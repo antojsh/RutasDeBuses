@@ -290,7 +290,7 @@ footer a:active {
   background: linear-gradient(#FE2E2E,#B40404);
   border-radius: 10px;
   box-shadow: 1px 1px 10px #610B0B;
-    color: white;
+  color: white;
   display: flex;
   justify-content: space-around;
   align-items: center;

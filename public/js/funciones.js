@@ -12,7 +12,7 @@ var map= L.map('map'),marker,globalLatiud,globalLongitud,markerTemporal;
 var markerPartida,markerDestino;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
-    iconUrl: 'img/marker_start.png',
+    iconUrl: 'static/img/marker_start.png',
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
@@ -20,7 +20,7 @@ var greenIcon = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var yellowIcon = L.icon({
-    iconUrl: 'img/marker_stop.png',
+    iconUrl: 'static/img/marker_stop.png',
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
@@ -28,7 +28,7 @@ var yellowIcon = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var markerTemp = L.icon({
-    iconUrl: 'img/marker_temporal.png',
+    iconUrl: 'static/img/marker_temporal.png',
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
@@ -36,7 +36,7 @@ var markerTemp = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var markerPerson = L.icon({
-    iconUrl: 'img/persona.png',
+    iconUrl: 'static/img/persona.png',
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
@@ -47,7 +47,7 @@ window.addEventListener("load",function(){
   socket.on('connect',function(data){
       socket.emit('app_user',fingerprint);
   });
-error('Ups !','No se encontro ninguna ruta cercana, Quieres aumentar el rango de busqueda')
+
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition);
 
 
@@ -75,7 +75,7 @@ function errorPosition(){
       id: 'mapbox.streets',
       accessToken: 'your.mapbox.public.access.token'
   }).addTo(map);
-  //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
+  error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 map.on('click', function (e) {
     $('.dots').fadeIn('fast');
@@ -179,7 +179,7 @@ $('#listarutasEncontradas').html('');
         '<p>'+data[i].description+'</p>'+
       '</div>'+
     '</li>')
-    $('#'+data[i]._id+' div:first-child').css("background-image", "url('http://localhost:3000/static/"+data[i].image+"')");
+    //$('#'+data[i]._id+' div:first-child').css("background-image", "url('http://localhost:3000/static/"+data[i].image+"')");
   }
   $('#listarutasEncontradas').fadeIn('fast')
 }else{

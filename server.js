@@ -152,8 +152,16 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		var norepetido = repeat(rutasEncontradas, 1)
-			socket.emit('rutaEncontrada',norepetido)
+	 		for(var i =0;i<rutasEncontradas.length-1;i++){
+
+          for(var j=i+1;j<rutasEncontradas.length;j++){
+                 if(rutasEncontradas[i]==rutasEncontradas[j]){
+                    rutasEncontradas.splice(j,1);
+                    j--;
+                 }
+            }
+      }
+			socket.emit('rutaEncontrada',rutasEncontradas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

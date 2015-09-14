@@ -59,8 +59,8 @@ io.sockets.on('connection', function (socket) {
 	 }
 	 function findAllBusRoute  (){
 	 		Rutas.find(function(err,rutasbuses){
-	 			if (!err)  socket.emit('findAllBusRoute', OkResponseJSON(200,true,rutasbuses,Date.today()))
-	 			else res.send(errorResponseJSON(500,false,err));
+	 			if (!err)  socket.emit('findAllBusRoute', rutasbuses)
+	 			//else res.send(errorResponseJSON(500,false,err));
 	 			// res.end(res.status())
 	 			JsonResponse= {};
 	 		})
@@ -70,7 +70,7 @@ io.sockets.on('connection', function (socket) {
 	 	function buscarRutaUnica (data){
 
 	 		Rutas.findById(data,function(err,rutasbus){
-	 			if (!err) socket.emit('rutaUnicaEncontrada', OkResponseJSON(200,true,rutasbus,Date.today()))
+	 			if (!err) socket.emit('rutaUnicaEncontrada', rutasbus)
 	 			else res.send('Error en busqueda por Id '+err)
 	 		})
 	 		JsonResponse= {};
@@ -165,7 +165,7 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		norepetias = repeat(rutasEncontradas,1)
+	 		var norepetias = repeat(rutasEncontradas)
 			socket.emit('rutaEncontrada',rutasEncontradas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){

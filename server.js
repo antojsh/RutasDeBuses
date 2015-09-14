@@ -152,17 +152,18 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-      var norepetidas = JSON.parse(rutasEncontradas)
-      for(var i =0;i<norepetidas.length-1;i++){
-
-          for(var j=i+1;j<norepetidas.length;j++){
-                 if(norepetidas[i].name ==norepetidas[j].name){
-                    norepetidas.splice(j,1);
-                    j--;
-                 }
-            }
-      }
-			socket.emit('rutaEncontrada',norepetidas)
+      // var norepetidas = JSON.stringify(rutasEncontradas)
+      // for(var i =0;i<norepetidas.length-1;i++){
+      //
+      //     for(var j=i+1;j<norepetidas.length;j++){
+      //            if(norepetidas[i].name ==norepetidas[j].name){
+      //               norepetidas.splice(j,1);
+      //               j--;
+      //            }
+      //       }
+      // }
+      
+			socket.emit('rutaEncontrada',rutasEncontradas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

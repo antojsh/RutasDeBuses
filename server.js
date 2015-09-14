@@ -6,6 +6,7 @@ var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var repeat = require('repeat-array');
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 server.listen(port,ip_addr);
@@ -164,8 +165,8 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-
-			socket.emit('rutaEncontrada',rutasEncontradas)
+	 		var norepetidas=repeat(rutasEncontradas)
+			socket.emit('rutaEncontrada',norepetidas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

@@ -156,7 +156,7 @@ io.sockets.on('connection', function (socket) {
       r(var i =0;i<norepetidas.length;i++){
 
           for(var j=i+1;j<norepetidas.length;j++){
-                 if(norepetidas[0][i].name ==norepetidas[0][j].name){
+                 if(norepetidas[0].name[i] ==norepetidas[0].name[j]){
                     norepetidas.splice(j,1);
                     j--;
                  }

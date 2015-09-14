@@ -164,7 +164,11 @@ function ocultarFooter(){
 
 // Funciones Sockets
 var mostrarruta= L.geoJson();
-function rutaEncontrada(data){
+function rutaEncontrada(names){
+var data = [];
+$.each(names, function(i, el){
+    if($.inArray(el, data) === -1) data.push(el);
+});
   console.log(JSON.stringify(data))
 $('#listarutasEncontradas').html('');
   ocultarFooter()

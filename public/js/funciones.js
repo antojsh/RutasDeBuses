@@ -164,12 +164,11 @@ function ocultarFooter(){
 
 // Funciones Sockets
 var mostrarruta= L.geoJson();
-function rutaEncontrada(names){
-var data = [];
-$.each(names, function(i, el){
-    if($.inArray(el, data) === -1) data.push(el);
-});
-  console.log(JSON.stringify(data))
+function rutaEncontrada(norepetias){
+  var data = norepetias.prototype.unique=function(a){
+  return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+  });
+console.log(JSON.stringify(data))
 $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){

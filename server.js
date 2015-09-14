@@ -152,7 +152,7 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		var norepetido = repeat(rutasEncontradas, 1)
+	 		var norepetido = repeat(rutasEncontradas, 0)
 			socket.emit('rutaEncontrada',norepetido)
 		}
 		// 	function OkResponseJSON(status,code,data,date){

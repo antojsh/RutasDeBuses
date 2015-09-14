@@ -170,7 +170,7 @@ console.log(JSON.stringify(data))
 $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){
-    
+
   for (var i = 0; i < data.length; i++) {
 
     $('#listarutasEncontradas').append('<li id='+data[i]._id+'>'+
@@ -187,6 +187,7 @@ $('#listarutasEncontradas').html('');
   error('Ups !','No se encontro ninguna ruta cercana, Quieres aumentar el rango de busqueda')
 }
   //mostrarruta=new L.Polyline(data.data.data.loc).addTo(map);
+    $('.dots').fadeOut('fast');
 }
 $('#listarutasEncontradas').on('click','li',function(){
     socket.emit('buscarRutaUnica',this.id)

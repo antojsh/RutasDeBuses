@@ -153,7 +153,7 @@ io.sockets.on('connection', function (socket) {
 	 				}
 	 		}
       var norepetidas = JSON.stringify(rutasEncontradas)
-      for(var i =0;i<norepetidas.length;i++){
+      for(var i =0;i<norepetidas.length-1;i++){
 
           for(var j=i+1;j<norepetidas.length;j++){
                  if(norepetidas[i].name ==norepetidas[j].name){

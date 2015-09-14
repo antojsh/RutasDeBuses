@@ -15,7 +15,7 @@ require('date-utils');
 var usuariosActivos={};
 app.use(bodyParser.json())
 
-var connection_string = '127.0.0.1:27017/YOUR_APP_NAME';
+var connection_string = '127.0.0.1:27017/busroute';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
@@ -25,7 +25,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   process.env.OPENSHIFT_APP_NAME;
 }
 
-		mongoose.connect('mongodb://localhost/'+connection_string,function(err,res){
+		mongoose.connect('mongodb://'+connection_string,function(err,res){
 			if (err) console.log('Error: '+err)
 			else console.log('Conectado');
 		});

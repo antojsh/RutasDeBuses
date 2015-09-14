@@ -18,33 +18,22 @@
     "type": "git",
     "url": "https://github.com/openshift/origin-server"
   },
-
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
-     "body": "^5.1.0",
-    
+    "body": "^5.1.0",
     "body-parser": "^1.13.3",
-        
     "course": "0.0.1",
-        
     "date-utils": "^1.2.17",
-       
     "express": "*",
-       
-     "mongoose": "*",
-        
-    "socket.io": "^1.3.6",
-     
-    "repeat-array":"*"
- 
+    "mongoose": "*",
+    "repeat-array": "^1.0.0",
+    "socket.io": "^1.3.6"
   },
   "devDependencies": {},
   "bundleDependencies": [],
-
   "private": true,
   "main": "server.js"
 }

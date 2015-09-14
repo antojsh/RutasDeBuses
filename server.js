@@ -105,7 +105,7 @@ io.sockets.on('connection', function (socket) {
 	 	 function buscarRutaPartida(data){
 
 	 		var distance = 1000 / 6371;
-	 		var query = Rutas.aggregate({'loc': {
+	 		var query = Rutas.find({'loc': {
 	 		  $near: [data[0][0],data[0][1]],
 	 		  $maxDistance: 0.01,
 	 			}
@@ -123,7 +123,7 @@ io.sockets.on('connection', function (socket) {
 	 	}
 	 		function	buscarRutaDestino (data,partida){
 	 		var distance = 1000 / 6371;
-	 		var query = Rutas.aggregate({'loc': {
+	 		var query = Rutas.find({'loc': {
 	 		  $near: [data[1][0],data[1][1]],
 	 		  $maxDistance: 0.01,
 	 			}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <link rel="stylesheet" href="css/estilo.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/iconos.css" media="screen" title="no title" charset="utf-8">
+    <!-- <link rel="stylesheet" href="css/Control.Geocoder.css" media="screen" title="no title" charset="utf-8"> -->
+    </script>
+    <title></title>
+  </head>
+  <body>
+
+    <aside id="articlePopup">
+      <div>
+        <div>
+          <span class="icon icon-heart rutaFavorita"></span>
+        </div>
+        <div>
+          <strong id='strongCiudad'></strong>
+          <p id='parrafoDir'></p>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li id='btnCerrarPopup'>
+            <span class="icon icon-cross"></span>
+            Cerrar
+          </li>
+          <li id="btnPartida">
+            <span class="icon icon-location2"></span>
+             Partida
+          </li>
+          <li id='btnDestino'>
+            <span class="icon icon-location2"></span>
+            Destino
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <div id='divBuscar'>
+      <form  action="#" >
+          <input type="search" id='txtBuscar' placeholder="Busca Direcciones, lugares, sitios etc" id='textBuscar'>
+
+      </form>
+
+    </div>
+    <div id='rutasEncontradas'>
+        <span class="icon icon-cross"></span>
+        <ul id='listarutasEncontradas'>
+
+        </ul>
+    </div>
+    <section id="map">
+
+    </section>
+
+    <footer>
+      <a href="#" id='btnBuscarRuta'>BUSCAR RUTAS</a>
+    </footer>
+    <!-- Venta de errores -->
+
+    <!-- Preload de la pagina -->
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+	</div>
+    <script src="js/leaflet.js"></script>
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src='js/fingerprint.js'></script>
+    <script src="js/socket.io.js"></script>
+    <!-- <script src='js/Control.Geocoder.js'> -->
+
+    </script>
+    <script type="text/javascript" src="js/funciones.js"></script>
+
+  </body>
+</html>

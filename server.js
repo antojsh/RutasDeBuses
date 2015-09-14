@@ -166,7 +166,7 @@ io.sockets.on('connection', function (socket) {
 	 				}
 	 		}
 	 		
-			socket.emit('rutaEncontrada',repeat(rutasEncontradas))
+			socket.emit('rutaEncontrada',rutasEncontradas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

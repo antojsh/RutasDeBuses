@@ -152,8 +152,10 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		var norepetias = repeat(rutasEncontradas)
-			socket.emit('rutaEncontrada',rutasEncontradas)
+	 		var norepetias = rutasEncontradas.prototype.unique=function(a){
+      return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+    });
+			socket.emit('rutaEncontrada',norepetias)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

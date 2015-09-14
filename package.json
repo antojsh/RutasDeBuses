@@ -27,20 +27,20 @@
   "dependencies": {
      "body": "^5.1.0",
     
-"body-parser": "^1.13.3",
-    
-"course": "0.0.1",
-    
-"date-utils": "^1.2.17",
-   
-"express": "*",
-   
- "mongoose": "*",
-    
-"socket.io": "^1.3.6",
-    
-"winston": "^1.0.0",
-"repeat-array":"*"
+    "body-parser": "^1.13.3",
+        
+    "course": "0.0.1",
+        
+    "date-utils": "^1.2.17",
+       
+    "express": "*",
+       
+     "mongoose": "*",
+        
+    "socket.io": "^1.3.6",
+        
+    "winston": "^1.0.0",
+    "repeat-array":"*"
  
   },
   "devDependencies": {},

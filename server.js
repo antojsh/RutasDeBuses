@@ -152,16 +152,17 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		for(var i =0;i<rutasEncontradas.length;i++){
+      var norepetidas = JSON.stringify(rutasEncontradas)
+	 		for(var i =0;i<norepetidas.length;i++){
 
-          for(var j=i+1;j<rutasEncontradas.length;j++){
-                 if(rutasEncontradas[i]==rutasEncontradas[j]){
-                    rutasEncontradas.splice(j,1);
+          for(var j=i+1;j<norepetidas.length;j++){
+                 if(norepetidas[i].name ==norepetidas[j].name){
+                    norepetidas.splice(j,1);
                     j--;
                  }
             }
       }
-			socket.emit('rutaEncontrada',rutasEncontradas)
+			socket.emit('rutaEncontrada',norepetidas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

@@ -166,11 +166,11 @@ function ocultarFooter(){
 var mostrarruta= L.geoJson();
 function rutaEncontrada(rutasEncontradas){
   var data = JSON.stringify(rutasEncontradas)
-  for(var i =0;i<norepetidas.length-1;i++){
+  for(var i =0;i<data.length-1;i++){
 
-      for(var j=i+1;j<norepetidas.length;j++){
-             if(norepetidas[i].name ==norepetidas[j].name){
-                norepetidas.splice(j,1);
+      for(var j=i+1;j<data.length;j++){
+             if(data[i].name ==data[j].name){
+                data.splice(j,1);
                 j--;
              }
         }

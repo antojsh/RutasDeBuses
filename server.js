@@ -1,159 +1,196 @@
-#!/bin/env node
-//  OpenShift sample Node application
+'use stric'
+
+var mongoose = require('mongoose')
+var bodyParser= require('body-parser')
 var express = require('express');
-var fs      = require('fs');
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
+var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
+server.listen(port,ip_addr);
+var iduser;
+//var JsonResponse= {};
+require('date-utils');
+var usuariosActivos={};
+app.use(bodyParser.json())
+
+var connection_string = '127.0.0.1:27017/YOUR_APP_NAME';
+// if OPENSHIFT env variables are present, use the available connection info:
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}
+
+		mongoose.connect('mongodb://localhost/'+connection_string,function(err,res){
+			if (err) console.log('Error: '+err)
+			else console.log('Conectado');
+		});
 
 
-/**
- *  Define the sample application.
- */
-var SampleApp = function() {
+app.use('/static', express.static('public'));
+app.get('/', function (req, res) {
 
-    //  Scope.
-    var self = this;
+  res.sendFile(__dirname + '/index.html');
+});
+app.get('/app', function (req, res) {
 
-
-    /*  ================================================================  */
-    /*  Helper functions.                                                 */
-    /*  ================================================================  */
-
-    /**
-     *  Set up server IP address and port # using env variables/defaults.
-     */
-    self.setupVariables = function() {
-        //  Set the environment variables we need.
-        self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-
-        if (typeof self.ipaddress === "undefined") {
-            //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-            //  allows us to run/test the app locally.
-            console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
-            self.ipaddress = "127.0.0.1";
-        };
-    };
+  res.sendFile(__dirname + '/public/index.html');
+});
+//app.use('/imagenes', express.static(__dirname + '/public/imagenes/'));
 
 
-    /**
-     *  Populate the cache.
-     */
-    self.populateCache = function() {
-        if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
-        }
+	var Rutas = require('./rutasbuses')
+io.sockets.on('connection', function (socket) {
+	console.log("Conectado socket")
+	//require('./websockets')(socket,Rutas)
+	socket.on('app_user',nuevoUsuario)
+ 	 socket.on('buscarRuta',buscarRutaPartida);
+	 socket.on('guardarRuta',addRutaBus);
+	 socket.on('buscarRutaUnica',buscarRutaUnica);
+	 function nuevoUsuario (data) {
+	 	iduser=data;
+	 	 usuariosActivos[data]=socket.id;
+	 	console.log('Users conectados '+JSON.stringify(usuariosActivos))
+	 }
+	 function findAllBusRoute  (){
+	 		Rutas.find(function(err,rutasbuses){
+	 			if (!err)  socket.emit('findAllBusRoute', OkResponseJSON(200,true,rutasbuses,Date.today()))
+	 			else res.send(errorResponseJSON(500,false,err));
+	 			// res.end(res.status())
+	 			JsonResponse= {};
+	 		})
+	 	}
 
-        //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
-    };
+	 	//GET
+	 	function buscarRutaUnica (data){
+
+	 		Rutas.findById(data,function(err,rutasbus){
+	 			if (!err) socket.emit('rutaUnicaEncontrada', OkResponseJSON(200,true,rutasbus,Date.today()))
+	 			else res.send('Error en busqueda por Id '+err)
+	 		})
+	 		JsonResponse= {};
+	 	}
+
+	 	//POST
+	 	function addRutaBus(data){
+	 		console.log(JSON.stringify(data));
+	 		var ruta = new Rutas(data)
+	 	ruta.save(function(err){
+	 			if(!err) { socket.emit('findAllBusRoute', data)}
+	 			else socket.emit('findAllBusRoute', err)
+
+	 		});
+
+	 	}
+
+	 	//PUT
+	 // 		function updateRutaBus (req,res){
+	 // 		console.log('+++++++++++++++ '+req.query.name)
+	 // 		var updatePara= {};
+	 // 		var conditions = { _id: req.query.id };
+	 // 		var update = { $set : {name:req.query.name ,description:req.query.description, flota:req.query.flota}};
+	 // 		var options = { upsert: true };
+	 // 		Rutas.update(conditions, update, options, function(err,rutasbus){
+	 // 			if (err) res.send(errorResponseJSON(500,false,err))
+	 // 			else res.send(OkResponseJSON(200,true,rutasbus,Date.today()))
+	 // 		});
+	 //
+		//
+		// 	}
+
+	 	//DELETE
+		// 	function deleteRutaBus (req,res){
+	 // 		Rutas.findById(req.params.id,function(err,rutasbus){
+	 // 			rutasbus.remove(function(err){
+	 // 			if(!err) res.send(OkResponseJSON(200,true,rutasbus,Date.today()))
+	 // 			else res.send(errorResponseJSON(500,false,err))
+		//
+	 // 			})
+	 // 		})
+	 // 		JsonResponse= {};
+		// 	}
+
+	 	 function buscarRutaPartida(data){
+
+	 		var distance = 1000 / 6371;
+	 		var query = Rutas.find({'loc': {
+	 		  $near: [data[0][0],data[0][1]],
+	 		  $maxDistance: 0.01,
+	 			}
+	 		});
+	 		query.exec(function (err, ruta) {
+	 		  if (err) {console.log(err);throw err;}
+	 			if (!ruta) {
+	 		    console.log('NAda')
+	 		  } else {
+	 		    //console.log('******************** PARTIDA' + ruta);
+	 				buscarRutaDestino(data,ruta)
+	 		  //	socket.emit('rutaEncontrada', OkResponseJSON(200,true,ruta,Date.today()))
+	 		 }
+	 			});
+	 	}
+	 		function	buscarRutaDestino (data,partida){
+	 		var distance = 1000 / 6371;
+	 		var query = Rutas.find({'loc': {
+	 		  $near: [data[1][0],data[1][1]],
+	 		  $maxDistance: 0.01,
+	 			}
+	 		});
+	 		query.exec(function (err, ruta) {
+	 		  if (err) {console.log(err);throw err;}
+	 			if (!ruta) {
+	 		    console.log('NAda')
+	 		  } else {
+	 		    //console.log('******************** DESTINO' + ruta);
+	 		  	//socket.emit('rutaEncontrada', OkResponseJSON(200,true,{ruta,partida},Date.today()))
+	 				compararRutas(partida,ruta);
+	 		 }
+	 	 	});
+	 	}
+	 	var a,b;
+	 	function compararRutas(partida,destino){
+			var rutasEncontradas=new Array();
+	 		for (var i = 0; i < partida.length; i++) {
+	 				for (var j = 0; j < destino.length; j++) {
+	 					a=partida[i].name;
+	 					b=destino[j].name;
+						if(a == b){
+							//console.log(partida[i].name+'  '+destino[j].name)
+	 						rutasEncontradas.push(partida[i])
+	 					}
+	 				}
+	 		}
+
+			socket.emit('rutaEncontrada',rutasEncontradas)
+		}
+		// 	function OkResponseJSON(status,code,data,date){
+	 // 		JsonResponse={
+	 // 			status:status,
+	 // 			code:code,
+	 // 			date:date,
+	 // 			data:{
+	 // 				data
+	 // 			}
+	 // 		}
+	 // 		return JsonResponse;
+		// 	}
+		// 	function errorResponseJSON(status, code,err){
+	 // 		JsonResponse.push({
+	 // 			status:status,
+	 // 			code:code,
+	 // 			err:err
+		//
+	 // 		})
+	 // 		return JsonResponse;
+		// 	}
+	 	socket.on('disconnect',function(){
+	 		delete usuariosActivos[iduser]
+	 		console.log('User disconnect '+JSON.stringify(usuariosActivos))
+	 	})
 
 
-    /**
-     *  Retrieve entry (content) from cache.
-     *  @param {string} key  Key identifying content to retrieve from cache.
-     */
-    self.cache_get = function(key) { return self.zcache[key]; };
-
-
-    /**
-     *  terminator === the termination handler
-     *  Terminate server on receipt of the specified signal.
-     *  @param {string} sig  Signal to terminate on.
-     */
-    self.terminator = function(sig){
-        if (typeof sig === "string") {
-           console.log('%s: Received %s - terminating sample app ...',
-                       Date(Date.now()), sig);
-           process.exit(1);
-        }
-        console.log('%s: Node server stopped.', Date(Date.now()) );
-    };
-
-
-    /**
-     *  Setup termination handlers (for exit and a list of signals).
-     */
-    self.setupTerminationHandlers = function(){
-        //  Process on exit and signals.
-        process.on('exit', function() { self.terminator(); });
-
-        // Removed 'SIGPIPE' from the list - bugz 852598.
-        ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
-         'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
-        ].forEach(function(element, index, array) {
-            process.on(element, function() { self.terminator(element); });
-        });
-    };
-
-
-    /*  ================================================================  */
-    /*  App server functions (main app logic here).                       */
-    /*  ================================================================  */
-
-    /**
-     *  Create the routing table entries + handlers for the application.
-     */
-    self.createRoutes = function() {
-        self.routes = { };
-
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
-        self.routes['/'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
-        };
-    };
-
-
-    /**
-     *  Initialize the server (express) and create the routes and register
-     *  the handlers.
-     */
-    self.initializeServer = function() {
-        self.createRoutes();
-        self.app = express.createServer();
-
-        //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
-        }
-    };
-
-
-    /**
-     *  Initializes the sample application.
-     */
-    self.initialize = function() {
-        self.setupVariables();
-        self.populateCache();
-        self.setupTerminationHandlers();
-
-        // Create the express server and routes.
-        self.initializeServer();
-    };
-
-
-    /**
-     *  Start the server (starts up the sample application).
-     */
-    self.start = function() {
-        //  Start the app on the specific interface (and port).
-        self.app.listen(self.port, self.ipaddress, function() {
-            console.log('%s: Node server started on %s:%d ...',
-                        Date(Date.now() ), self.ipaddress, self.port);
-        });
-    };
-
-};   /*  Sample Application.  */
-
-
-
-/**
- *  main():  Main code.
- */
-var zapp = new SampleApp();
-zapp.initialize();
-zapp.start();
-
+});

@@ -152,7 +152,7 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		for(var i =0;i<rutasEncontradas.length-1;i++){
+	 		for(var i =0;i<rutasEncontradas.length;i++){
 
           for(var j=i+1;j<rutasEncontradas.length;j++){
                  if(rutasEncontradas[i]==rutasEncontradas[j]){

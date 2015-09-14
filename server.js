@@ -1,5 +1,5 @@
-'use stric'
 
+var repeat = require('repeat-array');
 var mongoose = require('mongoose')
 var bodyParser= require('body-parser')
 var express = require('express');
@@ -15,7 +15,7 @@ var iduser;
 require('date-utils');
 var usuariosActivos={};
 app.use(bodyParser.json())
-var repeat = require('repeat-array');
+
 var connection_string = '127.0.0.1:27017/busroute';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){

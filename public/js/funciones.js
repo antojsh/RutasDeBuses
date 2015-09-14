@@ -3,7 +3,6 @@ var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.io.on('connect_error', function(err) {
-  // handle server error here
   alert('Error connecting to server');
 });
 var coorPartida= new Array();

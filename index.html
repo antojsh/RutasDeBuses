@@ -24,7 +24,7 @@
 	</div>
 <script>
 	var jsonRuta={};
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com:8000',{'forceNew':true });
     socket.emit('findall', {});
   socket.on('findAllBusRoute', function (data) {
     console.log(JSON.stringify(data));

@@ -166,7 +166,7 @@ function ocultarFooter(){
 var mostrarruta= L.geoJson();
 function rutaEncontrada(data){
 
-console.log(JSON.stringify(data))
+console.log('********** '+JSON.stringify(data))
 $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){

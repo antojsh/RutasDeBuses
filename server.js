@@ -105,11 +105,11 @@ io.sockets.on('connection', function (socket) {
 	 	 function buscarRutaPartida(data){
 
 	 		var distance = 1000 / 6371;
-	 		var query = Rutas.find({'loc': {
+	 		var query = Rutas.find.distinct(({'loc': {
 	 		  $near: [data[0][0],data[0][1]],
 	 		  $maxDistance: 0.01,
 	 			}
-	 		});
+	 		}));
 	 		query.exec(function (err, ruta) {
 	 		  if (err) {console.log(err);throw err;}
 	 			if (!ruta) {
@@ -123,11 +123,11 @@ io.sockets.on('connection', function (socket) {
 	 	}
 	 		function	buscarRutaDestino (data,partida){
 	 		var distance = 1000 / 6371;
-	 		var query = Rutas.find({'loc': {
+	 		var query = Rutas.find.distinct(({'loc': {
 	 		  $near: [data[1][0],data[1][1]],
 	 		  $maxDistance: 0.01,
 	 			}
-	 		});
+	 		}));
 	 		query.exec(function (err, ruta) {
 	 		  if (err) {console.log(err);throw err;}
 	 			if (!ruta) {
@@ -153,7 +153,7 @@ io.sockets.on('connection', function (socket) {
 	 				}
 	 		}
 	 		var norepetias = repeat(rutasEncontradas)
-			socket.emit('rutaEncontrada',norepetias)
+			socket.emit('rutaEncontrada',rutasEncontradas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

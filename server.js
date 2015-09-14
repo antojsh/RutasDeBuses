@@ -1,21 +1,18 @@
 
 var repeat = require('repeat-array');
+require('date-utils');
 var mongoose = require('mongoose')
 var bodyParser= require('body-parser')
 var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
-server.listen(port,ip_addr);
 var iduser;
-//var JsonResponse= {};
-require('date-utils');
 var usuariosActivos={};
+server.listen(port,ip_addr);
 app.use(bodyParser.json())
-
 var connection_string = '127.0.0.1:27017/busroute';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
@@ -25,37 +22,27 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
 }
-
-		mongoose.connect('mongodb://'+connection_string,function(err,res){
-			if (err) console.log('Error: '+err)
-			else console.log('Conectado');
-		});
-
-
+mongoose.connect('mongodb://'+connection_string,function(err,res){
+	if (err) console.log('Error: '+err)
+	else console.log('Conectado');
+});
 app.use('/static', express.static('public'));
 app.get('/', function (req, res) {
-
   res.sendFile(__dirname + '/index.html');
 });
 app.get('/app', function (req, res) {
-
   res.sendFile(__dirname + '/public/index.html');
 });
-//app.use('/imagenes', express.static(__dirname + '/public/imagenes/'));
-
-
-	var Rutas = require('./rutasbuses')
+var Rutas = require('./rutasbuses')
 io.sockets.on('connection', function (socket) {
-	console.log("Conectado socket")
-	//require('./websockets')(socket,Rutas)
-	socket.on('app_user',nuevoUsuario)
+	 socket.on('app_user',nuevoUsuario)
  	 socket.on('buscarRuta',buscarRutaPartida);
 	 socket.on('guardarRuta',addRutaBus);
 	 socket.on('buscarRutaUnica',buscarRutaUnica);
 	 function nuevoUsuario (data) {
 	 	iduser=data;
-	 	 usuariosActivos[data]=socket.id;
-	 	console.log('Users conectados '+JSON.stringify(usuariosActivos))
+	 	usuariosActivos[data]=socket.id;
+	 	//console.log('Users conectados '+JSON.stringify(usuariosActivos))
 	 }
 	 function findAllBusRoute  (){
 	 		Rutas.find(function(err,rutasbuses){
@@ -165,8 +152,8 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		var norepetias = repeat(rutasEncontradas,1)
-			socket.emit('rutaEncontrada',rutasEncontradas)
+	 		var norepetias = repeat(rutasEncontradas)
+			socket.emit('rutaEncontrada',norepetias)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

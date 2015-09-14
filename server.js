@@ -6,7 +6,7 @@ var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var repeat = require('repeat-array');
+
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 server.listen(port,ip_addr);
@@ -15,7 +15,7 @@ var iduser;
 require('date-utils');
 var usuariosActivos={};
 app.use(bodyParser.json())
-
+var repeat = require('repeat-array');
 var connection_string = '127.0.0.1:27017/busroute';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
@@ -165,8 +165,8 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
-	 		
-			socket.emit('rutaEncontrada',rutasEncontradas)
+	 		var norepetias = repeat(rutasEncontradas)
+			socket.emit('rutaEncontrada',norepetias)
 		}
 		// 	function OkResponseJSON(status,code,data,date){
 	 // 		JsonResponse={

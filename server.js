@@ -49,7 +49,7 @@ app.post('/saveRuta',function(req,res){
 	console.log(JSON.stringify(req.file.path))
 	cloudinary.uploader.upload(req.file.path,function(result){
 		var ruta = new Rutas()
-		ruta.name=req.body.name;
+		ruta.name=req.body.nombreRuta;
 		ruta.description= req.body.descripcion;
 		ruta.flota= req.body.flota;
 		ruta.image=result.url;

@@ -233,7 +233,7 @@ function rutaUnicaEncontrada(data){
 }
 function error(titulo,msj){
   $('body').append('<div id="error">'+
-  '<span class="icon icon-cross" id="cerrarError"></span>'+
+  '<span class="icon icon-cross" onclick="cerrarError()" id="cerrarError"></span>'+
       '<div class="">'+
           '<span class="icon icon-sad"></span>'+
       '</div>'+
@@ -246,3 +246,6 @@ function error(titulo,msj){
 $('#cerrarError').click(function(){
   $('#error').fadeOut('fast');
 })
+function cerrarError(){
+  $('#error').fadeOut('fast');
+}

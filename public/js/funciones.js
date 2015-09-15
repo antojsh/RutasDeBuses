@@ -52,14 +52,9 @@ window.addEventListener("load",function(){
   });
 
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition);
-
-
-
-
+  setInterval(function(){ navigator.geolocation.getCurrentPosition(showPosition,errorPosition); }, 5000);
 });
-
 function showPosition(position) {
-
     map.setView([position.coords.latitude, position.coords.longitude], 16);
     L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',

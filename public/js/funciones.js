@@ -8,7 +8,7 @@ socket.io.on('connect_error', function(err) {
 });
 var coorPartida= new Array();
 var coorDestino= new Array();
-var map= L.map('map'),marker,globalLatiud,globalLongitud,markerTemporal;
+var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
 var markerPartida,markerDestino;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({

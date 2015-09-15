@@ -165,16 +165,7 @@ function ocultarFooter(){
 // Funciones Sockets
 var mostrarruta= L.geoJson();
 function rutaEncontrada(data){
-  // var data = JSON.stringify(rutasEncontradas)
-  // for(var i =0;i<data.length-1;i++){
-  //
-  //     for(var j=i+1;j<data.length;j++){
-  //            if(data[i].name ==data[j].name){
-  //               data.splice(j,1);
-  //               j--;
-  //            }
-  //       }
-  // }
+
 console.log('********** '+data)
 $('#listarutasEncontradas').html('');
   ocultarFooter()
@@ -189,7 +180,7 @@ $('#listarutasEncontradas').html('');
         '<p>'+data[i].description+'</p>'+
       '</div>'+
     '</li>')
-    //$('#'+data[i]._id+' div:first-child').css("background-image", "url('http://localhost:3000/static/"+data[i].image+"')");
+    $('#'+data[i]._id+' div:first-child').css("background-image", "url('"+data[i].image+"')");
   }
   $('#listarutasEncontradas').fadeIn('fast')
 }else{

@@ -3,6 +3,8 @@ var repeat = require('repeat-array');
 require('date-utils');
 var mongoose = require('mongoose')
 var bodyParser= require('body-parser')
+var multer = require('multer');
+var cloudinary = require('cloudinary');
 var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
@@ -13,6 +15,14 @@ var iduser;
 var usuariosActivos={};
 server.listen(port,ip_addr);
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(multer({dest:'./uploads'}).single('imagen'))
+cloudinary.config({
+	cloud_name:"daawlfg2i",
+	api_key:"697739221818451",
+	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
+
+})
 // var connection_string = '127.0.0.1:27017/busroute';
 // // if OPENSHIFT env variables are present, use the available connection info:
 // if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
@@ -23,8 +33,10 @@ app.use(bodyParser.json())
 //   process.env.OPENSHIFT_APP_NAME;
 // }
 mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
+//	mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
+
 	if (err) console.log('Error: '+err)
-	else console.log('Conectado');
+	else console.log('Conectado Mongo');
 });
 app.use('/static', express.static('public'));
 app.get('/', function (req, res) {
@@ -33,6 +45,27 @@ app.get('/', function (req, res) {
 app.get('/app', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
+app.post('/saveRuta',function(req,res){
+	console.log(JSON.stringify(req.file.path))
+	cloudinary.uploader.upload(req.file.path,function(result){
+		var ruta = new Rutas()
+		ruta.name=req.body.name;
+		ruta.description= req.body.descripcion;
+		ruta.flota= req.body.flota;
+		ruta.image=result.url;
+		ruta.loc= req.body.coordenadas;
+		ruta.save(function(err){
+			if(err) {
+			console.log('Error al guardar');
+			res.send('<h1>No se puedo Guardar la ruta</h1><br><a href="http://localhost:3000">Regresar</a>')
+			}
+			else {
+				console.log('Guardada');
+				res.send('<h1>Ruta Guardara</h1><br><a href="http://localhost:3000">Guardar Otras Rutas</a>')
+			}
+		})
+	})
+})
 var Rutas = require('./rutasbuses')
 io.sockets.on('connection', function (socket) {
 	 socket.on('app_user',nuevoUsuario)

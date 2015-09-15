@@ -11,37 +11,42 @@
 	</style>
 </head>
 <body>
-	<input type="text" placeholder="Nombre Rutas" id='nombreRuta'><br>
-	<input type="text" placeholder="descripcion" id='descripcion'><br>
-	<input type="text" placeholder="ciudad" id='ciudad'><br>
-	<input type="text" placeholder="flota" id='flota'><br>
-	<textarea name="name" rows="8" cols="40" id='coordenadas'></textarea><br>
-	<input type="button" name="name" value="Guardar" id='btnguardar'>
+	<form  action="http://localhost:3000/saveRuta" method="post" enctype="multipart/form-data">
+	<input type="text" placeholder="Nombre Rutas" id='nombreRuta' name='nombreRuta'><br>
+	<input type="text" placeholder="descripcion" id='descripcion' name='descripcion'><br>
+	<input type="text" placeholder="ciudad" id='ciudad' name='ciudad'><br>
+	<input type="text" placeholder="flota" id='flota' name='flota'><br>
+	<input type="file" name="imagen"><br>
+	<textarea name="name" rows="8" cols="40" id='coordenadas' name='coordenadas'></textarea><br>
+	<input type="submit" name="name" value="Guardar" id='btnguardar'>
+
 	<input type="button" name="name" value="Borrar ultimo punto" id="btnBorrar">
+	</form>
 	<script src="/socket.io/socket.io.js"></script>
 	<div id="map" style="width:1000px; height:600px; position:fixed; right:0; top:0;">
 
 	</div>
 <script>
 	var jsonRuta={};
+	var coor= document.getElementById('coordenadas');
   var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com:8000',{'forceNew':true });
     socket.emit('findall', {});
   socket.on('findAllBusRoute', function (data) {
     console.log(JSON.stringify(data));
   });
 
-	document.getElementById('btnguardar').addEventListener('click',function(){
-			jsonRuta={
-				name:document.getElementById('nombreRuta').value,
-				description:document.getElementById('descripcion').value,
-				city:document.getElementById('ciudad').value,
-				flota:document.getElementById('flota').value,
-				loc:cad
-
-			}
-			console.log(JSON.stringify(jsonRuta))
-			socket.emit('guardarRuta',jsonRuta);
-	})
+	// document.getElementById('btnguardar').addEventListener('click',function(){
+	// 		jsonRuta={
+	// 			name:document.getElementById('nombreRuta').value,
+	// 			description:document.getElementById('descripcion').value,
+	// 			city:document.getElementById('ciudad').value,
+	// 			flota:document.getElementById('flota').value,
+	// 			loc:cad
+	//
+	// 		}
+	// 		console.log(JSON.stringify(jsonRuta))
+	// 		socket.emit('guardarRuta',jsonRuta);
+	// })
 	var map= L.map('map');
 	window.addEventListener("load",function(){
   map.setView([11.004692, -74.808877], 18);
@@ -68,6 +73,7 @@ map.on("click",function(e){
 	}
 	cad=JSON.parse("["+cadruta+"]");
 	console.log(cad)
+	coor.value=JSON.stringify(cad);
 capa=new L.Polyline(cad).addTo(map);
 
 

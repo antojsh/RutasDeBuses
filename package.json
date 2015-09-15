@@ -30,7 +30,9 @@
     "express": "*",
     "mongoose": "*",
     "repeat-array": "^1.0.0",
-    "socket.io": "^1.3.6"
+    "socket.io": "^1.3.6",
+    "multer":"*",
+    "cloudinary":"*"
   },
   "devDependencies": {},
   "bundleDependencies": [],

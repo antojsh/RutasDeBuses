@@ -170,7 +170,7 @@ console.log('********** '+data)
 $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){
-
+///Pruebaaaaa
   for (var i = 0; i < data.length; i++) {
 
     $('#listarutasEncontradas').append('<li id='+data[i]._id+'>'+

@@ -341,9 +341,16 @@ footer a:active {
 .noConnection span{
   color: white;
   text-shadow: 1px 1px 8px #000;
+  animation: noconnection 2s infinite;
 }
 
-
+@-webkit-keyframes noconnection{
+  0%{ font-size: 1.1rem;}
+  25%{ font-size: 1.15rem;}
+  50%{ font-size: 1.2rem;}
+  75%{ font-size: 1.25rem;}
+  100%{ font-size: 1.3rem;}
+}
 
 /*Estilos para el preload*/
 /*

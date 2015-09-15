@@ -325,32 +325,34 @@ footer a:active {
   font-size: 0.9rem;
 }
 
-.noConnection{
+.noConnection, .Connection{
   position: fixed;
   z-index: 100;
   width: 100%;
   height: 60px;
-  background: linear-gradient(#FE2E2E,#B40404);
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  max-height: 0px;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
+.Connection{background: linear-gradient(#36D278,#27ae60);}
+.noConnection{background: linear-gradient(#FE2E2E,#B40404);}
+
+
 .noConnection span{
   color: white;
   text-shadow: 1px 1px 8px #000;
-  animation: noconnection .8s infinite alternate;
+
 }
 
-@-webkit-keyframes noconnection{
-  0%{ font-size: 1.1rem;}
-  25%{ font-size: 1.15rem;}
-  50%{ font-size: 1.2rem;}
-  75%{ font-size: 1.25rem;}
-  100%{ font-size: 1.3rem;}
-}
+
 
 /*Estilos para el preload*/
 /*

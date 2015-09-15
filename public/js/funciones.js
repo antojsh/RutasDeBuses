@@ -3,7 +3,8 @@ var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.io.on('connect_error', function(err) {
-  alert('Error connecting to server');
+  $('.noConnection').css('max-height','60px');
+  $('.Connection').css('max-height','0px');
 });
 var coorPartida= new Array();
 var coorDestino= new Array();
@@ -45,6 +46,9 @@ var markerPerson = L.icon({
 window.addEventListener("load",function(){
   socket.on('connect',function(data){
       socket.emit('app_user',fingerprint);
+      $('.noConnection').css('max-height','0px');
+      $('.Connection').css('max-height','60px');
+      setTimeout(function(){ $('.Connection').css('max-height','0px');}, 2000);
   });
 
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition);

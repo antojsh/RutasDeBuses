@@ -17,7 +17,7 @@ var greenIcon = L.icon({
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
 });
 var yellowIcon = L.icon({
     iconUrl: 'static/img/marker_stop.png',
@@ -25,7 +25,7 @@ var yellowIcon = L.icon({
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
 });
 var markerTemp = L.icon({
     iconUrl: 'static/img/marker_temporal.png',
@@ -123,7 +123,7 @@ $('#btnPartida').click(function() {
      coorPartida[1]=globalLongitud;
       map.addLayer(markerPartida);
       map.removeLayer(markerTemporal)
-      markerPartida.bindPopup("<b>Partida</b><br>I am a popup.").openPopup();
+      markerPartida.bindPopup("<b>Partida</b>").openPopup();
       markerTemporal=undefined;
   }
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
@@ -147,7 +147,7 @@ $('#btnDestino').click(function() {
     coorDestino[1]=globalLongitud;
     map.addLayer(markerDestino);
     map.removeLayer(markerTemporal)
-    markerDestino.bindPopup("<b>Partida</b><br>I am a popup.").openPopup();
+    markerDestino.bindPopup("<b>Destino</b>").openPopup();
     markerTemporal=undefined;
   }
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){

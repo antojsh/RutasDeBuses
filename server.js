@@ -64,7 +64,7 @@ app.post('/saveRuta',function(req,res){
 				res.send('<h1>Ruta Guardara</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Guardar Otras Rutas</a>')
 			}
 		})
-	},{ width: 100, height: 150, crop: 'fit' })
+	},{ width: 300, height: 350, crop: 'fit' })
 })
 var Rutas = require('./rutasbuses')
 io.sockets.on('connection', function (socket) {

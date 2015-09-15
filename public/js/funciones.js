@@ -53,6 +53,7 @@ window.addEventListener("load",function(){
   });
 
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition);
+  setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition); }, 5000);
 
 });
 function showPosition(position) {
@@ -65,7 +66,7 @@ function showPosition(position) {
     }).addTo(map);
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     map.addLayer(person);
-    setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition); }, 5000);
+
 }
 function showPosition(position) {
     map.removeLayer(person);

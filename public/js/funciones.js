@@ -6,11 +6,10 @@ socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
   $('.Connection').css('max-height','0px');
 });
-var person;
 var coorPartida= new Array();
 var coorDestino= new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
-var markerPartida,markerDestino;
+var markerPartida,markerDestino,person;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
     iconUrl: 'static/img/marker_start.png',
@@ -69,7 +68,7 @@ function showPosition(position) {
 
 }
 function showPosition(position) {
-    map.removeLayer(person);
+    //map.removeLayer(person);
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     map.addLayer(person);
 }

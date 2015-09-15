@@ -341,7 +341,7 @@ footer a:active {
 .noConnection span{
   color: white;
   text-shadow: 1px 1px 8px #000;
-  animation: noconnection 2s infinite;
+  animation: noconnection .3s infinite;
 }
 
 @-webkit-keyframes noconnection{

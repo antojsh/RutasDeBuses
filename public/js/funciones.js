@@ -6,6 +6,7 @@ socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
   $('.Connection').css('max-height','0px');
 });
+var person;
 var coorPartida= new Array();
 var coorDestino= new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
@@ -52,7 +53,7 @@ window.addEventListener("load",function(){
   });
 
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition);
-  setInterval(function(){ navigator.geolocation.getCurrentPosition(showPosition,errorPosition); }, 5000);
+
 });
 function showPosition(position) {
     map.setView([position.coords.latitude, position.coords.longitude], 16);
@@ -62,7 +63,13 @@ function showPosition(position) {
         id: 'mapbox.streets',
         accessToken: 'your.mapbox.public.access.token'
     }).addTo(map);
-    var person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
+    person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
+    map.addLayer(person);
+    setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition); }, 5000);
+}
+function showPosition(position) {
+    map.removeLayer(person);
+    person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     map.addLayer(person);
 }
 function errorPosition(){

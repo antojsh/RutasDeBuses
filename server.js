@@ -53,10 +53,10 @@ app.post('/saveRuta',function(req,res){
 		ruta.description= req.body.descripcion;
 		ruta.flota= req.body.flota;
 		ruta.image=result.url;
-		ruta.loc= req.body.coordenadas;
+		ruta.loc= JSON.parse(req.body.coordenadas);
 		ruta.save(function(err){
 			if(err) {
-			console.log('Error al guardar');
+			console.log('Error al guardar '+err);
 			res.send('<h1>No se puedo Guardar la ruta</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Regresar</a>')
 			}
 			else {

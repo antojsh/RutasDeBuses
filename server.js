@@ -13,16 +13,16 @@ var iduser;
 var usuariosActivos={};
 server.listen(port,ip_addr);
 app.use(bodyParser.json())
-var connection_string = '127.0.0.1:27017/busroute';
-// if OPENSHIFT env variables are present, use the available connection info:
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-  process.env.OPENSHIFT_APP_NAME;
-}
-mongoose.connect('mongodb://'+connection_string,function(err,res){
+// var connection_string = '127.0.0.1:27017/busroute';
+// // if OPENSHIFT env variables are present, use the available connection info:
+// if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+//   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+//   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+//   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+//   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+//   process.env.OPENSHIFT_APP_NAME;
+// }
+mongoose.connect('mongodb://<antojsh>:<antonio199308JSH>@ds041663.mongolab.com:41663/busroute',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado');
 });
@@ -162,7 +162,7 @@ io.sockets.on('connection', function (socket) {
       //            }
       //       }
       // }
-      
+
 			socket.emit('rutaEncontrada',rutasEncontradas)
 		}
 		// 	function OkResponseJSON(status,code,data,date){

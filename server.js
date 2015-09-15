@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 //   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
 //   process.env.OPENSHIFT_APP_NAME;
 // }
-mongoose.connect('mongodb://<antojsh>:<antonio199308JSH>@ds041663.mongolab.com:41663/busroute',function(err,res){
+mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado');
 });

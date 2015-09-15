@@ -47,7 +47,7 @@ app.get('/app', function (req, res) {
 });
 app.post('/saveRuta',function(req,res){
 	console.log(JSON.stringify(req.file.path))
-	cloudinary.uploader.upload(req.file.path,{ width: 100, height: 150, crop: 'limit' },function(result){
+	cloudinary.uploader.upload(req.file.path,function(result){
 		var ruta = new Rutas()
 		ruta.name=req.body.nombreRuta;
 		ruta.description= req.body.descripcion;

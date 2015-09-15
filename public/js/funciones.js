@@ -67,7 +67,7 @@ function showPosition(position) {
     map.addLayer(person);
 
 }
-function showPosition(position) {
+function showPositionMove(position) {
     //map.removeLayer(person);
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     map.addLayer(person);

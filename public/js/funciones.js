@@ -123,6 +123,7 @@ $('#btnPartida').click(function() {
      coorPartida[1]=globalLongitud;
       map.addLayer(markerPartida);
       map.removeLayer(markerTemporal)
+      markerPartida.bindPopup("<b>Partida</b><br>I am a popup.").openPopup();
       markerTemporal=undefined;
   }
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
@@ -146,6 +147,7 @@ $('#btnDestino').click(function() {
     coorDestino[1]=globalLongitud;
     map.addLayer(markerDestino);
     map.removeLayer(markerTemporal)
+    markerDestino.bindPopup("<b>Partida</b><br>I am a popup.").openPopup();
     markerTemporal=undefined;
   }
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){

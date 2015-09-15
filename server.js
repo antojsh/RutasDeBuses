@@ -57,11 +57,11 @@ app.post('/saveRuta',function(req,res){
 		ruta.save(function(err){
 			if(err) {
 			console.log('Error al guardar');
-			res.send('<h1>No se puedo Guardar la ruta</h1><br><a href="http://localhost:3000">Regresar</a>')
+			res.send('<h1>No se puedo Guardar la ruta</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Regresar</a>')
 			}
 			else {
 				console.log('Guardada');
-				res.send('<h1>Ruta Guardara</h1><br><a href="http://localhost:3000">Guardar Otras Rutas</a>')
+				res.send('<h1>Ruta Guardara</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Guardar Otras Rutas</a>')
 			}
 		})
 	})

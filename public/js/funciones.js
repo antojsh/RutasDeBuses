@@ -243,6 +243,6 @@ function error(titulo,msj){
       '</div>'+
   '</div>');
 }
-$('#cerrarError').on('click',function(){
+$('#cerrarError').click(function(){
   $('#error').fadeOut('fast');
 })

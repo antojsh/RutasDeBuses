@@ -226,7 +226,7 @@ footer a:active {
 
 #rutasEncontradas li div:last-child p{
   font-size: 0.8em;
-  max-height: 30px;
+  max-height: 80px;
   overflow:hidden;
   text-overflow: ellipsis;
 

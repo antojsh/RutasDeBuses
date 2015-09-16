@@ -140,7 +140,7 @@ io.sockets.on('connection', function (socket) {
 	 		var distance = 1000 / 6371;
 	 		var query = Rutas.find({'loc': {
 	 		  $near: [data[0][0],data[0][1]],
-	 		  $maxDistance: 0.01,
+	 		  $maxDistance: 0.007,
 	 			}
 	 		});
 	 		query.exec(function (err, ruta) {

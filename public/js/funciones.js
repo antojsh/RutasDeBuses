@@ -188,7 +188,9 @@ $('#listarutasEncontradas').html('');
         '<p>'+data[i].description+'</p>'+
       '</div>'+
     '</li>')
-    $('#'+data[i]._id+' div:first-child').css("background-image", "url('"+data[i].image+"')");
+    var img =   $('#'+data[i]._id+' div:first-child');
+    img.css("background-image", "url('"+data[i].image+"')");
+    img.css("background-size",'cover');
   }
   $('#listarutasEncontradas').fadeIn('fast')
 }else{

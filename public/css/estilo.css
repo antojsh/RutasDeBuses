@@ -225,7 +225,7 @@ footer a:active {
 }
 
 #rutasEncontradas li div:last-child p{
-  font-size: 0.68em;
+  font-size: 0.8em;
   max-height: 30px;
 
 
@@ -327,7 +327,7 @@ footer a:active {
 
 .noConnection, .Connection{
   position: fixed;
-  z-index: 100;
+  z-index: 10000;
   width: 100%;
   height: 60px;
   top: 0;

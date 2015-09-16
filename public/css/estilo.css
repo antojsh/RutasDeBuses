@@ -150,11 +150,11 @@ footer a:active {
 
 #rutasEncontradas {
   position: fixed;
-  top: 10px;
+  top: 5px;
   z-index: 999999 !important;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 98%;
   height: auto;
   max-height: 90%;
   overflow: auto;
@@ -186,7 +186,7 @@ footer a:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 120px;
   margin-bottom: 10px;
   background: #FFFFFF;
   overflow: hidden;
@@ -200,7 +200,7 @@ footer a:active {
 
 
 #rutasEncontradas li div:first-child {
-  width: 30%;
+  width: 40%;
   height: 100%;
   /*background-image: url("../img/Sobusa.jpg");*/
   background-position: center;
@@ -212,7 +212,7 @@ footer a:active {
 }
 
 #rutasEncontradas li div:last-child {
-  width: 70%;
+  width: 60%;
   height: 100%;
   max-height: 100%;
   display: flex;

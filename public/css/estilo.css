@@ -227,8 +227,9 @@ footer a:active {
 #rutasEncontradas li div:last-child p{
   font-size: 0.8em;
   max-height: 80px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   overflow:hidden;
-  text-overflow: ellipsis;
 
 }
 .btnParodesSelec {

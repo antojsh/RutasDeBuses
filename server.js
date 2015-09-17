@@ -23,18 +23,8 @@ cloudinary.config({
 	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
 
 })
-// var connection_string = '127.0.0.1:27017/busroute';
-// // if OPENSHIFT env variables are present, use the available connection info:
-// if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-//   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-//   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-//   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-//   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-//   process.env.OPENSHIFT_APP_NAME;
-// }
 mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
 //	mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
-
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo');
 });
@@ -57,11 +47,11 @@ app.post('/saveRuta',function(req,res){
 		ruta.save(function(err){
 			if(err) {
 			console.log('Error al guardar '+err);
-			res.send('<h1>No se puedo Guardar la ruta</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Regresar</a>')
+			res.send('<h1>No se pudo Guardar la ruta</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Regresar</a>')
 			}
 			else {
 				console.log('Guardada');
-				res.send('<h1>Ruta Guardara</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Guardar Otras Rutas</a>')
+				res.send('<h1>Ruta Guardada</h1><br><a href="http://busroute-pruebanodejs.rhcloud.com/">Guardar Otras Rutas</a>')
 			}
 		})
 	},{ width: 300, height: 350, crop: 'fit' })

@@ -64,6 +64,7 @@ function showPosition(position) {
         accessToken: 'your.mapbox.public.access.token'
     }).addTo(map);
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
+    person.bindPopup("<b>Destino</b>").openPopup();
     map.addLayer(person);
 
 }

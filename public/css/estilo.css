@@ -147,7 +147,15 @@ footer a:active {
   border-bottom-width: 0;
   line-height: 4em;
 }
-
+#menuLateral {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999999;
+  width: 50%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
 #rutasEncontradas {
   position: fixed;
   top: 5px;

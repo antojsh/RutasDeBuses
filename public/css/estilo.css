@@ -174,7 +174,7 @@ footer a:active {
   height: 120px;
   border: 1px solid #000;
   border-radius: 50%;
-
+  margin-top: 15px;
 }
 #menuLateral #profile span{
   color:#aaa;

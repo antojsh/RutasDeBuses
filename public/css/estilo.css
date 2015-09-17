@@ -178,7 +178,7 @@ footer a:active {
 }
 #menuLateral #profile span{
   color:#aaa;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   margin: 15px 5px;
   text-shadow: 1px 1px 10px #000;
 }
@@ -187,6 +187,7 @@ footer a:active {
   display: block;
 }
 #menuLateral nav ul li a{
+  font-size: 0.9rem;
   text-decoration: none;
   display: block;
   padding: 15px;

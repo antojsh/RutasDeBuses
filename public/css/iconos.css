@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?i5sgtj');
-	src:url('fonts/icomoon.eot?#iefixi5sgtj') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?i5sgtj') format('truetype'),
-		url('fonts/icomoon.woff?i5sgtj') format('woff'),
-		url('fonts/icomoon.svg?i5sgtj#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?-hqe9eq');
+	src:url('fonts/icomoon.eot?#iefix-hqe9eq') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?-hqe9eq') format('truetype'),
+		url('fonts/icomoon.woff?-hqe9eq') format('woff'),
+		url('fonts/icomoon.svg?-hqe9eq#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,12 +23,30 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-connection:before {
+	content: "\e603";
+}
 .icon-location2:before {
 	content: "\e600";
+}
+.icon-map:before {
+	content: "\e604";
+}
+.icon-truck:before {
+	content: "\e605";
+}
+.icon-menu:before {
+	content: "\e606";
 }
 .icon-sad:before {
 	content: "\e601";
 }
 .icon-cross:before {
 	content: "\e602";
+}
+.icon-facebook3:before {
+	content: "\e607";
+}
+.icon-twitter3:before {
+	content: "\e608";
 }

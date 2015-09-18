@@ -149,7 +149,7 @@ footer a:active {
 }
 #menuLateral {
   position: fixed;
-  left: 0;
+  left: -70%;
   top: 0;
   z-index: 9999999;
   width: 60%;
@@ -158,9 +158,23 @@ footer a:active {
 
   display: flex;
   flex-direction: column;
-  display: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-top: 2px solid white;
 
 
+}
+.mostrarMenu{
+  left: 0 !important;
+}
+#menuLateral > span{
+  color: white;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.95);
 }
 #menuLateral #profile{
   width: 100%;
@@ -290,11 +304,11 @@ footer a:active {
   line-height: 4em !important;
 }
 
-#divBuscar, #divBuscar form{
+#divBuscar{
   position: fixed;
-  top: 10px;
+  top: 5px;
   z-index: 20;
-  width: 90%;
+  width: 98%;
   height: auto;
 
   display: flex;
@@ -304,13 +318,26 @@ footer a:active {
   left: 50%;
   transform: translateX(-50%);
 }
+#divBuscar form{
+  width: 100%;
+}
+#divBuscar span{
+  color: #fff;
+  position: absolute;
+  left: 10px;
+  font-size: 2.1rem;
+  text-shadow: 1px 1px 1px #000;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000000;
+}
 #divBuscar input{
   width:100%;
-  height: 35px;
+  height: 45px;
   border-radius: 5px;
   background: #dadada;
   border: 2px solid #36D278;
-  padding-left: 5px;
+  padding-left: 55px;
   color: #000;
   font-size: 1rem;
   /*box-shadow: 1px 1px 3px white;*/

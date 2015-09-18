@@ -81,7 +81,7 @@ function errorPosition(){
       id: 'mapbox.streets',
       accessToken: 'your.mapbox.public.access.token'
   }).addTo(map);
-  error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
+  //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 map.on('click', function (e) {
     $('.dots').fadeIn('fast');
@@ -231,7 +231,12 @@ $('#divBuscar').submit(function(e){
   console.log(JSON.stringify( data[0].address.displayLatLng.lat));
 });
 })
-
+$('#btnMenu').click(function(){
+  $('#menuLateral').addClass('mostrarMenu');
+})
+$('#btnCerrarMenu').click(function(){
+  $('#menuLateral').removeClass('mostrarMenu');
+})
 function rutaUnicaEncontrada(data){
 
   $('#listarutasEncontradas').fadeOut('fast')

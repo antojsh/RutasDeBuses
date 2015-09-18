@@ -52,7 +52,7 @@ window.addEventListener("load",function(){
   });
 
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition);
-  setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition); }, 2000);
+  setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
 
 });
 function showPosition(position) {

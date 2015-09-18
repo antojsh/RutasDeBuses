@@ -193,6 +193,7 @@ $('#listarutasEncontradas').html('');
     img.css("background-image", "url('"+data[i].image+"')");
     img.css("background-size",'cover');
   }
+  $('#rutasEncontradas').css('display','block');
   $('#listarutasEncontradas').fadeIn('fast')
 }else{
   error('Ups !','No se encontro ninguna ruta cercana, Quieres aumentar el rango de busqueda')
@@ -236,6 +237,9 @@ $('#btnMenu').click(function(){
 })
 $('#btnCerrarMenu').click(function(){
   $('#menuLateral').removeClass('mostrarMenu');
+})
+$('#cerrarEncontradas').click(function(){
+  $('#rutasEncontradas').css('display','none');
 })
 function rutaUnicaEncontrada(data){
 

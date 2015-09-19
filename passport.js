@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('Usuarios');
+var userLogin= require('./models/logueado')
 // Estrategia de autenticación con Twitter
 var TwitterStrategy = require('passport-twitter').Strategy;
 // Estrategia de autenticación con Facebook
@@ -61,7 +62,11 @@ module.exports = function(passport) {
 		callbackURL	 : '/auth/facebook/callback',
 		profileFields : ['id', 'displayName',  'photos']
 	}, function(accessToken, refreshToken, profile, done) {
-      console.log(profile.id+' '+profile.provider+' '+profile.displayName+' '+profile.photos[0].value)
+
+      //console.log(profile.id+' '+profile.provider+' '+profile.displayName+' '+profile.photos[0].value)
+			userLogin.name=profile.displayName;
+			userLogin.photo=profile.photos[0].value;
+			console.log('Passsport '+JSON.stringify(done))
 		// El campo 'profileFields' nos permite que los campos que almacenamos
 		// se llamen igual tanto para si el usuario se autentica por Twitter o
 		// por Facebook, ya que cada proveedor entrega los datos en el JSON con
@@ -82,7 +87,7 @@ module.exports = function(passport) {
 			user.save(function(err) {
 				if(err) throw err;
 				done(null, user);
-        console.log(profile.id+' '+profile.provider+' '+profile.displayName+' '+profile.photos[0].value)
+
 			});
 		});
 	}));

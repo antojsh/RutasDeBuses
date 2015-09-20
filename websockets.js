@@ -5,7 +5,7 @@ var mongoose = require('mongoose')
 var iduser;
 var Rutas = require('./rutasbuses')
 io.sockets.on('connection', function (socket) {
-console.log("Conectado socket")
+//console.log("Conectado socket")
 require('./websockets')(socket,Rutas)
 socket.on('app_user',nuevoUsuario)
  socket.on('buscarRuta',buscarRutaPartida);

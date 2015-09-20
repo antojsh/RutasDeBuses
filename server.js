@@ -1,3 +1,6 @@
+
+var repeat = require('repeat-array');
+require('date-utils');
 var mongoose = require('mongoose')
 var bodyParser= require('body-parser')
 var multer = require('multer');
@@ -7,15 +10,15 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var passport = require('passport');
-require('./models/usuarios');
-require('./passport')(passport);
+// require('./models/usuarios');
+// require('./passport')(passport);
 var session = require('express-session')
 
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 var iduser;
 var usuariosActivos={};
-server.listen(3000);
+server.listen(port,ip_addr);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(multer({dest:'./uploads'}).single('imagen'))
@@ -25,8 +28,8 @@ cloudinary.config({
 	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
 
 })
-//mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-	mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
+mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
+	//mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo');
 });
@@ -37,37 +40,32 @@ app.get('/', function (req, res) {
 app.get('/app', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
-
 // Configuración de Passport. Lo inicializamos
 // y le indicamos que Passport maneje la Sesión
-app.use(session({secret: 'antonio199308JSH',
-                 saveUninitialized: true,
-                 resave: true}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
-// Ruta para autenticarse con Twitter (enlace de login)
-app.get('/auth/twitter', passport.authenticate('twitter'));
-// Ruta para autenticarse con Facebook (enlace de login)
-app.get('/auth/facebook', function (req,res){
-	console.log(JSON.stringify(res.body))
-	passport.authenticate('facebook');
-	res.send('h')
-});
-// Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
-// En caso de fallo redirige a otra vista '/login'
-app.get('/auth/twitter/callback', passport.authenticate('twitter',
-  { successRedirect: '/', failureRedirect: '/login' }
-));
-// Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
-// En caso de fallo redirige a otra vista '/login'
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
-  { successRedirect: '/app', failureRedirect: '/public/index.html' }
-));
+// app.use(session({secret: 'antonio199308JSH',
+//                  saveUninitialized: true,
+//                  resave: true}));
+// app.use(passport.initialize());
+// app.use(passport.session());
+//
+// app.get('/logout', function(req, res) {
+//   req.logout();
+//   res.redirect('/');
+// });
+// // Ruta para autenticarse con Twitter (enlace de login)
+// app.get('/auth/twitter', passport.authenticate('twitter'));
+// // Ruta para autenticarse con Facebook (enlace de login)
+// app.get('/auth/facebook', passport.authenticate('facebook'));
+// // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
+// // En caso de fallo redirige a otra vista '/login'
+// app.get('/auth/twitter/callback', passport.authenticate('twitter',
+//   { successRedirect: '/', failureRedirect: '/login' }
+// ));
+// // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
+// // En caso de fallo redirige a otra vista '/login'
+// app.get('/auth/facebook/callback', passport.authenticate('facebook',
+//   { successRedirect: '/', failureRedirect: '/index.html' }
+// ));
 app.post('/saveRuta',function(req,res){
 	console.log(JSON.stringify(req.file.path))
 	cloudinary.uploader.upload(req.file.path,function(result){
@@ -90,20 +88,14 @@ app.post('/saveRuta',function(req,res){
 	},{ width: 300, height: 350, crop: 'fit' })
 })
 var Rutas = require('./models/rutasbuses')
-io.sockets.on('connection', function (socket) {
-
+	io.sockets.on('connection', function (socket) {
 	 socket.on('app_user',nuevoUsuario)
  	 socket.on('buscarRuta',buscarRutaPartida);
 	 socket.on('guardarRuta',addRutaBus);
 	 socket.on('buscarRutaUnica',buscarRutaUnica);
-
-
 	 function nuevoUsuario (data) {
 	 	iduser=data;
 	 	usuariosActivos[data]=socket.id;
-		var userLogin= require('./models/logueado')
-
-		socket.emit('dataUser',userLogin)
 	 	//console.log('Users conectados '+JSON.stringify(usuariosActivos))
 	 }
 	 function findAllBusRoute  (){

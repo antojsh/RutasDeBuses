@@ -63,7 +63,6 @@ module.exports = function(passport) {
 		profileFields : ['id', 'displayName',  'photos']
 	}, function(accessToken, refreshToken, profile, done) {
 
-			console.log('Passsport '+JSON.stringify(done))
 		// El campo 'profileFields' nos permite que los campos que almacenamos
 		// se llamen igual tanto para si el usuario se autentica por Twitter o
 		// por Facebook, ya que cada proveedor entrega los datos en el JSON con

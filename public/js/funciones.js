@@ -1,10 +1,8 @@
-var socket = io.connect('http://localhost:3000',{'forceNew':true });
+//Home
+var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com:8000',{'forceNew':true });
 var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
-socket.on('dataUser',function(data){
-  alert(JSON.stringify(data))
-})
 socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
   $('.Connection').css('max-height','0px');

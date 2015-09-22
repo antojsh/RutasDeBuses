@@ -77,7 +77,10 @@ outline:0;
 border-radius:5px 5px 0px 0px;
 
 }
+section article .loginNormal form input:last-child{
+  border-radius: 0px 0px 5px 5px;
+}
 section article .loginNormal form input:focus{
   outline:0;
-  border-radius: 0px 0px 5px 5px;
+  
 }

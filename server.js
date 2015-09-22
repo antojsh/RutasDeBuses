@@ -10,8 +10,8 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var passport = require('passport');
-// require('./models/usuarios');
-// require('./passport')(passport);
+require('./models/usuarios');
+require('./passport')(passport);
 var session = require('express-session')
 
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
@@ -35,37 +35,41 @@ mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663
 });
 app.use('/static', express.static('public'));
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/login.html');
 });
 app.get('/app', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 // Configuración de Passport. Lo inicializamos
 // y le indicamos que Passport maneje la Sesión
-// app.use(session({secret: 'antonio199308JSH',
-//                  saveUninitialized: true,
-//                  resave: true}));
-// app.use(passport.initialize());
-// app.use(passport.session());
-//
-// app.get('/logout', function(req, res) {
-//   req.logout();
-//   res.redirect('/');
-// });
-// // Ruta para autenticarse con Twitter (enlace de login)
-// app.get('/auth/twitter', passport.authenticate('twitter'));
-// // Ruta para autenticarse con Facebook (enlace de login)
-// app.get('/auth/facebook', passport.authenticate('facebook'));
-// // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
-// // En caso de fallo redirige a otra vista '/login'
-// app.get('/auth/twitter/callback', passport.authenticate('twitter',
-//   { successRedirect: '/', failureRedirect: '/login' }
-// ));
-// // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
-// // En caso de fallo redirige a otra vista '/login'
-// app.get('/auth/facebook/callback', passport.authenticate('facebook',
-//   { successRedirect: '/', failureRedirect: '/index.html' }
-// ));
+app.use(session({secret: 'antonio199308JSH',
+                 saveUninitialized: true,
+                 resave: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+app.get("/auth/facebook", function (req, res, next) {
+
+  passport.authenticate('facebook')(req, res, next)
+}, function() {});
+// Ruta para autenticarse con Twitter (enlace de login)
+app.get('/auth/twitter', passport.authenticate('twitter'));
+// Ruta para autenticarse con Facebook (enlace de login)
+//app.get('/auth/facebook', passport.authenticate('facebook'));
+// Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
+// En caso de fallo redirige a otra vista '/login'
+app.get('/auth/twitter/callback', passport.authenticate('twitter',
+  { successRedirect: '/app', failureRedirect: '/' }
+));
+// Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
+// En caso de fallo redirige a otra vista '/login'
+app.get('/auth/facebook/callback', passport.authenticate('facebook',
+  { successRedirect: '/app', failureRedirect: '/' }
+));
 app.post('/saveRuta',function(req,res){
 	console.log(JSON.stringify(req.file.path))
 	cloudinary.uploader.upload(req.file.path,function(result){
@@ -88,7 +92,7 @@ app.post('/saveRuta',function(req,res){
 	},{ width: 300, height: 350, crop: 'fit' })
 })
 var Rutas = require('./models/rutasbuses')
-	io.sockets.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
 	 socket.on('app_user',nuevoUsuario)
  	 socket.on('buscarRuta',buscarRutaPartida);
 	 socket.on('guardarRuta',addRutaBus);

@@ -13,7 +13,7 @@ body,section,html,article{
 section article >span{
   font-size: 1.5rem;
   color: #1A1A1A;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 section article >small{
   color: #C2C2C2;
@@ -26,7 +26,7 @@ section article .contentSocial{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px 0px;
+  margin: 20px 0px;
 
 }
 section article .contentSocial a{
@@ -54,7 +54,7 @@ section article{
 }
 section article .loginNormal{
   width: 100%;
-  margin: 20px 0px;
+  margin: 15px 0px;
 }
 section article .loginNormal form{
   display: flex;

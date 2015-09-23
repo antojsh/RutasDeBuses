@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body,html{
+      width: 100%;
+      height: 100%;
+    }
+    #creacionRuta{
+      position: fixed;
+      z-index: 50;
+      background: steelblue;
+    width: 250px;
+    padding: 10px;
+    }
+    #creacionRuta form{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    #creacionRuta form input,textarea{
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='creacionRuta'>
+    <form  action="http://busroute-pruebanodejs.rhcloud.com/saveRuta" method="post" enctype="multipart/form-data">
+    <input type="text" placeholder="Nombre Rutas" id='nombreRuta' name='nombreRuta'>
+    <input type="text" placeholder="Descripcion" id='descripcion' name='descripcion'>
+    <input type="text" placeholder="ciudad" id='ciudad' name='ciudad'>
+    <input type="text" placeholder="flota" id='flota' name='flota'>
+    <input type="file" name="imagen">
+    <textarea  rows="8" cols="40" id='coordenadas' name='coordenadas' placeholder='Coordenadas'></textarea>
+    <input type="submit"  value="Guardar" id='btnguardar'>
+
+    <input type="button"  value="Borrar ultimo punto" id="btnBorrar">
+    </form>
+  </div>
+	<div id="map" style="width:100%; height:100%; position:fixed !important; right:0; top:0 !important;"></div>
+  <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC29kT7B_aSG7jeJEvxNAwWzI1P5MFNNak&sensor=true">
+  </script>
+  <script>
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+    var flightPath;
+    var cadruta="";
+    var flightPlanCoordinates = [];
+    var vector=[];
+    var cad;
+    var coordenadas= document.getElementById('coordenadas');
+    var mapOptions = {
+           center: new google.maps.LatLng(10.942071365517807,-74.78217601776123),
+           zoom: 16,
+           mapTypeId: google.maps.MapTypeId.ROADMAP
+         };
+
+
+         window.addEventListener('load',function(){
+           map = new google.maps.Map(document.getElementById("map"),
+               mapOptions);
+
+               google.maps.event.addListener(map, "click", function(e) {
+               flightPlanCoordinates.push({lat:e.latLng.H , lng: e.latLng.L})
+               if(flightPath){
+                 flightPath.setMap(null);
+               }
+               agregarLinea()
+               vector.push(e.latLng.H+","+e.latLng.L);
+               cadruta="";
+               for(var i=0;i<vector.length;i++){
+               		cadruta+="["+vector[i]+"]";
+               		    if(i!=vector.length-1)cadruta+=",";
+               				//console.log(cadruta)
+               	}
+               	cad=JSON.parse("["+cadruta+"]");
+                coordenadas.value=JSON.stringify(cad);
+               	console.log(JSON.stringify(cad))
+               })
+          })
+         function agregarLinea(){
+           flightPath = new google.maps.Polyline({
+             path: flightPlanCoordinates,
+             geodesic: true,
+             strokeColor: '#FF0000',
+             strokeOpacity: 1.0,
+             strokeWeight: 2
+           });
+           flightPath.setMap(map);
+
+         }
+
+         document.getElementById('btnBorrar').addEventListener('click',function(){
+           flightPlanCoordinates.pop();
+           vector.pop()
+
+           cadruta="";
+           for(var i=0;i<vector.length;i++){
+              cadruta+="["+vector[i]+"]";
+                  if(i!=vector.length-1)cadruta+=",";
+                  //console.log(cadruta)
+            }
+            cad=JSON.parse("["+cadruta+"]");
+            coordenadas.value=JSON.stringify(cad);
+            flightPath.setMap(null);
+            agregarLinea()
+
+         })
+
+
+
+
+    </script>
+</body>
+</html>

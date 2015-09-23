@@ -33,6 +33,9 @@ mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo');
 });
+app.get('/create', function (req, res) {
+  res.sendFile(__dirname + '/google.html');
+});
 app.use('/static', express.static('public'));
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/login.html');

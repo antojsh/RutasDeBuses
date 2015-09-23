@@ -29,7 +29,7 @@ cloudinary.config({
 
 })
 mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-	//mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
+//	mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo');
 });
@@ -53,7 +53,7 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 app.get("/auth/facebook", function (req, res, next) {
-
+	console.log('Hola Mundo '+ JSON.stringify(req.body))
   passport.authenticate('facebook')(req, res, next)
 }, function() {});
 // Ruta para autenticarse con Twitter (enlace de login)

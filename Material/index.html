@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Material Prueba</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified JavaScript -->
+
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+
+</head>
+<body>
+  <nav>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo">Logo</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </header>
+
+    <section id='map'>
+
+    </section>
+
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet">
+      <div class="modal-content">
+        <div class="row" id='infoPuntoEscogido'>
+         <div class="col s12 m12">
+           <div class="card blue-grey darken-1">
+             <div class="card-content white-text">
+               <span class="card-title" id='strongCiudad'></span>
+               <p id='parrafoDir'></p>
+             </div>
+             <!-- <div class="card-action">
+               <a href="#">Patida</a>
+               <a href="#">Destino</a>
+               <a href="#">Cerrar</a>
+             </div> -->
+           </div>
+         </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Partida</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Destino</a>
+      </div>
+    </div>
+    <footer>
+
+    </footer>
+     <a class="btn-floating btn-large waves-effect waves-light red" id='btnBuscarRuta'><i class="material-icons">search</i></a>
+
+
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+ <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+   <script src='js/index.js'></script>
+</body>
+</html>

@@ -71,10 +71,9 @@ function errorPosition(){
 map.on('click', function (e) {
     $.getJSON("http://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&zoom=18&lat=" + e.latlng.lat + "&lon=" + e.latlng.lng + "&json_callback=?",
         function (response) {
-           $('#modal1').openModal();
-            console.log(JSON.stringify(response))
-            Materialize.showStaggeredList('#infoPuntoEscogido')
+           
             var msj = response.display_name;
+
             $('#strongCiudad').html(response.address.country+', '+response.address.state+', '+response.address.city);
             $('#parrafoDir').html(msj.replace(response.address.postcode+',',"") )
 
@@ -87,7 +86,7 @@ $(document).ready(function(){
     $('.modal-trigger').leanModal();
      $('.button-collapse').sideNav({
       menuWidth: 300, // Default is 240
-      edge: 'right', // Choose the horizontal origin
+      edge: 'left', // Choose the horizontal origin
       closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }
   );

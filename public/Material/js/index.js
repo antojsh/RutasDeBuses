@@ -69,6 +69,14 @@ function errorPosition(){
   //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 map.on('click', function (e) {
+        globalLatiud = e.latlng.lat;
+    globalLongitud=  e.latlng.lng;
+    if (markerTemporal === undefined){
+      markerTemporal= L.marker([globalLatiud, globalLongitud], {icon: markerTemp});
+      map.addLayer(markerTemporal);
+    }else{
+      markerTemporal.setLatLng(e.latlng);
+    }
     $.getJSON("http://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&zoom=18&lat=" + e.latlng.lat + "&lon=" + e.latlng.lng + "&json_callback=?",
         function (response) {
            

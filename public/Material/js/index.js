@@ -76,7 +76,7 @@ map.on('click', function (e) {
 
             $('#strongCiudad').html(response.address.country+', '+response.address.state+', '+response.address.city);
             $('#parrafoDir').html(msj.replace(response.address.postcode+',',"") )
-
+            $('#infoPunto').fadeIn('fast');
 
         }
     );
@@ -137,4 +137,8 @@ $('#btnDestino').click(function() {
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
     ocultarFooter()
   }
+})
+
+$('#btnCerrarPopup').click(function(){
+  $('#infoPunto').fadeOut('fast')
 })

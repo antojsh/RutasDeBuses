@@ -18,3 +18,10 @@ footer{
 .card-content p{
   line-height: 24px;
 }
+#infoPunto{
+  display: none;
+  z-index: 999999 !important;
+}
+.seleccionCoor{
+  color: white !important;
+}

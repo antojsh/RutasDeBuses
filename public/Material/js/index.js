@@ -1,4 +1,40 @@
-var map= L.map('map',{closePopupOnClick: false});
+var coorPartida= new Array();
+var coorDestino= new Array();
+var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
+var markerPartida,markerDestino,person;
+var coordenadas =[  {  "partida": []  },  {"destino": []  }]
+var greenIcon = L.icon({
+    iconUrl: 'static/img/marker_start.png',
+    iconSize:     [50, 50], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
+});
+var yellowIcon = L.icon({
+    iconUrl: 'static/img/marker_stop.png',
+    iconSize:     [50, 50], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
+});
+var markerTemp = L.icon({
+    iconUrl: 'static/img/marker_temporal.png',
+    iconSize:     [50, 50], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+  //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+var markerPerson = L.icon({
+    iconUrl: 'static/img/persona.png',
+    iconSize:     [50, 50], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+  //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
 window.addEventListener("load",function(){
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
   setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
@@ -49,4 +85,51 @@ map.on('click', function (e) {
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal-trigger').leanModal();
-  });
+});
+$('#btnPartida').click(function() {
+  //alert($(this).hasClass('btnParodesSelec'));z
+  if($(this).hasClass('btnParodesSelec')){
+    $(this).removeClass('btnParodesSelec');
+    $('#btnPartida span').css('color','white');
+    map.removeLayer(markerPartida);
+
+  }else{
+
+    $(this).addClass('waves-light');
+    $('#btnPartida span').css('color','green');
+     markerPartida = L.marker([globalLatiud, globalLongitud], {icon: greenIcon});
+     coorPartida[0]=globalLatiud;
+     coorPartida[1]=globalLongitud;
+      map.addLayer(markerPartida);
+      map.removeLayer(markerTemporal)
+      markerPartida.bindPopup("<b>Partida</b>").openPopup();
+      markerTemporal=undefined;
+  }
+  if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
+    ocultarFooter()
+  }
+})
+$('#btnDestino').click(function() {
+  //alert($(this).hasClass('btnParodesSelec'));
+  if($(this).hasClass('btnParodesSelec')){
+    $(this).removeClass('btnParodesSelec');
+    $('#btnDestino span').css('color','white');
+    map.removeLayer(markerDestino);
+
+  }else{
+
+    $(this).addClass('btnParodesSelec');
+    $('#btnDestino span').css('color','red');
+    coordenadas[0].partida[0]=globalLatiud;
+    markerDestino = L.marker([globalLatiud, globalLongitud], {icon: yellowIcon});
+    coorDestino[0]=globalLatiud;
+    coorDestino[1]=globalLongitud;
+    map.addLayer(markerDestino);
+    map.removeLayer(markerTemporal)
+    markerDestino.bindPopup("<b>Destino</b>").openPopup();
+    markerTemporal=undefined;
+  }
+  if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
+    ocultarFooter()
+  }
+})

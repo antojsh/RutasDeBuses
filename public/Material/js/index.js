@@ -161,7 +161,7 @@ $('#btnBuscarRuta').click(function(){
      socket.emit('buscarRuta', array);
 })
 function rutaEncontrada(data){
-  alert('Hola')
+  $('.dots').fadeIn('fast')
   for (var i = data.length - 1; i >= 0; i--) {
     $('#rutasEncontradas').append(' <div class="card">'+
     '<div class="card-image waves-effect waves-block waves-light">'+
@@ -177,7 +177,7 @@ function rutaEncontrada(data){
     '</div>'+
   '</div>')
   };
-  
+  $('.dots').fadeOut('fast')
 }
 function rutaUnicaEncontrada(){
 

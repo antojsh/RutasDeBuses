@@ -3,6 +3,7 @@ socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 var coorPartida= new Array();
 var coorDestino= new Array();
+var mostrarruta= L.geoJson();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
 var markerPartida,markerDestino,person;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
@@ -169,16 +170,23 @@ function rutaEncontrada(data){
     '</div>'+
     '<div class="card-content">'+
       '<span class="card-title activator grey-text text-darken-4">'+data[i].name+'<i class="material-icons right">more_vert</i></span>'+
-      '<p><a href="#">Ver ruta</a></p>'+
+      '<p><a href="#" id="'+data[i]._id+'" class="btnVerMas">Ver ruta</a></p>'+
     '</div>'+
    ' <div class="card-reveal">'+
-      '<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>'+
+      '<span class="card-title grey-text text-darken-4">'+data[i].name+'<i class="material-icons right">close</i></span>'+
       '<p>'+data[i].description+'</p>'+
     '</div>'+
   '</div>')
   };
   $('.dots').fadeOut('fast')
 }
-function rutaUnicaEncontrada(){
+$('#rutasEncontradas').on('click','.btnVerMas',function(){
+    $('.dots').fadeIn('fast');
+    socket.emit('buscarRutaUnica',this.id)
 
+})
+function rutaUnicaEncontrada(data){
+  $('#rutasEncontradas').fadeOut('fast')
+  mostrarruta=new L.Polyline(data.loc).addTo(map);
+  $('.dots').fadeOut('fast');
 }

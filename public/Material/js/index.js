@@ -1,3 +1,6 @@
+var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com:8000',{'forceNew':true });
+socket.on('rutaEncontrada', rutaEncontrada)
+socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 var coorPartida= new Array();
 var coorDestino= new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
@@ -119,7 +122,7 @@ $('#btnPartida').click(function() {
       markerTemporal=undefined;
   }
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
-    ocultarFooter()
+    $('#infoPunto').fadeOut('fast');
   }
 })
 $('#btnDestino').click(function() {
@@ -143,10 +146,39 @@ $('#btnDestino').click(function() {
     markerTemporal=undefined;
   }
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
-    ocultarFooter()
+    $('#infoPunto').fadeOut('fast');
   }
 })
 
 $('#btnCerrarPopup').click(function(){
   $('#infoPunto').fadeOut('fast')
 })
+$('#btnBuscarRuta').click(function(){
+  $('.dots').fadeIn('fast');
+  var array = new Array();
+    array[0]=coorPartida
+    array[1]=coorDestino
+     socket.emit('buscarRuta', array);
+})
+function rutaEncontrada(data){
+  alert('Hola')
+  for (var i = data.length - 1; i >= 0; i--) {
+    $('#rutasEncontradas').append(' <div class="card">'+
+    '<div class="card-image waves-effect waves-block waves-light">'+
+      '<img class="activator" src="'+data[i].image+'">'+
+    '</div>'+
+    '<div class="card-content">'+
+      '<span class="card-title activator grey-text text-darken-4">'+data[i].name+'<i class="material-icons right">more_vert</i></span>'+
+      '<p><a href="#">Ver ruta</a></p>'+
+    '</div>'+
+   ' <div class="card-reveal">'+
+      '<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>'+
+      '<p>'+data[i].description+'</p>'+
+    '</div>'+
+  '</div>')
+  };
+  
+}
+function rutaUnicaEncontrada(){
+
+}

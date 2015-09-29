@@ -36,6 +36,9 @@ mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663
 app.get('/create', function (req, res) {
   res.sendFile(__dirname + '/google.html');
 });
+app.get('/material', function (req, res) {
+  res.sendFile(__dirname + '/public/Material/index.html');
+});
 app.use('/static', express.static('public'));
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/login.html');

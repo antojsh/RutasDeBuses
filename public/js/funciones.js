@@ -67,6 +67,13 @@ function showPosition(position) {
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     person.bindPopup("<b>Destino</b>").openPopup();
     map.addLayer(person);
+        var options = {
+        key: 'b478d26fa0fad134bb7dc2ca92feebc7',
+    };
+    var control = L.Control.openCageSearch(options).addTo(map);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
 }
 function showPositionMove(position) {

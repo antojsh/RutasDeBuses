@@ -172,8 +172,8 @@ io.sockets.on('connection', function (socket) {
 	 		var query = Rutas.find({'loc': {
 	 		  $near: [data[0][0],data[0][1]],
 	 		  $maxDistance: 0.007,
-	 			}
-	 		});
+			}
+		},'name description image');
 	 		query.exec(function (err, ruta) {
 	 		  if (err) {console.log(err);throw err;}
 	 			if (!ruta) {
@@ -191,7 +191,7 @@ io.sockets.on('connection', function (socket) {
 	 		  $near: [data[1][0],data[1][1]],
 	 		  $maxDistance: 0.01,
 	 			}
-	 		});
+	 		},'name description image');
 	 		query.exec(function (err, ruta) {
 	 		  if (err) {console.log(err);throw err;}
 	 			if (!ruta) {

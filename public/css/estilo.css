@@ -266,6 +266,9 @@ footer a:active {
     border-radius: 5px;
   /*overflow: auto;*/
 }
+#rutasEncontradas li:first-child{
+  margin-top: 20px;
+}
 #rutasEncontradas li:last-child{
   margin-bottom: 0px;
 }

@@ -339,6 +339,10 @@ footer a:active {
   font-size: 1rem;
   position: absolute;
 }
+.leaflet-control-ocd-search-alternatives{
+  width: 100% !important;
+  margin-top: 45px;
+}
 #divBuscar{
   position: fixed;
   top: 32px;

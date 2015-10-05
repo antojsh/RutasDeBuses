@@ -312,9 +312,36 @@ footer a:active {
   line-height: 4em !important;
 }
 
+.leaflet-control-ocd-search {
+  position: fixed;
+  top: 0px;
+  z-index: 20;
+  width: 98%;
+
+  justify-content: center;
+  align-items: center;
+
+  left: 50%;
+  transform: translateX(-50%);
+}
+.leaflet-control-ocd-search-icon{
+  display: none;
+  z-index: 999999;
+}
+.leaflet-control-ocd-search input{
+  width:100%;
+  height: 45px;
+  border-radius: 5px;
+  background: #dadada;
+  border: 2px solid #36D278;
+  padding-left: 55px;
+  color: #000;
+  font-size: 1rem;
+  position: absolute;
+}
 #divBuscar{
   position: fixed;
-  top: 5px;
+  top: 32px;
   z-index: 20;
   width: 98%;
   height: auto;
@@ -322,7 +349,7 @@ footer a:active {
   display: flex;
   justify-content: center;
   align-items: center;
-
+    z-index: 1000000;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -337,7 +364,7 @@ footer a:active {
   text-shadow: 1px 1px 1px #000;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000000;
+
 }
 #divBuscar input{
   width:100%;
@@ -348,6 +375,7 @@ footer a:active {
   padding-left: 55px;
   color: #000;
   font-size: 1rem;
+  display: none;
   /*box-shadow: 1px 1px 3px white;*/
 }
 #divBuscar ::-webkit-input-placeholder{

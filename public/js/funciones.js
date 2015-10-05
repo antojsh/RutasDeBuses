@@ -59,8 +59,7 @@ window.addEventListener("load",function(){
 function showPosition(position) {
     map.setView([position.coords.latitude, position.coords.longitude], 16);
     L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         id: 'mapbox.streets',
         accessToken: 'your.mapbox.public.access.token'
     }).addTo(map);
@@ -84,7 +83,7 @@ function showPositionMove(position) {
 function errorPosition(){
   map.setView([11.004692, -74.808877], 16);
   L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18,
       id: 'mapbox.streets',
       accessToken: 'your.mapbox.public.access.token'

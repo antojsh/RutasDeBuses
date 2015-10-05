@@ -338,6 +338,7 @@ footer a:active {
   color: #000;
   font-size: 1rem;
   position: absolute;
+  font-size: .9rem;
 }
 .leaflet-control-ocd-search-alternatives{
   width: 100% !important;

@@ -245,7 +245,7 @@ function rutaUnicaEncontrada(data){
   var arrowOffset = 0;
   var anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 10, polygon: false, pathOptions: {stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 10, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])
       if(++arrowOffset > 100)
           arrowOffset = 0;

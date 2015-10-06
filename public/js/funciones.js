@@ -1,4 +1,3 @@
-//Home
 var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com:8000',{'forceNew':true });
 var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
@@ -59,20 +58,14 @@ window.addEventListener("load",function(){
 function showPosition(position) {
     map.setView([position.coords.latitude, position.coords.longitude], 16);
     L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
         id: 'mapbox.streets',
         accessToken: 'your.mapbox.public.access.token'
     }).addTo(map);
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     person.bindPopup("<b>Destino</b>").openPopup();
     map.addLayer(person);
-        var options = {
-        key: 'b478d26fa0fad134bb7dc2ca92feebc7',
-    };
-    var control = L.Control.openCageSearch(options).addTo(map);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
 
 }
 function showPositionMove(position) {
@@ -83,7 +76,7 @@ function showPositionMove(position) {
 function errorPosition(){
   map.setView([11.004692, -74.808877], 16);
   L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
       id: 'mapbox.streets',
       accessToken: 'your.mapbox.public.access.token'
@@ -252,6 +245,42 @@ function rutaUnicaEncontrada(data){
 
   $('#listarutasEncontradas').fadeOut('fast')
   mostrarruta=new L.Polyline(data.loc).addTo(map);
+  // var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
+  // var arrowOffset = 0;
+  // var anim = window.setInterval(function() {
+  //     arrowHead.setPatterns([
+  //         {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 8, polygon: false, pathOptions: {stroke: true}})}
+  //     ])
+  //     if(++arrowOffset > 100)
+  //         arrowOffset = 0;
+  // }, 5000);
+
+  // var pd = L.polylineDecorator(mostrarruta, {
+  //       patterns: [
+  //           {offset: 0, repeat: 10, symbol: L.Symbol.dash({pixelSize: 0})}
+  //       ]
+  //   }).addTo(map);
+
+  // var pathPattern = L.polylineDecorator(
+  //     mostrarruta,
+  //     {
+  //           patterns: [
+  //               { offset: 12, repeat: 25, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
+  //               { offset: 0, repeat: 25, symbol: L.Symbol.dash({pixelSize: 0}) }
+  //           ]
+  //       }
+  //   ).addTo(map);
+
+  var pathPattern = L.polylineDecorator(
+      mostrarruta,
+        {
+            patterns: [
+                { offset: 12, repeat: 25, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
+                { offset: 0, repeat: 25, symbol: L.Symbol.dash({pixelSize: 0}) }
+            ]
+        }
+    ).addTo(map);
+
   $('.dots').fadeOut('fast');
 }
 function error(titulo,msj){

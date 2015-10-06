@@ -245,11 +245,11 @@ function rutaUnicaEncontrada(data){
   var arrowOffset = 0;
   var anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 8, polygon: false, pathOptions: {stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 10, polygon: false, pathOptions: {stroke: true}})}
       ])
       if(++arrowOffset > 100)
           arrowOffset = 0;
-  }, 5000);
+  }, 500);
 
   // var pd = L.polylineDecorator(mostrarruta, {
   //       patterns: [

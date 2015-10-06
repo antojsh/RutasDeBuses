@@ -271,8 +271,8 @@ function rutaUnicaEncontrada(data){
       mostrarruta,
         {
             patterns: [
-                { offset: 12, repeat: 25, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
-                { offset: 0, repeat: 25, symbol: L.Symbol.dash({pixelSize: 0}) }
+                { offset: 12, repeat: 10, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
+                { offset: 0, repeat: 5, symbol: L.Symbol.dash({pixelSize: 0}) }
             ]
         }
     ).addTo(map);

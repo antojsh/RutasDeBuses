@@ -241,15 +241,15 @@ function rutaUnicaEncontrada(data){
 
   $('#listarutasEncontradas').fadeOut('fast')
   mostrarruta=new L.Polyline(data.loc).addTo(map);
-  // var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
-  // var arrowOffset = 0;
-  // var anim = window.setInterval(function() {
-  //     arrowHead.setPatterns([
-  //         {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 8, polygon: false, pathOptions: {stroke: true}})}
-  //     ])
-  //     if(++arrowOffset > 100)
-  //         arrowOffset = 0;
-  // }, 5000);
+  var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
+  var arrowOffset = 0;
+  var anim = window.setInterval(function() {
+      arrowHead.setPatterns([
+          {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 8, polygon: false, pathOptions: {stroke: true}})}
+      ])
+      if(++arrowOffset > 100)
+          arrowOffset = 0;
+  }, 5000);
 
   // var pd = L.polylineDecorator(mostrarruta, {
   //       patterns: [
@@ -267,15 +267,15 @@ function rutaUnicaEncontrada(data){
   //       }
   //   ).addTo(map);
 
-  var pathPattern = L.polylineDecorator(
-      mostrarruta,
-        {
-            patterns: [
-                { offset: 12, repeat: 10, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
-                { offset: 0, repeat: 5, symbol: L.Symbol.dash({pixelSize: 0}) }
-            ]
-        }
-    ).addTo(map);
+  // var pathPattern = L.polylineDecorator(
+  //     mostrarruta,
+  //       {
+  //           patterns: [
+  //               { offset: 12, repeat: 10, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
+  //               { offset: 0, repeat: 5, symbol: L.Symbol.dash({pixelSize: 0}) }
+  //           ]
+  //       }
+  //   ).addTo(map);
 
   $('.dots').fadeOut('fast');
 }

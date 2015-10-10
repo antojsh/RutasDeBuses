@@ -240,6 +240,7 @@ $('#cerrarEncontradas').click(function(){
 function rutaUnicaEncontrada(data){
 
   $('#listarutasEncontradas').fadeOut('fast')
+  mostrarruta='';
   mostrarruta=new L.Polyline(data.loc).addTo(map);
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
   var arrowOffset = 0;

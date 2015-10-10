@@ -13,7 +13,7 @@ body,section,html,article{
 section article >span{
   font-size: 1.5rem;
   color: #1A1A1A;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 section article >small{
   color: #C2C2C2;
@@ -26,7 +26,7 @@ section article .contentSocial{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px;
+  margin: 10px 0px;
 
 }
 section article .contentSocial a{
@@ -48,13 +48,14 @@ section article .contentSocial a:last-child{
 }
 section article{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  padding: 5px;
 }
 section article .loginNormal{
   width: 100%;
-  margin: 15px 0px;
+  margin: 10px 0px;
 }
 section article .loginNormal form{
   display: flex;
@@ -64,7 +65,7 @@ section article .loginNormal form{
   width: 100%;
 }
 section article .loginNormal form input{
-  width: 90%;
+  width: 70%;
   height: 3em;
   outline: 0;
   font-size: 1.04rem;

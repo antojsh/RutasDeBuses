@@ -216,6 +216,8 @@ io.sockets.on('connection', function (socket) {
 	 					}
 	 				}
 	 		}
+
+			
       // var norepetidas = JSON.stringify(rutasEncontradas)
       // for(var i =0;i<norepetidas.length-1;i++){
       //

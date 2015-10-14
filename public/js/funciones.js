@@ -3,6 +3,8 @@ var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.on('userProfile',function(data){
+  if(localStorage.getItem('profile') === undefined || localStorage.getItem('profile') == null) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
+  localStorage.setItem("profile", data._id);
   $('#nomUsuario').html(data.name)
   $('#imgUsuario').attr("src",data.photo);
 })
@@ -48,6 +50,7 @@ var markerPerson = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 window.addEventListener("load",function(){
+
   socket.on('connect',function(data){
       socket.emit('app_user',fingerprint);
       $('.noConnection').css('max-height','0px');

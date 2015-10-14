@@ -30,6 +30,10 @@
           <small>Olvidaste tu contraseña ?</small>
       </article>
     </section>
-
+    <script>
+      window.addEventListener('load',function(){
+        if(!localStorage.getItem('profile') === undefined || localStorage.getItem('profile') != null) window.location ='http://busroute-pruebanodejs.rhcloud.com/app';
+      })
+    </script>
   </body>
 </html>

@@ -617,7 +617,7 @@ Inspired by https://dribbble.com/shots/2028561-Meta
   right: 0;
   bottom: 0;
   margin: auto;
-  background: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   z-index: 999999999;
   display: none; }
 

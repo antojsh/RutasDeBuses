@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080',{'forceNew':true });
+var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com',{'forceNew':true });
 var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)

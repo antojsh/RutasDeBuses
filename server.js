@@ -73,7 +73,7 @@ app.get('/auth/twitter/callback', passport.authorize('twitter',
   { successRedirect: '/app', failureRedirect: '/' }
 ),  function(req, res) {
 	inforPerfil=req.account;
-	console.log(JSON.stringify(req.session.idprofile))
+
 	res.redirect('/app');
 });
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.

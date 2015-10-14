@@ -256,7 +256,8 @@ footer a:active {
   color: #aaa;
   font-size: 1.05rem;
   margin: 15px 5px;
-  text-shadow: 1px 1px 10px #000; }
+  text-shadow: 1px 1px 10px #000;
+  text-align: center; }
 
 #menuLateral nav ul li {
   display: block; }

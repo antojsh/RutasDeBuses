@@ -275,15 +275,10 @@ footer a:active {
 
 #rutasEncontradas {
   position: fixed;
-  top: 5px;
   z-index: 999999 !important;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-  width: 98%;
-  height: auto;
-  max-height: 90%;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow: auto;
   background: -webkit-linear-gradient(#fff, #dadada);
   background: linear-gradient(#fff, #dadada);

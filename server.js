@@ -13,7 +13,7 @@ var passport = require('passport');
 require('./models/usuarios');
 require('./passport')(passport);
 var session = require('express-session')
-
+var inforPerfil;
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 var iduser;
@@ -48,34 +48,42 @@ app.get('/app', function (req, res) {
 });
 // Configuración de Passport. Lo inicializamos
 // y le indicamos que Passport maneje la Sesión
+
 app.use(session({secret: 'antonio199308JSH',
                  saveUninitialized: true,
                  resave: true}));
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
-app.get("/auth/facebook", function (req, res, next) {
-	console.log('Hola Mundo '+ JSON.stringify(req.body))
-  passport.authenticate('facebook')(req, res, next)
-}, function() {});
+app.get("/auth/facebook", passport.authenticate('facebook'))
+
 // Ruta para autenticarse con Twitter (enlace de login)
-app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter', passport.authenticate('twitter',function(req, res) {
+	console.log("PERRR "+JSON.stringify(req.user))
+}));
 // Ruta para autenticarse con Facebook (enlace de login)
 //app.get('/auth/facebook', passport.authenticate('facebook'));
 // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
 // En caso de fallo redirige a otra vista '/login'
-app.get('/auth/twitter/callback', passport.authenticate('twitter',
+app.get('/auth/twitter/callback', passport.authorize('twitter',
   { successRedirect: '/app', failureRedirect: '/' }
-));
+),  function(req, res) {
+	inforPerfil=req.account;
+	console.log(JSON.stringify(req.session.idprofile))
+	res.redirect('/app');
+});
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
 // En caso de fallo redirige a otra vista '/login'
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
+app.get('/auth/facebook/callback', passport.authorize('facebook',
   { successRedirect: '/app', failureRedirect: '/' }
-));
+),  function(req, res) {
+	inforPerfil=req.account;
+	res.redirect('/app');
+});
 app.post('/saveRuta',function(req,res){
 	console.log(JSON.stringify(req.file.path))
 	cloudinary.uploader.upload(req.file.path,function(result){
@@ -99,6 +107,7 @@ app.post('/saveRuta',function(req,res){
 })
 var Rutas = require('./models/rutasbuses')
 io.sockets.on('connection', function (socket) {
+	socket.emit('userProfile',inforPerfil)
 	 socket.on('app_user',nuevoUsuario)
  	 socket.on('buscarRuta',buscarRutaPartida);
 	 socket.on('guardarRuta',addRutaBus);
@@ -106,7 +115,8 @@ io.sockets.on('connection', function (socket) {
 	 function nuevoUsuario (data) {
 	 	iduser=data;
 	 	usuariosActivos[data]=socket.id;
-	 	//console.log('Users conectados '+JSON.stringify(usuariosActivos))
+	 	console.log('Users conectados '+JSON.stringify(usuariosActivos))
+
 	 }
 	 function findAllBusRoute  (){
 	 		Rutas.find(function(err,rutasbuses){
@@ -217,7 +227,7 @@ io.sockets.on('connection', function (socket) {
 	 				}
 	 		}
 
-			
+
       // var norepetidas = JSON.stringify(rutasEncontradas)
       // for(var i =0;i<norepetidas.length-1;i++){
       //

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('Usuarios');
-
+var session = require('express-session')
 // Estrategia de autenticación con Twitter
 var TwitterStrategy = require('passport-twitter').Strategy;
 // Estrategia de autenticación con Facebook
@@ -19,6 +19,7 @@ module.exports = function(passport) {
 	// Serializa al usuario para almacenarlo en la sesión
 	passport.serializeUser(function(user, done) {
 		done(null, user);
+
 	});
 
 	// Deserializa el objeto usuario almacenado en la sesión para
@@ -33,8 +34,7 @@ module.exports = function(passport) {
 		consumerSecret	: config.twitter.secret,
 		callbackURL		 : '/auth/twitter/callback'
 	}, function(req,accessToken, refreshToken, profile, done) {
-		// Busca en la base de datos si el usuario ya se autenticó en otro
-		// momento y ya está almacenado en ella
+
 		User.findOne({provider_id: profile.id}, function(err, user) {
 			if(err) throw(err);
 			// Si existe en la Base de Datos, lo devuelve

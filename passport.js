@@ -32,7 +32,7 @@ module.exports = function(passport) {
 		consumerKey		 : config.twitter.key,
 		consumerSecret	: config.twitter.secret,
 		callbackURL		 : '/auth/twitter/callback'
-	}, function(accessToken, refreshToken, profile, done) {
+	}, function(req,accessToken, refreshToken, profile, done) {
 		// Busca en la base de datos si el usuario ya se autenticó en otro
 		// momento y ya está almacenado en ella
 		User.findOne({provider_id: profile.id}, function(err, user) {
@@ -63,7 +63,7 @@ module.exports = function(passport) {
 		profileFields : ['id', 'displayName',  'photos']
 	}, function(accessToken, refreshToken, profile, done) {
 
-	
+
 		// El campo 'profileFields' nos permite que los campos que almacenamos
 		// se llamen igual tanto para si el usuario se autentica por Twitter o
 		// por Facebook, ya que cada proveedor entrega los datos en el JSON con

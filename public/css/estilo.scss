@@ -244,7 +244,7 @@ footer a:active {
   position: absolute;
   top: 0;
   left: 0;
-  background: steelblue;
+  background: linear-gradient(#25B7FA, #06a7f1);
   height: 50px;
   width: 100%;
   display: flex;
@@ -254,9 +254,12 @@ footer a:active {
 #rutasEncontradas  .cabecera span,small{
   margin: 0 20px;
   color:white;
+  font-size: 1rem;
+  text-shadow: 1px 1px 5px black;
+}
+#rutasEncontradas  .cabecera span{
   font-size: 1.4rem;
 }
-
 
 #rutasEncontradas ul {
   list-style: none;

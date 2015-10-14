@@ -306,12 +306,9 @@ footer a:active {
           align-items: center; }
 
 #rutasEncontradas .cabecera span, small {
-  margin: 0 10px;
-  color: white; }
-
-#rutasEncontradas .cabecera span {
-  font-size: 1.2rem;
-  margin-left: 15px; }
+  margin: 0 20px;
+  color: white;
+  font-size: 1.4rem; }
 
 #rutasEncontradas ul {
   list-style: none;

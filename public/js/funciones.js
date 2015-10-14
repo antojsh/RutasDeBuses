@@ -235,22 +235,22 @@ $('#btnCerrarMenu').click(function(){
   $('#menuLateral').removeClass('mostrarMenu');
 })
 $('#cerrarEncontradas').click(function(){
-  $('#rutasEncontradas').css('display','none');
+  $('#rutasEncontradas').fadeOut('slow');
 })
 function rutaUnicaEncontrada(data){
 
-  $('#listarutasEncontradas').fadeOut('fast')
+  $('#rutasEncontradas').fadeOut('slow');
   mostrarruta='';
   mostrarruta=new L.Polyline(data.loc).addTo(map);
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
   var arrowOffset = 0;
   var anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 500, symbol: L.Symbol.arrowHead({pixelSize: 10, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 50, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])
       if(++arrowOffset > 100)
           arrowOffset = 0;
-  }, 500);
+  }, 1000);
 
   // var pd = L.polylineDecorator(mostrarruta, {
   //       patterns: [

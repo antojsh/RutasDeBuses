@@ -28,6 +28,7 @@ section:target{
 
 
 
+
 aside {
   width: 100%;
   height: 150px;
@@ -235,32 +236,37 @@ footer a:active {
 
   overflow: auto;
   background: linear-gradient(#fff,#dadada) ;
-  border-radius: 5px;
+
   box-shadow: 1px 1px 10px #000;
   display: none;
 }
-#rutasEncontradas >strong{
-  padding: 20px;
-  margin-top: 20px;
-  font-size: 1.5rem;
-  text-shadow: 1px 1px 5px #fff;
-}
-#rutasEncontradas span{
+#rutasEncontradas  .cabecera{
   position: absolute;
-  right: 0;
   top: 0;
-  cursor: pointer;
-  margin: 3px 3px;
-
-  padding: 8px;
-  text-shadow: 1px 1px 5px #fff;
-  color: #000;
+  left: 0;
+  background: steelblue;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
+#rutasEncontradas  .cabecera span,small{
+  margin: 0 10px;
+  color:white;
+}
+#rutasEncontradas  .cabecera span{
+  font-size: 1.2rem;
+  margin-left: 15px;
+}
+
 #rutasEncontradas ul {
   list-style: none;
   border-radius: 10px;
   display: none;
   padding: 10px;
+  overflow: auto;
+  margin-top: 50px;
 }
 
 #rutasEncontradas li {

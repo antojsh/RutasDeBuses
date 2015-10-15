@@ -3,8 +3,7 @@ var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.on('userProfile',function(data){
-  if(localStorage.getItem('profile') === undefined || localStorage.getItem('profile') == null) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
-  localStorage.setItem("profile", data._id);
+localStorage.setItem("profile", data._id);
   $('#nomUsuario').html(data.name)
   $('#imgUsuario').attr("src",data.photo);
 })
@@ -253,7 +252,7 @@ function rutaUnicaEncontrada(data){
   // if (anim !=undefined) map.removeLayer(anim);
   var anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 35, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 20, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])
       if(++arrowOffset > 100)
           arrowOffset = 0;

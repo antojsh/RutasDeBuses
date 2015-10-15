@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>
+    if(localStorage.getItem('profile') === undefined || localStorage.getItem('profile') == null) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
+    
+    </script>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
     <link rel="stylesheet" href="static/css/estilo.css" media="screen" title="no title" charset="utf-8">

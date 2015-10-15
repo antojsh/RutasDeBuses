@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <title>Iniciar Sesion</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>
+      
+        if(!localStorage.getItem('profile') === undefined || localStorage.getItem('profile') != null) window.location ='http://busroute-pruebanodejs.rhcloud.com/app';
 
+    </script>
     <link rel="stylesheet" href="static/css/login.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="static/css/iconos.css" media="screen" title="no title" charset="utf-8">
   </head>
@@ -30,10 +34,6 @@
           <small>Olvidaste tu contraseña ?</small>
       </article>
     </section>
-    <script>
-      window.addEventListener('load',function(){
-        if(!localStorage.getItem('profile') === undefined || localStorage.getItem('profile') != null) window.location ='http://busroute-pruebanodejs.rhcloud.com/app';
-      })
-    </script>
+
   </body>
 </html>

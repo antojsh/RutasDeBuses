@@ -32,9 +32,10 @@ module.exports = function(passport) {
 	passport.use(new TwitterStrategy({
 		consumerKey		 : config.twitter.key,
 		consumerSecret	: config.twitter.secret,
-		callbackURL		 : '/auth/twitter/callback'
+		callbackURL		 : '/auth/twitter/callback',
+			profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
 	}, function(req,accessToken, refreshToken, profile, done) {
-
+		console.log(JSON.stringify(profile))
 		User.findOne({provider_id: profile.id}, function(err, user) {
 			if(err) throw(err);
 			// Si existe en la Base de Datos, lo devuelve
@@ -60,9 +61,9 @@ module.exports = function(passport) {
 		clientID			: config.facebook.key,
 		clientSecret	: config.facebook.secret,
 		callbackURL	 : '/auth/facebook/callback',
-		profileFields : ['id', 'displayName',  'photos']
+		profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
 	}, function(accessToken, refreshToken, profile, done) {
-
+		console.log(JSON.stringify(profile))
 
 		// El campo 'profileFields' nos permite que los campos que almacenamos
 		// se llamen igual tanto para si el usuario se autentica por Twitter o

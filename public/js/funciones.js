@@ -245,9 +245,8 @@ $('#cerrarEncontradas').click(function(){
   $('#rutasEncontradas').fadeOut('slow');
 })
 function rutaUnicaEncontrada(data){
-
+  if (mostrarruta !=undefined) map.removeLayer(mostrarruta);
   $('#rutasEncontradas').fadeOut('slow');
-  mostrarruta='';
   mostrarruta=new L.Polyline(data.loc).addTo(map);
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
   var arrowOffset = 0;

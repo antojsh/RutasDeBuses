@@ -3,7 +3,7 @@ var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.on('userProfile',function(data){
-  if(localStorage.getItem('profile') === undefined || localStorage.getItem('profile' || data._id ===undefined) == null) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
+  if(data._id ===undefined) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
   localStorage.setItem("profile", data._id);
   $('#nomUsuario').html(data.name)
   $('#imgUsuario').attr("src",data.photo);

@@ -3,6 +3,7 @@ var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.on('userProfile',function(data){
+  console.log(JSON.stringify(data))
   if(data._id ===undefined) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
   localStorage.setItem("profile", data._id);
   $('#nomUsuario').html(data.name)

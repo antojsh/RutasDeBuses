@@ -244,15 +244,14 @@ $('#btnCerrarMenu').click(function(){
 $('#cerrarEncontradas').click(function(){
   $('#rutasEncontradas').fadeOut('slow');
 })
-var anim
 function rutaUnicaEncontrada(data){
   if (mostrarruta !=undefined) map.removeLayer(mostrarruta);
   $('#rutasEncontradas').fadeOut('slow');
   mostrarruta=new L.Polyline(data.loc).addTo(map);
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
   var arrowOffset = 0;
-  if (anim !=undefined) map.removeLayer(anim);
-  anim = window.setInterval(function() {
+  // if (anim !=undefined) map.removeLayer(anim);
+  var anim = window.setInterval(function() {
       arrowHead.setPatterns([
           {offset: arrowOffset+'%', repeat: 35, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])

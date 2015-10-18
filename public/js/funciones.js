@@ -1,4 +1,4 @@
-var socket = io.connect('http://busroute-pruebanodejs.rhcloud.com',{'forceNew':true });
+var socket = io.connect('http://104.131.226.138:8080',{'forceNew':true });
 var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
@@ -56,8 +56,7 @@ var markerPerson = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 window.addEventListener("load",function(){
-  map = new google.maps.Map(document.getElementById("map"),
-      mapOptions);
+  
   socket.on('connect',function(data){
       socket.emit('app_user',fingerprint);
       $('.noConnection').css('max-height','0px');
@@ -65,8 +64,8 @@ window.addEventListener("load",function(){
       setTimeout(function(){ $('.Connection').css('max-height','0px');}, 2000);
   });
 
-  // navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
-  // setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
+   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
+   setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
 
 });
 function showPosition(position) {

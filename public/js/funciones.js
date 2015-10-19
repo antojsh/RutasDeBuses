@@ -26,7 +26,7 @@ var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongi
 var markerPartida,markerDestino,person;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
-    iconUrl: 'static/img/partida.png',
+    iconUrl: 'static/img/marker_start.png',
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
@@ -34,7 +34,7 @@ var greenIcon = L.icon({
     popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
 });
 var yellowIcon = L.icon({
-    iconUrl: 'static/img/destino.png',
+    iconUrl: 'static/img/marker_stop.png',
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location

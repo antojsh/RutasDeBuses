@@ -4,7 +4,7 @@ socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.on('userProfile',function(data){
   console.log(JSON.stringify(data))
-  if(data._id ===undefined) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
+  if(data._id ==null) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
   localStorage.setItem("profile", data._id);
   $('#nomUsuario').html(data.name)
   $('#imgUsuario').attr("src",data.photo);
@@ -259,7 +259,7 @@ function rutaUnicaEncontrada(data){
   // if (anim !=undefined) map.removeLayer(anim);
   var anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 20, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 5, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])
       if(++arrowOffset > 100)
           arrowOffset = 0;

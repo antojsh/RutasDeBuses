@@ -15,6 +15,7 @@ require('./passport')(passport);
 var session = require('express-session')
 var inforPerfil;
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '104.131.226.138';
+//var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '192.168.130.135';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 var iduser;
 var usuariosActivos={};

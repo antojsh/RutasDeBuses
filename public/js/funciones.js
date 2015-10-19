@@ -1,13 +1,14 @@
 var socket = io.connect('http://104.131.226.138:8080');
+//var socket = io.connect('http://192.168.130.135:8080');
 var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 socket.on('userProfile',function(data){
   console.log(JSON.stringify(data))
-  if(data._id ==null) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
-  localStorage.setItem("profile", data._id);
-  $('#nomUsuario').html(data.name)
-  $('#imgUsuario').attr("src",data.photo);
+//  if(data._id ===undefined) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
+  // localStorage.setItem("profile", data._id);
+  // $('#nomUsuario').html(data.name)
+  // $('#imgUsuario').attr("src",data.photo);
 })
 socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
@@ -56,7 +57,7 @@ var markerPerson = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 window.addEventListener("load",function(){
-  
+
   socket.on('connect',function(data){
       socket.emit('app_user',fingerprint);
       $('.noConnection').css('max-height','0px');
@@ -217,21 +218,25 @@ $('#divBuscar').submit(function(e){
   e.preventDefault();
   $('.dots').fadeIn('fast');
   var location = $('#txtBuscar').val();//unresolvedLocations
-  var geocode = ' http://open.mapquest.com/_svc/searchio?action=search&query0='+location+'&sort=bestmatch&page=0&routeContext='
-  $.getJSON(geocode, function(data) {
-    console.log(  data[0].address.displayLatLng );
+  //var geocode = ' http://open.mapquest.com/_svc/searchio?action=search&query0='+location+'&sort=bestmatch&page=0&routeContext=';
+  var geocode =  'http://photon.komoot.de/api?q='+location;
 
+  $.getJSON(geocode, function(data) {
+
+    var vlat= JSON.stringify(data.features[0].geometry.coordinates[0]);
+    var vlng= JSON.stringify(data.features[0].geometry.coordinates[1]);
+      //console.log(vlat+"      "+vlng);
+    map.setView([vlng,vlat],16);
+/*
   if( data[0].address.displayLatLng !==null){
     map.setView([data[0].address.displayLatLng.lat, data[0].address.displayLatLng.lng], 16);
     markerTemporal= L.marker([data[0].address.displayLatLng.lat, data[0].address.displayLatLng.lng], {icon: markerTemp});
   }else{
-
     map.setView([data[0].unresolvedLocations[0].address.displayLatLng.lat, data[0].unresolvedLocations[0].address.displayLatLng.lng], 16);
     markerTemporal= L.marker([data[0].unresolvedLocations[0].address.displayLatLng.lat, data[0].unresolvedLocations[0].address.displayLatLng.lng], {icon: markerTemp});
+  }*/
 
-  }
-
-  map.addLayer(markerTemporal);
+  //map.addLayer(markerTemporal);
   // // let's stringify it
   // var latlngAsString = latlng.join(',');
   // console.log(latlngAsString);
@@ -250,9 +255,11 @@ $('#btnCerrarMenu').click(function(){
 $('#cerrarEncontradas').click(function(){
   $('#rutasEncontradas').fadeOut('slow');
 })
+
 function rutaUnicaEncontrada(data){
   if (mostrarruta !=undefined) map.removeLayer(mostrarruta);
   $('#rutasEncontradas').fadeOut('slow');
+
   mostrarruta=new L.Polyline(data.loc).addTo(map);
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
   var arrowOffset = 0;

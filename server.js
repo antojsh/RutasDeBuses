@@ -29,9 +29,9 @@ cloudinary.config({
 
 })
 //mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-	mongoose.connect('mongodb://localhost:27017/DbRutasBuses',function(err,res){
+	mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
-	else console.log('Conectado Mongo');
+	else console.log('Conectado Mongo de Digital');
 });
 app.get('/create', function (req, res) {
   res.sendFile(__dirname + '/google.html');
@@ -72,7 +72,7 @@ app.get('/auth/twitter/callback', passport.authorize('twitter',
 ),  function(req, res) {
 	inforPerfil=req.account;
 
-	res.redirect('/app');
+-	res.redirect('/app');
 });
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
 // En caso de fallo redirige a otra vista '/login'
@@ -175,7 +175,7 @@ io.sockets.on('connection', function (socket) {
 		// 	}
 
 	 	 function buscarRutaPartida(data){
-
+console.log('ENTROOOOOO '+JSON.stringify(data));
 	 		var distance = 1000 / 6371;
 	 		var query = Rutas.find({'loc': {
 	 		  $near: [data[0][0],data[0][1]],
@@ -187,7 +187,7 @@ io.sockets.on('connection', function (socket) {
 	 			if (!ruta) {
 	 		    console.log('NAda')
 	 		  } else {
-	 		    //console.log('******************** PARTIDA' + ruta);
+	 		    console.log('******************** PARTIDA' + ruta);
 	 				buscarRutaDestino(data,ruta)
 	 		  //	socket.emit('rutaEncontrada', OkResponseJSON(200,true,ruta,Date.today()))
 	 		 }

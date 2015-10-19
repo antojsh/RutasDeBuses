@@ -1,4 +1,4 @@
-var socket = io.connect('http://104.131.226.138:8080',{'forceNew':true });
+var socket = io.connect('http://104.131.226.138:8080');
 var fingerprint = new Fingerprint().get();
 socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)

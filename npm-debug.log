@@ -1,0 +1,161 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'cookie-parser',
+1 verbose cli   '--save' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose install initial load of /home/si00067/Escritorio/OpenShit/busroute/package.json
+5 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/body/package.json
+6 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/body-parser/package.json
+7 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/cloudinary/package.json
+8 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/course/package.json
+9 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/date-utils/package.json
+10 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/express/package.json
+11 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/express-session/package.json
+12 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/mongoose/package.json
+13 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/multer/package.json
+14 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/passport/package.json
+15 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/passport-facebook/package.json
+16 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/passport-twitter/package.json
+17 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/repeat-array/package.json
+18 verbose installManyTop reading scoped package data from /home/si00067/Escritorio/OpenShit/busroute/node_modules/socket.io/package.json
+19 info package.json cloudinary@1.2.4 No license field.
+20 info package.json passport-facebook@2.0.0 No license field.
+21 info package.json passport-twitter@1.0.3 No license field.
+22 info package.json socket.io@1.3.6 No license field.
+23 info package.json body@5.1.0 No license field.
+24 verbose readDependencies loading dependencies from /home/si00067/Escritorio/OpenShit/busroute/package.json
+25 silly cache add args [ 'cookie-parser', null ]
+26 verbose cache add spec cookie-parser
+27 silly cache add parsed spec { raw: 'cookie-parser',
+27 silly cache add   scope: null,
+27 silly cache add   name: 'cookie-parser',
+27 silly cache add   rawSpec: '',
+27 silly cache add   spec: '*',
+27 silly cache add   type: 'range' }
+28 silly addNamed cookie-parser@*
+29 verbose addNamed "*" is a valid semver range for cookie-parser
+30 silly addNameRange { name: 'cookie-parser', range: '*', hasData: false }
+31 silly mapToRegistry name cookie-parser
+32 silly mapToRegistry using default registry
+33 silly mapToRegistry registry https://registry.npmjs.org/
+34 silly mapToRegistry uri https://registry.npmjs.org/cookie-parser
+35 verbose addNameRange registry:https://registry.npmjs.org/cookie-parser not in flight; fetching
+36 verbose request uri https://registry.npmjs.org/cookie-parser
+37 verbose request no auth needed
+38 info attempt registry request try #1 at 14:21:01
+39 verbose request id 776bb56a8a9720f7
+40 http request GET https://registry.npmjs.org/cookie-parser
+41 http 200 https://registry.npmjs.org/cookie-parser
+42 silly get cb [ 200,
+42 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+42 silly get     etag: '"ATOU130F5J4CW554NZMOJYLMR"',
+42 silly get     'content-type': 'application/json',
+42 silly get     'cache-control': 'max-age=60',
+42 silly get     'content-length': '20081',
+42 silly get     'accept-ranges': 'bytes',
+42 silly get     date: 'Wed, 14 Oct 2015 19:21:40 GMT',
+42 silly get     via: '1.1 varnish',
+42 silly get     age: '35',
+42 silly get     connection: 'keep-alive',
+42 silly get     'x-served-by': 'cache-jfk1025-JFK',
+42 silly get     'x-cache': 'HIT',
+42 silly get     'x-cache-hits': '1',
+42 silly get     'x-timer': 'S1444850500.796830,VS0,VE1',
+42 silly get     vary: 'Accept' } ]
+43 verbose get saving cookie-parser to /home/si00067/.npm/registry.npmjs.org/cookie-parser/.cache.json
+44 silly addNameRange number 2 { name: 'cookie-parser', range: '*', hasData: true }
+45 silly addNameRange versions [ 'cookie-parser',
+45 silly addNameRange   [ '1.0.0',
+45 silly addNameRange     '1.0.1',
+45 silly addNameRange     '1.1.0',
+45 silly addNameRange     '1.2.0',
+45 silly addNameRange     '1.3.0',
+45 silly addNameRange     '1.3.1',
+45 silly addNameRange     '1.3.2',
+45 silly addNameRange     '1.3.3',
+45 silly addNameRange     '1.3.4',
+45 silly addNameRange     '1.3.5',
+45 silly addNameRange     '1.4.0' ] ]
+46 silly addNamed cookie-parser@1.4.0
+47 verbose addNamed "1.4.0" is a plain semver version for cookie-parser
+48 silly mapToRegistry name cookie-parser
+49 silly mapToRegistry using default registry
+50 silly mapToRegistry registry https://registry.npmjs.org/
+51 silly mapToRegistry uri https://registry.npmjs.org/cookie-parser
+52 verbose addRemoteTarball https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz not in flight; adding
+53 verbose addRemoteTarball [ 'https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz',
+53 verbose addRemoteTarball   '73323d5a7de341078c446109c622d2f7008164ee' ]
+54 info retry fetch attempt 1 at 14:21:02
+55 info attempt registry request try #1 at 14:21:02
+56 http fetch GET https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz
+57 http fetch 200 https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz
+58 silly fetchAndShaCheck shasum 73323d5a7de341078c446109c622d2f7008164ee
+59 verbose addTmpTarball /tmp/npm-10219-79547149/registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz not in flight; adding
+60 verbose addTmpTarball already have metadata; skipping unpack for cookie-parser@1.4.0
+61 silly cache afterAdd cookie-parser@1.4.0
+62 verbose afterAdd /home/si00067/.npm/cookie-parser/1.4.0/package/package.json not in flight; writing
+63 verbose afterAdd /home/si00067/.npm/cookie-parser/1.4.0/package/package.json written
+64 silly install resolved [ { name: 'cookie-parser',
+64 silly install resolved     description: 'cookie parsing with signatures',
+64 silly install resolved     version: '1.4.0',
+64 silly install resolved     author:
+64 silly install resolved      { name: 'TJ Holowaychuk',
+64 silly install resolved        email: 'tj@vision-media.ca',
+64 silly install resolved        url: 'http://tjholowaychuk.com' },
+64 silly install resolved     contributors: [ [Object] ],
+64 silly install resolved     license: 'MIT',
+64 silly install resolved     repository:
+64 silly install resolved      { type: 'git',
+64 silly install resolved        url: 'https://github.com/expressjs/cookie-parser' },
+64 silly install resolved     keywords: [ 'cookie', 'middleware' ],
+64 silly install resolved     dependencies: { cookie: '0.2.2', 'cookie-signature': '1.0.6' },
+64 silly install resolved     devDependencies: { istanbul: '0.3.20', mocha: '2.2.5', supertest: '1.1.0' },
+64 silly install resolved     files: [ 'LICENSE', 'HISTORY.md', 'index.js' ],
+64 silly install resolved     engines: { node: '>= 0.8.0' },
+64 silly install resolved     scripts:
+64 silly install resolved      { test: 'mocha --reporter spec --bail --check-leaks test/',
+64 silly install resolved        'test-cov': 'istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/',
+64 silly install resolved        'test-travis': 'istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/' },
+64 silly install resolved     gitHead: '7defc09815f04dc7b665fd220b8705fba8d9573d',
+64 silly install resolved     bugs: { url: 'https://github.com/expressjs/cookie-parser/issues' },
+64 silly install resolved     homepage: 'https://github.com/expressjs/cookie-parser',
+64 silly install resolved     _id: 'cookie-parser@1.4.0',
+64 silly install resolved     _shasum: '73323d5a7de341078c446109c622d2f7008164ee',
+64 silly install resolved     _from: 'cookie-parser@*',
+64 silly install resolved     _npmVersion: '1.4.28',
+64 silly install resolved     _npmUser: { name: 'dougwilson', email: 'doug@somethingdoug.com' },
+64 silly install resolved     maintainers: [ [Object], [Object] ],
+64 silly install resolved     dist:
+64 silly install resolved      { shasum: '73323d5a7de341078c446109c622d2f7008164ee',
+64 silly install resolved        tarball: 'http://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz' },
+64 silly install resolved     directories: {},
+64 silly install resolved     _resolved: 'https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.0.tgz' } ]
+65 info install cookie-parser@1.4.0 into /home/si00067/Escritorio/OpenShit/busroute
+66 info installOne cookie-parser@1.4.0
+67 verbose installOne of cookie-parser to /home/si00067/Escritorio/OpenShit/busroute not in flight; installing
+68 warn locking Error: EACCES, open '/home/si00067/.npm/_locks/cookie-parser-8cc153302f938c6c.lock'
+68 warn locking     at Error (native)
+68 warn locking  /home/si00067/.npm/_locks/cookie-parser-8cc153302f938c6c.lock failed { [Error: EACCES, open '/home/si00067/.npm/_locks/cookie-parser-8cc153302f938c6c.lock']
+68 warn locking   errno: -13,
+68 warn locking   code: 'EACCES',
+68 warn locking   path: '/home/si00067/.npm/_locks/cookie-parser-8cc153302f938c6c.lock' }
+69 verbose stack Error: Attempt to unlock /home/si00067/Escritorio/OpenShit/busroute/node_modules/cookie-parser, which hasn't been locked
+69 verbose stack     at unlock (/usr/lib/node_modules/npm/lib/utils/locker.js:66:11)
+69 verbose stack     at cb (/usr/lib/node_modules/npm/lib/install.js:1017:5)
+69 verbose stack     at /usr/lib/node_modules/npm/lib/install.js:1021:20
+69 verbose stack     at /usr/lib/node_modules/npm/lib/utils/locker.js:40:9
+69 verbose stack     at cb (/usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+69 verbose stack     at /usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+69 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+70 verbose cwd /home/si00067/Escritorio/OpenShit/busroute
+71 error Linux 3.13.0-59-generic
+72 error argv "/usr/bin/node" "/usr/bin/npm" "install" "cookie-parser" "--save"
+73 error node v0.12.7
+74 error npm  v2.11.3
+75 error Attempt to unlock /home/si00067/Escritorio/OpenShit/busroute/node_modules/cookie-parser, which hasn't been locked
+76 error If you need help, you may report this error at:
+76 error     <https://github.com/npm/npm/issues>
+77 verbose exit [ 1, true ]

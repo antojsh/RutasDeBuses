@@ -19,6 +19,7 @@ var mapOptions = {
        zoom: 16,
        mapTypeId: google.maps.MapTypeId.ROADMAP
      };
+var flechas= new L.LayerGroup();
 var coorPartida= new Array();
 var coorDestino= new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
@@ -257,11 +258,13 @@ $('#cerrarEncontradas').click(function(){
 })
 
 function rutaUnicaEncontrada(data){
+   BorrarCapaFlechas();
   if (mostrarruta !=undefined) map.removeLayer(mostrarruta);
   $('#rutasEncontradas').fadeOut('slow');
 
   mostrarruta=new L.Polyline(data.loc).addTo(map);
-  var arrowHead = L.polylineDecorator(mostrarruta).addTo(map);
+  var arrowHead = L.polylineDecorator(mostrarruta).addTo(flechas);
+  flechas.addTo(map);
   var arrowOffset = 0;
   // if (anim !=undefined) map.removeLayer(anim);
   var anim = window.setInterval(function() {
@@ -317,4 +320,9 @@ $('#cerrarError').click(function(){
 })
 function cerrarError(){
   $('#error').fadeOut('fast');
+}
+
+function BorrarCapaFlechas(){
+  map.removeLayer(flechas);
+  flechas= new L.LayerGroup();
 }

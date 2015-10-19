@@ -24,6 +24,7 @@ var coorPartida= new Array();
 var coorDestino= new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
 var markerPartida,markerDestino,person;
+var anim;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
     iconUrl: 'static/img/marker_start.png',
@@ -266,12 +267,12 @@ function rutaUnicaEncontrada(data){
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(flechas);
   flechas.addTo(map);
   var arrowOffset = 0;
-  // if (anim !=undefined) map.removeLayer(anim);
-  var anim = window.setInterval(function() {
+   if (anim !=undefined) map.removeLayer(anim);
+      anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 5, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 80, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])
-      if(++arrowOffset > 100)
+      if(++arrowOffset > 20)
           arrowOffset = 0;
   }, 1000);
 

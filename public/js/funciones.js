@@ -1,24 +1,31 @@
 var socket = io.connect('http://104.131.226.138:8080');
-//var socket = io.connect('http://192.168.130.135:8080');
+//var socket = io.connect('http://localhost:8080');
 var fingerprint = new Fingerprint().get();
+
 socket.on('rutaEncontrada', rutaEncontrada)
+
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
+
 socket.on('userProfile',function(data){
-  console.log(JSON.stringify(data))
-//  if(data._id ===undefined) window.location ='http://busroute-pruebanodejs.rhcloud.com/';
-  // localStorage.setItem("profile", data._id);
-  // $('#nomUsuario').html(data.name)
-  // $('#imgUsuario').attr("src",data.photo);
+//  console.log("Entrando :::"+JSON.stringify(data))
+ if(data._id ===undefined) window.location ='http://104.131.226.138:8080';
+  localStorage.setItem("profile", data._id);
+  $('#nomUsuario').html(data.name)
+  $('#imgUsuario').attr("src",data.photo);
 })
+
+
 socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
   $('.Connection').css('max-height','0px');
 });
+
 var mapOptions = {
        center: new google.maps.LatLng(10.942071365517807,-74.78217601776123),
        zoom: 16,
        mapTypeId: google.maps.MapTypeId.ROADMAP
-     };
+    };
+
 var flechas= new L.LayerGroup();
 var coorPartida= new Array();
 var coorDestino= new Array();
@@ -46,7 +53,7 @@ var markerTemp = L.icon({
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
+    shadowAnchor: [4, 62]  // the same for the shadow
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var markerPerson = L.icon({
@@ -54,10 +61,11 @@ var markerPerson = L.icon({
     iconSize:     [50, 50], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
+    shadowAnchor: [4, 62]  // the same for the shadow
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
-window.addEventListener("load",function(){
+
+window.addEventListener("load",function(){ //document ready
 
   socket.on('connect',function(data){
       socket.emit('app_user',fingerprint);
@@ -70,6 +78,7 @@ window.addEventListener("load",function(){
    setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
 
 });
+
 function showPosition(position) {
     map.setView([position.coords.latitude, position.coords.longitude], 16);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -244,8 +253,8 @@ $('#divBuscar').submit(function(e){
 
   // the full results JSON
   $('.dots').fadeOut('fast');
-  console.log(JSON.stringify( data[0].address.displayLatLng.lat));
-});
+   console.log(JSON.stringify( data[0].address.displayLatLng.lat));
+  });
 })
 $('#btnMenu').click(function(){
   $('#menuLateral').addClass('mostrarMenu');
@@ -256,6 +265,11 @@ $('#btnCerrarMenu').click(function(){
 $('#cerrarEncontradas').click(function(){
   $('#rutasEncontradas').fadeOut('slow');
 })
+
+$('#menuLateral li').click(function(){
+    $('#menuLateral').removeClass('mostrarMenu');
+});
+
 
 function rutaUnicaEncontrada(data){
    BorrarCapaFlechas();
@@ -304,7 +318,7 @@ function rutaUnicaEncontrada(data){
   $('.dots').fadeOut('fast');
 }
 function error(titulo,msj){
-  $('body').append('<div id="error">'+
+  $('body').append('<div id="error" class="ErrorClass">'+
   '<span class="icon icon-cross" onclick="cerrarError()" id="cerrarError"></span>'+
       '<div class="">'+
           '<span class="icon icon-sad"></span>'+
@@ -315,14 +329,20 @@ function error(titulo,msj){
       '</div>'+
   '</div>');
 }
-$('#cerrarError').click(function(){
-  $('#error').fadeOut('fast');
-})
+// $('#cerrarError').click(function(){
+//   $('#error').fadeOut('fast');
+// })
 function cerrarError(){
-  $('#error').fadeOut('fast');
+  $('.ErrorClass').fadeOut();
 }
 
 function BorrarCapaFlechas(){
   map.removeLayer(flechas);
   flechas= new L.LayerGroup();
+}
+
+function SalirLogout(){
+  localStorage.clear();
+//  window.location.href="http://localhost:8080/logout";
+  window.location.href='http://104.131.226.138:8080';
 }

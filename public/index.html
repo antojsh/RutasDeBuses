@@ -1,128 +1,178 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
-    <link rel="stylesheet" href="static/css/estilo.css" media="screen" title="no title" charset="utf-8">
-  <link rel="stylesheet" href="static/css/iconos.css" media="screen" title="no title" charset="utf-8">
-    <!-- <link rel="stylesheet" href="css/Control.Geocoder.css" media="screen" title="no title" charset="utf-8"> -->
-    </script>
-    <title></title>
-  </head>
-  <body>
+      <link rel="stylesheet" href="static/css/estilo.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="static/css/iconos.css" media="screen" title="no title" charset="utf-8">
+      <!-- <link rel="stylesheet" href="css/Control.Geocoder.css" media="screen" title="no title" charset="utf-8"> -->
+      </script>
+      <title></title>
+    </head>
+    <body>
 
-    <div id='menuLateral'>
-      <span class="icon icon-cross" id="btnCerrarMenu"></span>
-        <div id='profile'>
-            <img id='imgUsuario' alt="">
-            <span id='nomUsuario'></span>
-        </div>
-        <nav>
-          <ul>
-            <li><a href="#map">Mapa</a></li>
-            <li><a href="#todasRutas">Rutas</a></li>
-            <!-- <li><a href="#">Trasmetro</a></li>
-            <li><a href="#">Estaciones</a></li>
-            <li><a href="#">Rutas Mas usadas</a></li> -->
-            <li onclick="SalirLogout();"><a href="#">Salir</a></li>
-          </ul>
-        </nav>
-    </div>
-    <aside id="articlePopup">
-      <div>
-        <div>
-          <span class="icon icon-heart rutaFavorita"></span>
-        </div>
-        <div>
-          <strong id='strongCiudad'></strong>
-          <p id='parrafoDir'></p>
-        </div>
+      <div id='menuLateral'>
+        <span class="icon icon-cross" id="btnCerrarMenu"></span>
+          <div id='profile'>
+              <img id='imgUsuario' alt="">
+              <span id='nomUsuario'></span>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="#map">Mapa</a></li>
+              <li><a href="#todasRutas">Rutas</a></li>
+             
+             <li onclick="SalirLogout();"><a href="#">Salir</a></li>
+            </ul>
+          </nav>
       </div>
-      <div>
-        <ul>
-          <li id='btnCerrarPopup'>
-            <span class="icon icon-cross"></span>
-            Cerrar
-          </li>
-          <li id="btnPartida">
-            <span class="icon icon-location2"></span>
-             Partida
-          </li>
-          <li id='btnDestino'>
-            <span class="icon icon-location2"></span>
-            Destino
-          </li>
-        </ul>
-      </div>
-    </aside>
-    <div id='divBuscar'>
-      <form  action="#" >
-          <span class="icon icon-menu" id='btnMenu'></span>
-          <input type="search" id='txtBuscar' placeholder="Busca Direcciones, lugares, sitios etc" id='textBuscar'>
-
-      </form>
-
-    </div>
-    <div id='rutasEncontradas'>
-        <div class='cabecera'>
-          <small class="icon icon-cross" id='cerrarEncontradas'></small>
-          <span>Rutas encontradas</span>
-        </div>
-
-        <ul id='listarutasEncontradas'>
-
-        </ul>
-    </div>
-    <section id="map">
-
-    </section>
-    <section id='todasRutas'>
-      <ul>
-        <li>
+      <aside id="articlePopup">
+        <div>
           <div>
-            <img src="/static/imagenes/sobusa/kra54.jpg" alt="">
-            <strong>SOBUSA C11-4168 Granabastos Silencio Uninorte</strong>
-            <a href="">Ver ruta</a>
+            <span class="icon icon-heart rutaFavorita"></span>
           </div>
-          <div class="description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, delectus. Vel illum, beatae architecto inventore quo consectetur sit delectus excepturi. Incidunt, commodi, ratione. Eligendi eveniet, cum nam accusantium fugiat iure.
+          <div>
+            <strong id='strongCiudad'></strong>
+            <p id='parrafoDir'></p>
           </div>
-        </li>
-      </ul>
-    </section>
+        </div>
+        <div>
+          <ul>
+            <li id='btnCerrarPopup'>
+              <span class="icon icon-cross"></span>
+              Cerrar
+            </li>
+            <li id="btnPartida">
+              <span class="icon icon-location2"></span>
+               Partida
+            </li>
+            <li id='btnDestino'>
+              <span class="icon icon-location2"></span>
+              Destino
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <div id='divBuscar'>
+        <form  action="#" >
+            <span class="icon icon-menu" id='btnMenu'></span>
+            <input type="search" id='txtBuscar' placeholder="Busca Direcciones, lugares, sitios etc" id='textBuscar'>
 
-    <footer>
-      <a href="#" id='btnBuscarRuta'>BUSCAR RUTAS</a>
-    </footer>
-    <!-- Venta de No connecti -->
-    <div class='noConnection'>
-      <span>No hay conexion</span>
-    </div>
-    <div class='Connection'>
-      <span>Conectado</span>
-    </div>
-    <!-- Preload de la pagina -->
-    <div class="loading-bro dots">
+        </form>
 
-      <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
-        <circle id="loading-inner" cx="75" cy="75" r="60"/>
-     </svg>
-    </div>
-    <script src="static/js/leaflet.js"></script>
-    <script src='static/js/leaflet.polylineDecorator.js'></script>
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC29kT7B_aSG7jeJEvxNAwWzI1P5MFNNak&sensor=true">
-    </script>
-    </script>
-    <script src="static/js/jquery.min.js" type="text/javascript"></script>
-    <script src='static/js/fingerprint.js'></script>
-    <script src="static/js/socket.io.js"></script>
-    <!-- <script src='js/Control.Geocoder.js'> -->
+      </div>
+      <div id='rutasEncontradas'>
+          <div class='cabecera'>
+            <small class="icon icon-cross" id='cerrarEncontradas'></small>
+            <span>Rutas encontradas</span>
+          </div>
 
-    </script>
-    <script type="text/javascript" src="static/js/funciones.js"></script>
+          <ul id='listarutasEncontradas'>
 
-  </body>
-</html>
+          </ul>
+      </div>
+      <section id="map">
+
+      </section>
+      <section id='todasRutas'>
+        <ul>
+        
+          <li>
+            <a href="#">
+              <span> Sobusa </span><span class="icon icon-menu"></span>
+            </a>
+            <ul>
+               <li>
+            <a href="#">
+              <span> Sobusa </span><span class="icon icon-menu"></span>
+            </a>
+               <li>
+            <div>
+              <img src="/static/imagenes/sobusa/kra54.jpg" alt="">
+              <strong>SOBUSA C11-4168 Granabastos Silencio Uninorte</strong>
+              <a href="">Ver ruta</a>
+            </div>
+            <div class="description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, delectus. Vel illum, beatae architecto inventore quo consectetur sit delectus excepturi. Incidunt, commodi, ratione. Eligendi eveniet, cum nam accusantium fugiat iure.
+            </div>
+          </li> 
+            </ul>
+          </li>
+         
+
+          <li>
+            <a href="#">
+              <span> Sobusa </span><span class="icon icon-menu"></span>
+            </a>
+             <ul>
+               <li>
+            <a href="#">
+              <span> Sobusa </span><span class="icon icon-menu"></span>
+            </a>
+               <li>
+            <div>
+              <img src="/static/imagenes/sobusa/kra54.jpg" alt="">
+              <strong>SOBUSA C11-4168 Granabastos Silencio Uninorte</strong>
+              <a href="">Ver ruta</a>
+            </div>
+            <div class="description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, delectus. Vel illum, beatae architecto inventore quo consectetur sit delectus excepturi. Incidunt, commodi, ratione. Eligendi eveniet, cum nam accusantium fugiat iure.
+            </div>
+          </li> 
+            </ul>
+
+             <ul>
+               <li>
+            <a href="#">
+              <span> Sobusa </span><span class="icon icon-menu"></span>
+            </a>
+               <li>
+            <div>
+              <img src="/static/imagenes/sobusa/kra54.jpg" alt="">
+              <strong>SOBUSA C11-4168 Granabastos Silencio Uninorte</strong>
+              <a href="">Ver ruta</a>
+            </div>
+            <div class="description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, delectus. Vel illum, beatae architecto inventore quo consectetur sit delectus excepturi. Incidunt, commodi, ratione. Eligendi eveniet, cum nam accusantium fugiat iure.
+            </div>
+          </li> 
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <footer>
+        <a href="#" id='btnBuscarRuta'>BUSCAR RUTAS</a>
+      </footer>
+      <!-- Venta de No connecti -->
+      <div class='noConnection'>
+        <span>No hay conexion</span>
+      </div>
+      <div class='Connection'>
+        <span>Conectado</span>
+      </div>
+      <!-- Preload de la pagina -->
+      <div class="loading-bro dots">
+
+        <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
+          <circle id="loading-inner" cx="75" cy="75" r="60"/>
+       </svg>
+      </div>
+      <script src="static/js/leaflet.js"></script>
+      <script src='static/js/leaflet.polylineDecorator.js'></script>
+      <script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC29kT7B_aSG7jeJEvxNAwWzI1P5MFNNak&sensor=true">
+      </script>
+      </script>
+      <script src="static/js/jquery.min.js" type="text/javascript"></script>
+      <script src='static/js/fingerprint.js'></script>
+      <script src="static/js/socket.io.js"></script>
+      <!-- <script src='js/Control.Geocoder.js'> -->
+
+      </script>
+      <script type="text/javascript" src="static/js/funciones.js"></script>
+
+    </body>
+  </html>

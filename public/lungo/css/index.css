@@ -1,0 +1,260 @@
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Architects Daughter', cursive; }
+  section header{
+      background: black !important;
+      box-shadow: 1px 1px 1px #00afe3 !important;
+  }
+  .title{
+      text-shadow: 1px 1px 2px black !important;
+  }
+  header nav a {
+      text-shadow: 1px 1px 2px black !important; color:#00afe3 !important;
+  }
+  #main-article{
+      height: 100%;
+  }
+    #rutaEscogida .empty{
+      top: 0;
+      width: 100%;
+      padding: 10px;
+    }
+  #rutaEscogida article img{
+    margin: 0 auto;
+      width: 100%;
+    box-shadow: 1px 1px 5px #aaa;
+    border-radius: 2px;
+  }
+    #rutaEscogida article  #mapRuta{
+      /*width: 80%;
+      height: 300px;
+      margin: 10px auto;
+      border-radius: 5px;
+            box-shadow: 1px 1px 5px #aaa;*/
+            height: 300px;
+    }
+
+
+    #articlePopup {
+
+      width: 100%;
+      height: 150px;
+      position: fixed;
+      z-index: 999999;
+      bottom: -150px;
+      left: 0;
+      background: #FFFFFF;
+      box-shadow: -1px 0px 15px black;
+      /*border-radius: 10px;*/
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      border-top: 2px solid white; }
+
+    #articlePopup > div:first-child {
+      height: 100px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center; }
+
+    #articlePopup > div:first-child > div:first-child {
+      width: 30%;
+      height: 100%;
+      box-shadow: 0px 4px 1px #cccccc;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center; }
+
+    #articlePopup > div:first-child > div:first-child span {
+      font-size: 4em;
+      color: white;
+      text-shadow: 1px 0px 2px black;
+      text-shadow: -1px 0px 2px black; }
+
+    .rutaFavorita {
+      color: #FA3900; }
+
+    #articlePopup > div:first-child > div:last-child {
+      width: 70%;
+      height: 100%;
+      max-height: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: start;
+      -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+      align-items: flex-start;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      padding: 10px;
+      font-size: .79em; }
+
+    #articlePopup > div:last-child {
+      position: relative;
+      left: 0;
+      bottom: 0;
+      background: #00afe3 ;
+
+      height: 50px;
+      outline: 1px solid #05a0e7;
+      border-bottom: 3px solid #05a0e7; }
+
+    #articlePopup div:last-child > ul {
+      list-style: none;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+      justify-content: space-around;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      height: 50px;
+      color: white; }
+
+    #articlePopup div:last-child > ul > li {
+      height: 100%;
+      width: 33.333333%;
+      box-shadow: 1px 0px 1px #06a7f1;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      font-size: .84em;
+      text-shadow: 1px 0px 2px black;
+      cursor: pointer; }
+
+    #articlePopup div:last-child ul li:active {
+      background: -webkit-linear-gradient(#058fce, #25B7FA);
+      background: linear-gradient(#058fce, #25B7FA); }
+
+    #articlePopup > div:last-child ul li span {
+      margin-right: 10px; }
+
+#btnBuscarRuta{
+  position:fixed;
+  bottom:20px;
+  z-index:9999999 !important;
+  text-decoration: none;
+  background: #36D278;
+  color: white !important;
+  display: inline-block;
+  line-height: 2.8em;
+  height: 3em;
+  padding: 0 2em;
+  border-radius: 1em;
+  border: 1px solid #27ae60;
+  border-bottom-width: 5px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  font-size: 15px;
+  text-shadow: 1px 1px 5px black;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#btnBuscarRuta:active {
+  border-bottom-width: 0;
+  line-height: 3.4em; }
+
+  .loading-bro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 999999999;
+    display: none; }
+
+  #load {
+    width: 150px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    -webkit-animation: loading 3s linear infinite;
+    animation: loading 3s linear infinite; }
+
+  #load #loading-inner {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 300;
+    stroke-width: 10;
+    stroke-miterlimit: 10;
+    stroke-linecap: round;
+    -webkit-animation: loading-circle 2s linear infinite;
+    animation: loading-circle 2s linear infinite;
+    stroke: #51BBA7;
+    fill: transparent; }
+
+  @-webkit-keyframes loading {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0); }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg); } }
+
+  @keyframes loading {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0); }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg); } }
+
+  @-webkit-keyframes loading-circle {
+    0% {
+      stroke-dashoffset: 0; }
+    100% {
+      stroke-dashoffset: -600; } }
+
+  @keyframes loading-circle {
+    0% {
+      stroke-dashoffset: 0; }
+    100% {
+      stroke-dashoffset: -600; } }

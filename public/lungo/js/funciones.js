@@ -11,13 +11,18 @@ socket.on('rutaEncontrada', rutaEncontrada)
 
  socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 
-// socket.on('userProfile',function(data){
-// //  console.log("Entrando :::"+JSON.stringify(data))
-//  if(data._id ===undefined) window.location ='http://104.131.226.138:8080';
-//   localStorage.setItem("profile", data._id);
-//   $('#nomUsuario').html(data.name)
-//   $('#imgUsuario').attr("src",data.photo);
-// })
+socket.on('userProfile',function(data){
+//  console.log("Entrando :::"+JSON.stringify(data))
+try{
+  if(data._id ==null || data._id ===undefined )  window.location ='http://localhost:8080';
+}catch(err){
+   window.location ='http://localhost:8080';
+}
+ 
+  localStorage.setItem("profile", data._id);
+  $('#NomUsuario').html(data.name)
+  $('#imgUsuario').attr("src",data.photo);
+})
 
 
 socket.io.on('connect_error', function(err) {
@@ -233,27 +238,48 @@ function error(titulo,msj){
 $('#listarutasEncontradas').on('click','li',function(){
   $('.dots').fadeIn('fast');
   socket.emit('buscarRutaUnica',this.id)
-  Lungo.Router.section('rutaEscogida')
+  
 })
 function rutaUnicaEncontrada(data){
-    mapRuta.setView([11.004692, -74.808877], 16);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mapRuta);
-  $('#rutaEscogida article .empty').html('<img src="'+data.image+'">'+
+//     mapRuta.setView([11.004692, -74.808877], 16);
+//     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+//         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+//     }).addTo(mapRuta);
+//   $('#rutaEscogida article .empty').html('<img src="'+data.image+'">'+
 
-'  <ul >'+
-'    <li class="accept">'+
-'      <strong>'+data.name+'</strong>'+
-'    </li>'+
-'    <li class="cancel">'+
-'      <strong>'+data.flota+'</strong>'+
-'    </li>'+
-'  <li class="warning"><strong>Barrios por donde pasa</strong>'+
-'  '+data.description+''+
-'</li>'+
-  '</ul>')
+// '  <ul >'+
+// '    <li class="accept">'+
+// '      <strong>'+data.name+'</strong>'+
+// '    </li>'+
+// '    <li class="cancel">'+
+// '      <strong>'+data.flota+'</strong>'+
+// '    </li>'+
+// '  <li class="warning"><strong>Barrios por donde pasa</strong>'+
+// '  '+data.description+''+
+// '</li>'+
+//   '</ul>')
 
-  $('#rutaEscogida header .title').html(data.name)
-  $('.dots').fadeOut('fast');
+//   $('#rutaEscogida header .title').html(data.name)
+//   $('.dots').fadeOut('fast');
+ BorrarCapaFlechas();
+  if (mostrarruta !=undefined) map.removeLayer(mostrarruta);
+ Lungo.Router.article("main", "map");
+
+  mostrarruta=new L.Polyline(data.loc).addTo(map);
+  var arrowHead = L.polylineDecorator(mostrarruta).addTo(flechas);
+  flechas.addTo(map);
+  var arrowOffset = 0;
+   if (anim !=undefined) map.removeLayer(anim);
+      anim = window.setInterval(function() {
+      arrowHead.setPatterns([
+          {offset: arrowOffset+'%', repeat: 80, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
+      ])
+      if(++arrowOffset > 20)
+          arrowOffset = 0;
+  }, 1000);
+   $('.dots').fadeOut('fast');
+}
+function BorrarCapaFlechas(){
+  map.removeLayer(flechas);
+  flechas= new L.LayerGroup();
 }

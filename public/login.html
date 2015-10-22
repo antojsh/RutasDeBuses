@@ -4,33 +4,50 @@
     <meta charset="utf-8">
     <title>Iniciar Sesion</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="static/css/login.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="static/css/iconos.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="static/lungo/components/lungo/lungo.css">
+    <link rel="stylesheet" href="static/lungo/components/lungo/theme.lungo.css">
+    <link rel="stylesheet" href="static/lungo/components/lungo/lungo.icon.css">
+    <link rel="stylesheet" href="static/lungo/components/lungo/lungo.icon.brand.css">
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+      *{
+        font-family: 'Architects Daughter', cursive;
+      }
+    </style>
   </head>
-  <body>
-    <section>
-      <article>
-
-        <img src='/static/img/logo.png'>
-        <span>Bus Route</span>
-        <small>Inicia con tu red social</small>
-        <div class="contentSocial">
-          <a href='http://104.131.226.138:8080/auth/facebook' class="facebook icon icon-facebook3"></a>
-          <a href='http://104.131.226.138:8080/auth/twitter' class="twitter icon icon-twitter3"></a>
-          <!-- <a href='http://localhost:8080/auth/facebook' class="facebook icon icon-facebook3"></a>
-          <a href='http://localhost:8080/auth/twitter' class="twitter icon icon-twitter3"></a> -->
+  <body class="app" >
+  <section id="main" data-transition="slide" style='background:#00afe3 !important;'>
+  <article class="active splash">
+        <img src="static/img/logo.png" class="logo">
+        <div class="form">
+            <fieldset class="radius-top" data-icon="user"><span class="icon user"></span>
+                <input type="text" placeholder="Usuario" id="txt-signup-name" value="">
+            </fieldset>
+            <fieldset class="radius-bottom shadow" >
+                <input type="password" placeholder="Contraseña" id="txt-signup-password" value="" autocomplete="off" >
+            </fieldset>
+            <br>
+            <button class="anchor accept margin-bottom" data-icon="lock" data-label="Login"><span class="icon lock"></span></button>
+              <br><br><br><br>
+            <button class="anchor" data-icon="facebook" data-label="Facebook" style='background:#294986;' id='facebook'></button>
+            <button class="anchor" data-icon="twitter" data-label="Twitter" id='twitter'></button>
+            
         </div>
-        <small>---------- Or ----------</small>
-        <div class='loginNormal'>
-          <form class="#" action="index.html" method="post">
-            <input type="text" name="user" value="" placeholder="Usuario">
-            <input type="password" name="pass" value="" placeholder="Contraseña">
-          </form>
-
-        </div>
-          <small>Olvidaste tu contraseña ?</small>
-      </article>
-    </section>
-
-  </body>
+        <span class="copyright text thin">Copyright (C) 2011-2013 - <span class="text bold">Way</span></span>
+    </article>
+  </section>
+    <script src="static/lungo/components/quojs/quo.js"></script>
+    <script src="static/lungo/components/lungo/lungo.js"></script>
+    <script type="text/javascript">
+        Lungo.init({
+    name: 'prueba'
+});
+document.getElementById('facebook').addEventListener('click',function(){
+  window.location='http://104.131.226.138:8080/auth/facebook'
+})
+document.getElementById('twitter').addEventListener('click',function(){
+  window.location='http://104.131.226.138:8080/auth/twitter'
+})
+    </script>
+   </body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Eventime</title>
+    <title>Way</title>
     <meta name="description" content="Busca eventos en cualquier ciudad del mundo">
     <meta name="author" content="Antonio Sierra Hurtado @antojsh">
     <meta name="HandheldFriendly" content="True">
@@ -26,7 +26,7 @@
     <header data-title="Opciones"></header>
         <article class="active list indented">
             <ul id='listmenu'>
-              <li data-view-article="Perfil" data-icon="list" class="active">
+              <li data-view-article="Perfil" data-icon="user" class="active">
 
                 <strong>Perfil</strong>
               </li>
@@ -51,14 +51,12 @@
             <nav class="on-left">
                 <a href="#" data-view-aside="features" data-icon="menu" ></a>
             </nav>
-            <nav class="on-right">
-                <a href="#features"  data-icon="pushpin" id='refreshubicacion'></a>
-            </nav>
+            
             <!-- <nav class="right box">
                 <a href="#second" data-router="section" data-icon="share"></a>
             </nav> -->
             <div class="centered title with-subtitle"  style="text-shadow: 1px 1px 2px black !important;">
-                EvenTime
+                Way
                 <button  id='btnBuscarRuta'>Buscar Ruta</button>
                 <!-- <<small></small> class="subtitle">Que no te lo cuenten</small> -->
             </div>
@@ -99,10 +97,10 @@
         </article>
         <article id='Perfil'>
           <div class="empty">
-              <span class="icon user"></span>
-              <strong>Profile Empty</strong>
+              <img style='width:100px; height:100px; border-radius:50%; margin:10px auto;' id='imgUsuario'>
+              <strong id='NomUsuario'>Profile Empty</strong>
               <small>When you back a project or follow a friend, their activity will show up here.</small>
-
+              <button class="anchor" ><abbr>Cerrar sesion</abbr></button>
           </div>
         </article>
     </section>
@@ -163,9 +161,10 @@
         <circle id="loading-inner" cx="75" cy="75" r="60"/>
      </svg>
     </div>
-    
+     <script src="static/js/jquery.min.js" type="text/javascript"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
-    <script src="static/js/jquery.min.js" type="text/javascript"></script>
+   
+     <script src='static/js/leaflet.polylineDecorator.js'></script>
     <script src="static/lungo/components/quojs/quo.js"></script>
     <script src="static/lungo/components/lungo/lungo.js"></script>
     <script src='static/js/fingerprint.js'></script>

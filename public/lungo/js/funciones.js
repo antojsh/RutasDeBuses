@@ -193,6 +193,7 @@ $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){
 ///Pruebaaaaa
+  $('#numRutasEncontradas').html(data.length)
   for (var i = 0; i < data.length; i++) {
 
     $('#listarutasEncontradas').append(  '<li class="thumb big" id='+data[i]._id+'>'+

@@ -91,10 +91,7 @@ $('#btnCerrarPopup').click(function(e){
   $('#articlePopup').css('bottom','-150px')
 });
 $(document).ready(function(){
-    mapRuta.setView([11.004692, -74.808877], 16);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mapRuta);
+  
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
   //setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
 
@@ -201,7 +198,7 @@ $('#listarutasEncontradas').html('');
     $('#listarutasEncontradas').append(  '<li class="thumb big" id='+data[i]._id+'>'+
       '    <img src="'+data[i].image+'">'+
       '    <div>'+
-      '        <div class="on-right text tiny">Barranquilla</div>'+
+      '        <div class="on-right text tiny">'+data.city+'</div>'+
       '        <strong>'+data[i].name+'</strong>'+
       '        <span class="text tiny opacity">Sobusa</span>'+
       '        <small>'+
@@ -211,6 +208,7 @@ $('#listarutasEncontradas').html('');
       '</li>')
 
   }
+
   Lungo.Router.article("main", "todasRutas");
 
 }else{
@@ -232,21 +230,29 @@ function error(titulo,msj){
   '</div>');
 }
 $('#listarutasEncontradas').on('click','li',function(){
+  $('.dots').fadeIn('fast');
   socket.emit('buscarRutaUnica',this.id)
   Lungo.Router.section('rutaEscogida')
 })
 function rutaUnicaEncontrada(data){
-
+    mapRuta.setView([11.004692, -74.808877], 16);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mapRuta);
   $('#rutaEscogida article .empty').html('<img src="'+data.image+'">'+
-'  </div>'+
+
 '  <ul >'+
-'    <li data-icon="truck">'+
+'    <li class="accept">'+
 '      <strong>'+data.name+'</strong>'+
 '    </li>'+
-'    <li data-icon="flag">'+
+'    <li class="cancel">'+
 '      <strong>'+data.flota+'</strong>'+
 '    </li>'+
-'  <li class="feature">'+
+'  <li class="warning"><strong>Barrios por donde pasa</strong>'+
 '  '+data.description+''+
+'</li>'+
   '</ul>')
+
+  $('#rutaEscogida header .title').html(data.name)
+  $('.dots').fadeOut('fast');
 }

@@ -26,20 +26,20 @@
     <header data-title="Opciones"></header>
         <article class="active list indented">
             <ul id='listmenu'>
-              <li data-view-article="Perfil" data-icon="user" class="active" data-title="Perfil">
+              <li data-view-article="Perfil" data-icon="user" class="active" >
 
                 <strong>Perfil</strong>
               </li>
-              <li data-view-article="map" data-icon="globe" class="active" data-title="Go Route">
+              <li data-view-article="map" data-icon="globe" class="active" id='limap'>
 
                 <strong>Mapa</strong>
               </li>
-              <li data-view-article="todasRutas" data-icon="search" class="active" data-title="Rutas encontradas">
+              <li data-view-article="todasRutas" data-icon="search" class="active" >
                 <div class="tag on-right" id='numRutasEncontradas'>0</div>
                 <strong>Rutas encontradas</strong>
               </li>
 
-              <li data-view-article="todaslasRutas" data-icon="road" class="active" data-title="Todas las rutas">
+              <li data-view-article="todaslasRutas" data-icon="road" class="active" >
 
                 <strong>Todas las rutas</strong>
 
@@ -63,7 +63,7 @@
                 Go Route
 
                 <button  id='btnBuscarRuta'>Buscar Ruta</button>
-                <div class="form" style='position:fixed; width:100%; left:0;'>
+                <div id ="Geocodificador" class="form" style='position:fixed; width:100%; left:0;'>
                   <form id='divBuscar' action='#'>
                     <fieldset class="radius-top" style='width:100% !important;' >
                       <input type="text" placeholder="Buscar sitios, lugares, direcciones etc" id="txt-signup-name" value="" style='width:100% !important;' data-icon='search'>
@@ -83,29 +83,13 @@
 
 
         <article id='todasRutas' class='list scroll indented'>
+          <div id="ups_x_rutas_encontrada" class="empty">
+            <span class="icon remove"></span>
+            <strong>Ups !</strong>
+            <small>Escoje un punto de partida y destino</small>
+        </div>
           <ul id='listarutasEncontradas'>
-            <li class="thumb big">
-                <img src="http://cdn.tapquo.com/lungo/icon-144.png">
-                <div>
-                    <div class="on-right text tiny">Barranquilla</div>
-                    <strong>Kra 50 Uninorte</strong>
-                    <span class="text tiny opacity">Sobusa</span>
-                    <small>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, aliquam, nisi commodi blanditiis.
-                    </small>
-                </div>
-            </li>
-            <li class="thumb big">
-                <img src="http://cdn.tapquo.com/lungo/icon-144.png">
-                <div>
-                    <div class="on-right text tiny">lorem ipsum</div>
-                    <strong>&lt;strong&gt;</strong>
-                    <span class="text tiny opacity">lorem ipsum</span>
-                    <small>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, aliquam, nisi commodi blanditiis.
-                    </small>
-                </div>
-            </li>
+
           </ul>
         </article>
          <article id='todaslasRutas' class='list scroll indented'>

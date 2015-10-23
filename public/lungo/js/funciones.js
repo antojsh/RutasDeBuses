@@ -1,8 +1,8 @@
 Lungo.init({
     name: 'prueba'
 });
-var socket = io.connect('http://localhost:8080');
-//var socket = io.connect('http://localhost:8080');
+//var socket = io.connect('http://104.131.226.138:8080');
+var socket = io.connect('http://104.131.226.138:8080');
 
 socket.on('connect',function(data){
   var fingerprint = new Fingerprint().get();
@@ -23,7 +23,7 @@ try{
        $('#NomUsuario').html(localStorage.getItem('usuario'))
         $('#imgUsuario').attr("src",localStorage.getItem('foto'));
     }else{
-      window.location='http://localhost:8080'
+      window.location='http://104.131.226.138:8080'
     }
   }else{
     localStorage.setItem("profile", data._id);
@@ -31,18 +31,13 @@ try{
     localStorage.setItem("foto", data.photo);
     $('#NomUsuario').html(data.name)
     $('#imgUsuario').attr("src",data.photo);
-
   }
 
 }catch(err){
   console.log(err)
-   window.location ='http://localhost:8080';
+   window.location ='http://104.131.226.138:8080';
 }
-
-
 })
-
-
 
 socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
@@ -51,8 +46,8 @@ socket.io.on('connect_error', function(err) {
 
 
 var flechas= new L.LayerGroup();
-var coorPartida= new Array();
-var coorDestino= new Array();
+var coorPartida = new Array();
+var coorDestino = new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
 var markerPartida,markerDestino,person;
 var anim;
@@ -115,12 +110,9 @@ $('#btnCerrarPopup').click(function(e){
   $('#articlePopup').css('bottom','-150px')
 });
 $(document).ready(function(){
-<<<<<<< HEAD
 
-=======
 
   socket.emit('buscarTodaslasRutas',{})
->>>>>>> 2d28ac6d0b089b69dcb5cfcfef7652e48251b257
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
   //setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
 
@@ -202,26 +194,49 @@ $('#btnDestino').click(function() {
     ocultarFooter()
   }
 })
+
 $('#btnBuscarRuta').click(function(){
 
-  $('.dots').fadeIn('fast');
-  var array = new Array();
-    array[0]=coorPartida
-    array[1]=coorDestino
-     socket.emit('buscarRuta', array);
+  if(coorPartida.length >0 && coorDestino.length >0){
+
+      $('.dots').fadeIn('fast');
+      var array = new Array();
+        array[0]=coorPartida
+        array[1]=coorDestino
+        socket.emit('buscarRuta', array);
+  }else{
+      Lungo.Notification.error(
+        "Error",                      //Title
+        "Debe marcar un punto de Partida y Destino",     //Description
+        "cancel",                     //Icon
+        3
+  );
+  }
 })
+
+$('#listmenu > li').click(function(){
+  if(this.id=='limap'){
+
+     $("#Geocodificador").fadeIn("fast");
+     $("#btnBuscarRuta").fadeIn("fast");
+  }else {
+     $("#Geocodificador").fadeOut("fast");
+     $("#btnBuscarRuta").fadeOut("fast");
+  }
+})
+
 function ocultarFooter(){
   $('#articlePopup').css('bottom','-150px');
 }
 
 var mostrarruta= L.geoJson();
+
 function rutaEncontrada(data){
 
-console.log('********** '+data)
 $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){
-///Pruebaaaaa
+
   $('#numRutasEncontradas').html(data.length)
   for (var i = 0; i < data.length; i++) {
 
@@ -240,19 +255,19 @@ $('#listarutasEncontradas').html('');
   }
 
   Lungo.Router.article("main", "todasRutas");
-
+  $("#ups_x_rutas_encontrada").fadeOut("fast");
+  $("#divBuscar").fadeOut("fast");
 }else{
   Lungo.Notification.error(
     "Error",                      //Title
     "No se encontro ninguna ruta cercana",     //Description
     "cancel",                     //Icon
-    7,                            //Time on screen
-    afterNotification             //Callback function
+    7
 );
 }
-  //mostrarruta=new L.Polyline(data.data.data.loc).addTo(map);
     $('.dots').fadeOut('fast');
 }
+
 function error(titulo,msj){
   $('body').append('<div id="error" class="ErrorClass">'+
   '<span class="icon icon-cross" onclick="cerrarError()" id="cerrarError"></span>'+
@@ -267,13 +282,8 @@ function error(titulo,msj){
 }
 $('#listarutasEncontradas').on('click','li',function(){
   $('.dots').fadeIn('fast');
-<<<<<<< HEAD
-  socket.emit('buscarRutaUnica',this.id)
 
-=======
   socket.emit('buscarRutaUnica',{opc:1,id:this.id})
-
->>>>>>> 2d28ac6d0b089b69dcb5cfcfef7652e48251b257
 })
 $('#listatodaslasrutas').on('click','li',function(){
   $('.dots').fadeIn('fast');
@@ -285,7 +295,34 @@ $$('#listarutasEncontradas li').hold(function(){
 });
 $('#cerrarSesion').click(function(){
   localStorage.clear();
-  window.location='http://localhost:8080';
+  window.location='http://104.131.226.138:8080';
+})
+
+$('#divBuscar').submit(function(e){
+  e.preventDefault();
+  $('.dots').fadeIn('fast');
+  var location = $('#txt-signup-name').val();//unresolvedLocations
+  //var geocode = ' http://open.mapquest.com/_svc/searchio?action=search&query0='+location+'&sort=bestmatch&page=0&routeContext=';
+  var geocode =  'http://photon.komoot.de/api?q='+location;
+
+  $.getJSON(geocode, function(data) {
+    if(data.features.length>0){
+
+      var vlat= JSON.stringify(data.features[0].geometry.coordinates[0]);
+      var vlng= JSON.stringify(data.features[0].geometry.coordinates[1]);
+
+      map.setView([vlng,vlat],16);
+     //console.log(JSON.stringify( data[0].address.displayLatLng.lat));
+   }else{
+     Lungo.Notification.error(
+       "Error",                      //Title
+       "No se encontro ningun resultado",     //Description
+       "cancel",                     //Icon
+       3
+   );
+   }
+  });
+  $('.dots').fadeOut('fast');
 })
 
 function rutaUnicaEncontrada(data){
@@ -336,8 +373,7 @@ function BorrarCapaFlechas(){
   map.removeLayer(flechas);
   flechas= new L.LayerGroup();
 }
-<<<<<<< HEAD
-=======
+
 function mostrarrutaDesdeInfo(data){
   socket.emit('buscarRutaUnica',{opc:1,id:data})
    Lungo.Router.article("main", "map");
@@ -349,7 +385,7 @@ function todaslasrutas(data){
     $('#listatodaslasrutas').append(  '<li class="thumb big" id='+data[i]._id+'>'+
       '    <img src="'+data[i].image+'">'+
       '    <div>'+
-      '        <div class="on-right text tiny">'+data[i].city+'</div>'+
+    //  '        <div class="on-right text tiny">'+data[i].city+'</div>'+
       '        <strong>'+data[i].name+'</strong>'+
       '        <span class="text tiny opacity">'+data[i].flota+'</span>'+
       '        <small>'+
@@ -360,4 +396,3 @@ function todaslasrutas(data){
 
   }
 }
->>>>>>> 2d28ac6d0b089b69dcb5cfcfef7652e48251b257

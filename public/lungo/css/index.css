@@ -239,6 +239,11 @@
     stroke: #51BBA7;
     fill: transparent; }
 
+    .leaflet-control-zoom{
+     position: relative;
+     top: 45px;
+    }
+
   @-webkit-keyframes loading {
     0% {
       -webkit-transform: rotate(0);

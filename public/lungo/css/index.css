@@ -43,6 +43,9 @@
   font-weight: bold;
   color: #424242;
 }
+.list li.thumb.big > img {
+  width: 80px !important;
+}
     #articlePopup {
 
       width: 100%;

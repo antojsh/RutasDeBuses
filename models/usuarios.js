@@ -5,6 +5,7 @@ var usuarios = new Schema({
 	name: String,
 	provider: String,
 	provider_id: String,
+	device:String,
 	photo:String,
 	createdAt:{type: Date, default: Date.now}
 

@@ -26,26 +26,23 @@
     <header data-title="Opciones"></header>
         <article class="active list indented">
             <ul id='listmenu'>
-              <li data-view-article="Perfil" data-icon="user" class="active">
+              <li data-view-article="Perfil" data-icon="user" class="active" data-title="Perfil">
 
                 <strong>Perfil</strong>
               </li>
-              <li data-view-article="map" data-icon="globe" class="active">
+              <li data-view-article="map" data-icon="globe" class="active" data-title="Go Route">
 
                 <strong>Mapa</strong>
               </li>
-              <li data-view-article="todasRutas" data-icon="road" class="active">
+              <li data-view-article="todasRutas" data-icon="search" class="active" data-title="Rutas encontradas">
                 <div class="tag on-right" id='numRutasEncontradas'>0</div>
                 <strong>Rutas encontradas</strong>
               </li>
-              <li data-view-article="todasRutas" data-icon="road" class="active">
-                <div class="tag on-right" id='numRutasEncontradas'>0</div>
+              <li data-view-article="todaslasRutas" data-icon="road" class="active" data-title="Todas las rutas">
+                
                 <strong>Todas las rutas</strong>
               </li>
-              <li data-view-article="list" data-icon="remove-sign" class="active">
-
-                <strong>Salir</strong>
-              </li>
+              
             </ul>
         </article>
     </aside>
@@ -60,7 +57,7 @@
                 <a href="#second" data-router="section" data-icon="share"></a>
             </nav> -->
             <div class="centered title with-subtitle"  style="text-shadow: 1px 1px 2px black !important;">
-                Way
+                Go Route
                 <button  id='btnBuscarRuta'>Buscar Ruta</button>
                 <!-- <<small></small> class="subtitle">Que no te lo cuenten</small> -->
             </div>
@@ -99,12 +96,17 @@
             </li>
           </ul>
         </article>
+         <article id='todaslasRutas' class='list scroll indented'>
+          <ul id='listatodaslasrutas'>
+            
+          </ul>
+        </article>
         <article id='Perfil'>
           <div class="empty">
               <img style='width:100px; height:100px; border-radius:50%; margin:10px auto;' id='imgUsuario'>
               <strong id='NomUsuario'>Profile Empty</strong>
-              <small>When you back a project or follow a friend, their activity will show up here.</small>
-              <button class="anchor" ><abbr>Cerrar sesion</abbr></button>
+              
+              <button class="anchor" id='cerrarSesion'><abbr>Cerrar sesion</abbr></button>
           </div>
         </article>
     </section>
@@ -117,20 +119,14 @@
                 
             </div>
         </header>
-          <nav class='groupbar' data-control="groupbar" >
-          <a href="#" data-view-article="infoRuta" data-icon="user"><abbr> Informacion</abbr></a>
-            <a href="#" data-view-article="mapRuta" data-icon="user" ><abbr> Mapa Ruta</abbr></a>
-            
-        </nav>
+       
 
         <article class='active list scroll' id='infoRuta'>
           <div class="empty">
           </div>
         
         </article>
-        <article id='mapRuta'>
-          
-        </article>
+        
     </section>
     <div id="articlePopup">
       <div>

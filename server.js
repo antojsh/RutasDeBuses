@@ -14,11 +14,13 @@ require('./models/usuarios');
 require('./passport')(passport);
 var session = require('express-session')
 var inforPerfil;
-var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '104.131.226.138';
+//var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '104.131.226.138';
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || 'localhost';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 var iduser;
 var usuariosActivos={};
+var Rutas = require('./models/rutasbuses')
+var User = mongoose.model('Usuarios');
 server.listen(port,ip_addr);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
@@ -29,8 +31,8 @@ cloudinary.config({
 	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
 
 })
-//mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
+mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
+//mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo de Digital');
 });
@@ -48,7 +50,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/login.html');
 });
 app.get('/app', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/lungo/index.html');
 });
 // Configuración de Passport. Lo inicializamos
 // y le indicamos que Passport maneje la Sesión
@@ -65,10 +67,13 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 	//inforPerfil=null;
 });
-app.get("/auth/facebook", passport.authenticate('facebook',{ scope: ['email']}))
+app.get("/auth/facebook", passport.authenticate('facebook'))
 
 // Ruta para autenticarse con Twitter (enlace de login)
-app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter', function(req, res, next) {
+  console.log(req.query.llave)
+  next();
+}, passport.authenticate('twitter'));
 // Ruta para autenticarse con Facebook (enlace de login)
 //app.get('/auth/facebook', passport.authenticate('facebook'));
 // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
@@ -78,7 +83,7 @@ app.get('/auth/twitter/callback', passport.authorize('twitter',
 ),  function(req, res) {
 	inforPerfil=req.account;
 
--	res.redirect('/app');
+	res.redirect('/app');
 });
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
 // En caso de fallo redirige a otra vista '/login'
@@ -109,34 +114,35 @@ app.post('/saveRuta',function(req,res){
 		})
 	},{ width: 300, height: 350, crop: 'fit' })
 })
-var Rutas = require('./models/rutasbuses')
+
 io.sockets.on('connection', function (socket) {
+	
 	socket.emit('userProfile',inforPerfil)
+	inforPerfil=null;
 	 socket.on('app_user',nuevoUsuario)
  	 socket.on('buscarRuta',buscarRutaPartida);
 	 socket.on('guardarRuta',addRutaBus);
 	 socket.on('buscarRutaUnica',buscarRutaUnica);
+	 socket.on('buscarTodaslasRutas',findAllBusRoute)
 	 function nuevoUsuario (data) {
-	 	iduser=data;
-	 	usuariosActivos[data]=socket.id;
-	 	console.log('Users conectados '+JSON.stringify(usuariosActivos))
+	 	
+	 	usuariosActivos[data.username]=socket.nickname;
+	 	console.log('Users conectados '+JSON.stringify(data))
 
 	 }
 	 function findAllBusRoute  (){
-	 		Rutas.find(function(err,rutasbuses){
-	 			if (!err)  socket.emit('findAllBusRoute', rutasbuses)
-	 			//else res.send(errorResponseJSON(500,false,err));
-	 			// res.end(res.status())
-	 			JsonResponse= {};
+	 		Rutas.find({ $query: {}, $orderby: { name : 1 } },'name description image flota city',function(err,rutasbuses){
+	 			if (!err)  socket.emit('todaslasrutas', rutasbuses)
+	 			else console.log('Error')
 	 		})
 	 	}
 
 	 	//GET
 	 	function buscarRutaUnica (data){
 
-	 		Rutas.findById(data,function(err,rutasbus){
-	 			if (!err) socket.emit('rutaUnicaEncontrada', rutasbus)
-	 			else res.send('Error en busqueda por Id '+err)
+	 		Rutas.findById(data.id,function(err,rutasbus){
+	 			if (!err) socket.emit('rutaUnicaEncontrada', {opc:data.opc,ruta:rutasbus})
+	 			else console.log(err)
 	 		})
 	 		JsonResponse= {};
 	 	}
@@ -181,7 +187,7 @@ io.sockets.on('connection', function (socket) {
 		// 	}
 
 	 	 function buscarRutaPartida(data){
-console.log('ENTROOOOOO '+JSON.stringify(data));
+			console.log('ENTROOOOOO '+JSON.stringify(data));
 	 		var distance = 1000 / 6371;
 	 		var query = Rutas.find({'loc': {
 	 		  $near: [data[0][0],data[0][1]],
@@ -265,8 +271,8 @@ console.log('ENTROOOOOO '+JSON.stringify(data));
 	 // 		})
 	 // 		return JsonResponse;
 		// 	}
-	 	socket.on('disconnect',function(){
-	 		delete usuariosActivos[iduser]
+	 	socket.on('disconnect',function(socket){
+	 		delete usuariosActivos[socket.nickname]
 	 		console.log('User disconnect '+JSON.stringify(usuariosActivos))
 	 	})
 

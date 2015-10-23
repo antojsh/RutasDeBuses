@@ -35,7 +35,7 @@ module.exports = function(passport) {
 		callbackURL		 : '/auth/twitter/callback',
 			profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
 	}, function(req,accessToken, refreshToken, profile, done) {
-		console.log(JSON.stringify(profile))
+		
 		User.findOne({provider_id: profile.id}, function(err, user) {
 			if(err) throw(err);
 			// Si existe en la Base de Datos, lo devuelve
@@ -54,6 +54,7 @@ module.exports = function(passport) {
 				done(null, user);
 			});
 		});
+		
 	}));
 
 	// Configuración del autenticado con Facebook

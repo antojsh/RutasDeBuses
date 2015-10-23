@@ -13,25 +13,36 @@
       *{
         font-family: 'Architects Daughter', cursive;
       }
+      strong{
+        margin: 20px !important;
+        font-size: 3rem;
+      }
+      body{
+        background-color: red !important;
+      }
     </style>
   </head>
   <body class="app" >
   <section id="main" data-transition="slide" style='background:#00afe3 !important;'>
   <article class="active splash ">
-        <img src="static/img/logo.png" class="logo" style="margin-top:0px;">
+        <img src="static/img/logo.png" class="logo" >
+        
         <div class="form">
-            <fieldset class="radius-top" data-icon="user"><span class="icon user"></span>
+        <strong>Go Route</strong><br>
+        <small>Buscamos la ruta de tu destino</small>
+           <!--  <fieldset class="radius-top" data-icon="user"><span class="icon user"></span>
                 <input type="text" placeholder="Usuario" id="txt-signup-name" value="">
             </fieldset>
             <fieldset class="radius-bottom shadow" >
                 <input type="password" placeholder="Contraseña" id="txt-signup-password" value="" autocomplete="off" >
             </fieldset>
             <br>
-            <button class="anchor accept margin-bottom" data-icon="lock" data-label="Login"><span class="icon lock"></span></button>
-              <br><br><br><br>
-            <button class="anchor" data-icon="facebook" data-label="Facebook" style='background:#294986;' id='facebook'></button>
-            <button class="anchor" data-icon="twitter" data-label="Twitter" id='twitter'></button>
+            <button class="anchor accept margin-bottom" data-icon="lock" data-label="Login"><span class="icon lock"></span></button>-->
+              <br><br><br><br> 
             
+            <button class="anchor" data-icon="facebook" data-label="Iniciar con Facebook" style='background:#294986;' id='facebook'></button>
+            <button class="anchor" data-icon="twitter" data-label="Iniciar con Twitter" id='twitter'></button>
+        
         </div>
         
     </article>
@@ -40,14 +51,17 @@
     <script src="static/lungo/components/lungo/lungo.js"></script>
     <script type="text/javascript">
         Lungo.init({
-    name: 'prueba'
-});
-document.getElementById('facebook').addEventListener('click',function(){
-  window.location='http://104.131.226.138:8080/auth/facebook'
-})
-document.getElementById('twitter').addEventListener('click',function(){
-  window.location='http://104.131.226.138:8080/auth/twitter'
-})
+           name: 'prueba'
+        });
+        Lungo.ready(function(){
+          if(localStorage.getItem('profile')!=null) window.location='http://localhost:8080/app'
+        })
+        document.getElementById('facebook').addEventListener('click',function(){
+          window.location='http://104.131.226.138:8080/auth/facebook'
+        })
+        document.getElementById('twitter').addEventListener('click',function(){
+          window.location='http://localhost:8080/auth/twitter'
+        })
     </script>
    </body>
 </html>

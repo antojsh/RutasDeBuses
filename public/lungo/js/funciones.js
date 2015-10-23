@@ -238,6 +238,8 @@ $('#listarutasEncontradas').html('');
   if(data.length>0){
 
   $('#numRutasEncontradas').html(data.length)
+  $("#btnBuscarRuta").fadeOut("fast");
+
   for (var i = 0; i < data.length; i++) {
 
     $('#listarutasEncontradas').append(  '<li class="thumb big" id='+data[i]._id+'>'+
@@ -262,8 +264,8 @@ $('#listarutasEncontradas').html('');
     "Error",                      //Title
     "No se encontro ninguna ruta cercana",     //Description
     "cancel",                     //Icon
-    7
-);
+     3
+    );
 }
     $('.dots').fadeOut('fast');
 }
@@ -281,8 +283,8 @@ function error(titulo,msj){
   '</div>');
 }
 $('#listarutasEncontradas').on('click','li',function(){
-  $('.dots').fadeIn('fast');
 
+  $('.dots').fadeIn('fast');
   socket.emit('buscarRutaUnica',{opc:1,id:this.id})
 })
 $('#listatodaslasrutas').on('click','li',function(){
@@ -290,9 +292,7 @@ $('#listatodaslasrutas').on('click','li',function(){
   socket.emit('buscarRutaUnica',{opc:0,id:this.id})
 
 })
-$$('#listarutasEncontradas li').hold(function(){
-  Lungo.Notification.html('<article class="list selectable"><ul><li>Informacion Ruta</li></ul></article>');
-});
+
 $('#cerrarSesion').click(function(){
   localStorage.clear();
   window.location='http://104.131.226.138:8080';

@@ -11,18 +11,18 @@ socket.on('rutaEncontrada', rutaEncontrada)
 
  socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 
-socket.on('userProfile',function(data){
+//socket.on('userProfile',function(data){
 //  console.log("Entrando :::"+JSON.stringify(data))
-try{
-  if(data._id ==null || data._id ===undefined )  window.location ='http://localhost:8080';
-}catch(err){
-   window.location ='http://localhost:8080';
-}
- 
-  localStorage.setItem("profile", data._id);
-  $('#NomUsuario').html(data.name)
-  $('#imgUsuario').attr("src",data.photo);
-})
+// try{
+//   if(data._id ==null || data._id ===undefined )  window.location ='http://localhost:8080';
+// }catch(err){
+//    window.location ='http://localhost:8080';
+// }
+//
+//   localStorage.setItem("profile", data._id);
+//   $('#NomUsuario').html(data.name)
+//   $('#imgUsuario').attr("src",data.photo);
+// })
 
 
 socket.io.on('connect_error', function(err) {
@@ -96,7 +96,7 @@ $('#btnCerrarPopup').click(function(e){
   $('#articlePopup').css('bottom','-150px')
 });
 $(document).ready(function(){
-  
+
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
   //setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
 
@@ -238,7 +238,7 @@ function error(titulo,msj){
 $('#listarutasEncontradas').on('click','li',function(){
   $('.dots').fadeIn('fast');
   socket.emit('buscarRutaUnica',this.id)
-  
+
 })
 function rutaUnicaEncontrada(data){
 //     mapRuta.setView([11.004692, -74.808877], 16);

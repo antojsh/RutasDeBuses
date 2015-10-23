@@ -15,7 +15,7 @@ require('./passport')(passport);
 var session = require('express-session')
 var inforPerfil;
 var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '104.131.226.138';
-var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || 'localhost';
+//var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || 'localhost';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 var iduser;
 var usuariosActivos={};
@@ -48,7 +48,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/login.html');
 });
 app.get('/app', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/lungo/index.html');
 });
 // Configuración de Passport. Lo inicializamos
 // y le indicamos que Passport maneje la Sesión

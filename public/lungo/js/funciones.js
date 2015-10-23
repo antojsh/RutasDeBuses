@@ -14,9 +14,9 @@ socket.on('rutaEncontrada', rutaEncontrada)
 socket.on('userProfile',function(data){
 //  console.log("Entrando :::"+JSON.stringify(data))
 try{
-  if(data._id ==null || data._id ===undefined )  window.location ='http://localhost:8080';
+  if(data._id ==null || data._id ===undefined )  window.location ='http://104.131.226.138:8080';
 }catch(err){
-   window.location ='http://localhost:8080';
+   window.location ='http://104.131.226.138:8080';
 }
  
   localStorage.setItem("profile", data._id);

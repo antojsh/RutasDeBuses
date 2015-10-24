@@ -43,6 +43,9 @@
   font-weight: bold;
   color: #424242;
 }
+.list li.thumb.big > img {
+  width: 80px !important;
+}
     #articlePopup {
 
       width: 100%;
@@ -235,6 +238,11 @@
     animation: loading-circle 2s linear infinite;
     stroke: #51BBA7;
     fill: transparent; }
+
+    .leaflet-control-zoom{
+     position: relative;
+     top: 45px;
+    }
 
   @-webkit-keyframes loading {
     0% {

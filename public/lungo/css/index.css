@@ -243,6 +243,11 @@
      position: relative;
      top: 45px;
     }
+    .btnParodesSelec {
+      background: -webkit-linear-gradient(#058fce, #25B7FA);
+      background: linear-gradient(#058fce, #25B7FA);
+      border-bottom-width: 0 !important;
+      line-height: 4em !important; }
 
   @-webkit-keyframes loading {
     0% {

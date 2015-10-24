@@ -31,8 +31,8 @@ cloudinary.config({
 	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
 
 })
-//mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
+mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
+//mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo de Digital');
 });
@@ -216,7 +216,7 @@ io.sockets.on('connection', function (socket) {
 	 		query.exec(function (err, ruta) {
 	 		  if (err) {console.log(err);throw err;}
 	 			if (!ruta) {
-	 		    console.log('NAda')
+	 		    console.log('NAda');
 	 		  } else {
 	 		    //console.log('******************** DESTINO' + ruta);
 	 		  	//socket.emit('rutaEncontrada', OkResponseJSON(200,true,{ruta,partida},Date.today()))
@@ -233,7 +233,7 @@ io.sockets.on('connection', function (socket) {
 	 					b=destino[j].name;
 						if(a == b){
 							//console.log(partida[i].name+'  '+destino[j].name)
-	 						rutasEncontradas.push(partida[i])
+	 						rutasEncontradas.push(partida[i]);
 	 					}
 	 				}
 	 		}

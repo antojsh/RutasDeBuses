@@ -3,7 +3,11 @@ Lungo.init({
 });
 //var socket = io.connect('http://104.131.226.138:8080');
 var socket = io.connect('http://104.131.226.138:8080');
-
+var markerPartida=new L.LayerGroup(),
+    person =new L.LayerGroup(),
+    markerDestino=new L.LayerGroup();
+var posicionactual = new Array();
+var swmarkertemp = false;
 socket.on('connect',function(data){
   var fingerprint = new Fingerprint().get();
 
@@ -45,12 +49,11 @@ socket.io.on('connect_error', function(err) {
   $('.Connection').css('max-height','0px');
 });
 
-
+var markerTemporal = new L.LayerGroup();
 var flechas= new L.LayerGroup();
 var coorPartida = new Array();
 var coorDestino = new Array();
-var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
-var markerPartida,markerDestino,person;
+var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud;
 var anim;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
@@ -86,15 +89,15 @@ var markerPerson = L.icon({
   //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 map.on('click', function (e) {
+
     $('.dots').fadeIn('fast');
     globalLatiud = e.latlng.lat;
     globalLongitud=  e.latlng.lng;
-    if (markerTemporal === undefined){
-      markerTemporal= L.marker([globalLatiud, globalLongitud], {icon: markerTemp});
-      map.addLayer(markerTemporal);
-    }else{
-      markerTemporal.setLatLng(e.latlng);
-    }
+
+      B_markertemporal();
+      L.marker([globalLatiud, globalLongitud], {icon: markerTemp}).addTo(markerTemporal);
+      markerTemporal.addTo(map);
+
     $.getJSON("http://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&zoom=18&lat=" + e.latlng.lat + "&lon=" + e.latlng.lng + "&json_callback=?",
         function (response) {
             console.log(JSON.stringify(response))
@@ -106,25 +109,26 @@ map.on('click', function (e) {
 
         }
     );
-});
+  });
 $('#btnCerrarPopup').click(function(e){
-  $('#articlePopup').css('bottom','-150px')
+  $('#articlePopup').css('bottom','-150px');
 });
-$(document).ready(function(){
 
+$(document).ready(function(){
 
   socket.emit('buscarTodaslasRutas',{})
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
   //setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
-
 })
 
 function showPosition(position) {
     map.setView([position.coords.latitude, position.coords.longitude], 16);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="http://osm.org/copyright">Go Route</a> Engeenier '
     }).addTo(map);
 
+    posicionactual.pop();
+    posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     person.bindPopup("<b>Destino</b>").openPopup();
     map.addLayer(person);
@@ -140,57 +144,57 @@ function errorPosition(){
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
   //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 
 $('#todasRutas ul li').click(function(){
 
   Lungo.Router.section('rutaEscogida');
-})
+});
+
 $('#btnPartida').click(function() {
   //alert($(this).hasClass('btnParodesSelec'));z
   if($(this).hasClass('btnParodesSelec')){
+
     $(this).removeClass('btnParodesSelec');
     $('#btnPartida span').css('color','white');
-    map.removeLayer(markerPartida);
-
+    B_markerpartida();
   }else{
-
+    B_markertemporal();
     $(this).addClass('btnParodesSelec');
     $('#btnPartida span').css('color','green');
-     markerPartida = L.marker([globalLatiud, globalLongitud], {icon: greenIcon});
+      L.marker([globalLatiud, globalLongitud], {icon: greenIcon}).addTo(markerPartida).bindPopup("<b>Partida</b>");
+      markerPartida.addTo(map);
+
      coorPartida[0]=globalLatiud;
      coorPartida[1]=globalLongitud;
-      map.addLayer(markerPartida);
-      map.removeLayer(markerTemporal)
-      markerPartida.bindPopup("<b>Partida</b>").openPopup();
-      markerTemporal=undefined;
   }
+
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
-    ocultarFooter()
+    ocultarFooter();
   }
-})
+});
+
 $('#btnDestino').click(function() {
-  //alert($(this).hasClass('btnParodesSelec'));
+
   if($(this).hasClass('btnParodesSelec')){
+
     $(this).removeClass('btnParodesSelec');
     $('#btnDestino span').css('color','white');
-    map.removeLayer(markerDestino);
+    B_markerdestino();
 
   }else{
-
+    B_markertemporal();
     $(this).addClass('btnParodesSelec');
     $('#btnDestino span').css('color','red');
     coordenadas[0].partida[0]=globalLatiud;
-    markerDestino = L.marker([globalLatiud, globalLongitud], {icon: yellowIcon});
+    L.marker([globalLatiud, globalLongitud], {icon: yellowIcon}).addTo(markerDestino).bindPopup("<b>Destino</b>");
+    markerDestino.addTo(map);
+
     coorDestino[0]=globalLatiud;
     coorDestino[1]=globalLongitud;
-    map.addLayer(markerDestino);
-    map.removeLayer(markerTemporal)
-    markerDestino.bindPopup("<b>Destino</b>").openPopup();
-    markerTemporal=undefined;
   }
+
   if($('#btnDestino').hasClass('btnParodesSelec') && $('#btnPartida').hasClass('btnParodesSelec')){
     ocultarFooter()
   }
@@ -213,7 +217,15 @@ $('#btnBuscarRuta').click(function(){
         3
   );
   }
-})
+});
+
+$('#LimpiarMap').click(function(){
+  LimpiarMapa();
+});
+
+$('#PosicionActual').click(function(){
+   map.setView([posicionactual[0].lat,posicionactual[0].long], 16);
+});
 
 $('#listmenu > li').click(function(){
   if(this.id=='limap'){
@@ -226,6 +238,22 @@ $('#listmenu > li').click(function(){
   }
 })
 
+function LimpiarMapa(){
+  BorrarCapaFlechas();
+  map.removeLayer(mostrarruta);
+  B_markerpartida();
+  B_markertemporal();
+  B_markerdestino();
+
+  $('#btnDestino').removeClass('btnParodesSelec');
+  $('#btnPartida').removeClass('btnParodesSelec');
+  $('#btnDestino span').css('color','white');
+  $('#btnPartida span').css('color','white');
+
+   coorPartida = new Array();
+   coorDestino = new Array();
+}
+
 function ocultarFooter(){
   $('#articlePopup').css('bottom','-150px');
 }
@@ -233,7 +261,6 @@ function ocultarFooter(){
 var mostrarruta= L.geoJson();
 
 function rutaEncontrada(data){
-
 $('#listarutasEncontradas').html('');
   ocultarFooter()
   if(data.length>0){
@@ -354,7 +381,7 @@ else{
  Lungo.Router.article("main", "map");
 
   mostrarruta=new L.Polyline(data.ruta.loc).addTo(map);
-  map.setView([data.ruta.loc[0][0],data.ruta.loc[0][1]])
+  map.setView([globalLatiud,globalLongitud])
   var arrowHead = L.polylineDecorator(mostrarruta).addTo(flechas);
   flechas.addTo(map);
   var arrowOffset = 0;
@@ -373,6 +400,21 @@ else{
 function BorrarCapaFlechas(){
   map.removeLayer(flechas);
   flechas= new L.LayerGroup();
+}
+
+function B_markertemporal(){
+  map.removeLayer(markerTemporal);
+  markerTemporal = new L.LayerGroup();
+}
+
+function B_markerpartida(){
+  map.removeLayer(markerPartida);
+  markerPartida =new L.LayerGroup();
+}
+
+function B_markerdestino(){
+  map.removeLayer(markerDestino);
+  markerDestino = new L.LayerGroup();
 }
 
 function mostrarrutaDesdeInfo(data){

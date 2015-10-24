@@ -31,8 +31,8 @@ cloudinary.config({
 	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
 
 })
-mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-//mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
+//mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
+mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo de Digital');
 });

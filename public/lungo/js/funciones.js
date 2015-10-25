@@ -54,6 +54,7 @@ var flechas= new L.LayerGroup();
 var coorPartida = new Array();
 var coorDestino = new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud;
+
 var anim;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
@@ -211,7 +212,7 @@ $('#btnBuscarRuta').click(function(){
         socket.emit('buscarRuta', array);
   }else{
       Lungo.Notification.error(
-        "Error",                      //Title
+        "Ups !",                      //Title
         "Debe marcar un punto de Partida y Destino",     //Description
         "cancel",                     //Icon
         3
@@ -227,16 +228,16 @@ $('#PosicionActual').click(function(){
    map.setView([posicionactual[0].lat,posicionactual[0].long], 16);
 });
 
-$('#listmenu > li').click(function(){
-  if(this.id=='limap'){
+// $('#listmenu > li').click(function(){
+//   if(this.id=='limap'){
 
-     $("#Geocodificador").fadeIn("fast");
-     $("#btnBuscarRuta").fadeIn("fast");
-  }else {
-     $("#Geocodificador").fadeOut("fast");
-     $("#btnBuscarRuta").fadeOut("fast");
-  }
-})
+//      $("#Geocodificador").fadeIn("fast");
+//      $("#btnBuscarRuta").fadeIn("fast");
+//   }else {
+//      $("#Geocodificador").fadeOut("fast");
+//      $("#btnBuscarRuta").fadeOut("fast");
+//   }
+// })
 
 function LimpiarMapa(){
   BorrarCapaFlechas();
@@ -268,6 +269,7 @@ $('#listarutasEncontradas').html('');
   $('#numRutasEncontradas').html(data.length)
   $("#btnBuscarRuta").fadeOut("fast");
 
+  
   for (var i = 0; i < data.length; i++) {
 
     $('#listarutasEncontradas').append(  '<li class="thumb big" id='+data[i]._id+'>'+
@@ -289,7 +291,7 @@ $('#listarutasEncontradas').html('');
   $("#divBuscar").fadeOut("fast");
 }else{
   Lungo.Notification.error(
-    "Error",                      //Title
+    "Ups !",                      //Title
     "No se encontro ninguna ruta cercana",     //Description
     "cancel",                     //Icon
      3
@@ -313,7 +315,7 @@ function error(titulo,msj){
 $('#listarutasEncontradas').on('click','li',function(){
 
   $('.dots').fadeIn('fast');
-  socket.emit('buscarRutaUnica',{opc:1,id:this.id})
+  socket.emit('buscarRutaUnica',{opc:0,id:this.id})
 })
 $('#listatodaslasrutas').on('click','li',function(){
   $('.dots').fadeIn('fast');
@@ -378,7 +380,7 @@ if(data.opc==0){
 else{
    BorrarCapaFlechas();
   if (mostrarruta !=undefined) map.removeLayer(mostrarruta);
- Lungo.Router.article("main", "map");
+ 
 
   mostrarruta=new L.Polyline(data.ruta.loc).addTo(map);
   map.setView([globalLatiud,globalLongitud])
@@ -394,8 +396,10 @@ else{
           arrowOffset = 0;
   }, 1000);
 }
-
+Lungo.Router.article("main", "home");
    $('.dots').fadeOut('fast');
+   $('#divBuscar').css('display','block')
+   $('#btnBuscarRuta').css('display','block')
 }
 function BorrarCapaFlechas(){
   map.removeLayer(flechas);
@@ -419,10 +423,10 @@ function B_markerdestino(){
 
 function mostrarrutaDesdeInfo(data){
   socket.emit('buscarRutaUnica',{opc:1,id:data})
-   Lungo.Router.article("main", "map");
+   
 }
 function todaslasrutas(data){
-  console.log(JSON.stringify(data))
+
   for (var i = 0; i < data.length; i++) {
 
     $('#listatodaslasrutas').append(  '<li class="thumb big" id='+data[i]._id+'>'+

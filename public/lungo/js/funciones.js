@@ -275,9 +275,9 @@ $('#listarutasEncontradas').html('');
     $('#listarutasEncontradas').append(  '<li class="thumb big" id='+data[i]._id+'>'+
       '    <img src="'+data[i].image+'">'+
       '    <div>'+
-      '        <div class="on-right text tiny">'+data.city+'</div>'+
+      '        <div class="on-right text tiny">'+data[i].city+'</div>'+
       '        <strong>'+data[i].name+'</strong>'+
-      '        <span class="text tiny opacity">'+data.flota+'</span>'+
+      '        <span class="text tiny opacity">'+data[i].flota+'</span>'+
       '        <small>'+
       '           '+data[i].description+''+
       '        </small>'+

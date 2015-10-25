@@ -1,176 +1,184 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>GO Route</title>
-    <meta name="description" content="Busca eventos en cualquier ciudad del mundo">
-    <meta name="author" content="Antonio Sierra Hurtado @antojsh">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="cleartype" content="on">
-    <link rel="stylesheet" href="static/lungo/components/lungo/lungo.css">
-    <link rel="stylesheet" href="static/lungo/components/lungo/theme.lungo.css">
-    <link rel="stylesheet" href="static/lungo/components/lungo/lungo.icon.css">
-    <link rel="stylesheet" href="static/lungo/components/lungo/lungo.icon.brand.css">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
-    <link rel="stylesheet" href="static/lungo/css/index.css">
-    <link rel="stylesheet" href="static/css/iconos.css" media="screen" title="no title" charset="utf-8">
-</head>
+    <!doctype html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>GO Route</title>
+        <meta name="description" content="Busca eventos en cualquier ciudad del mundo">
+        <meta name="author" content="Antonio Sierra Hurtado @antojsh">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="cleartype" content="on">
+        <link rel="stylesheet" href="static/lungo/components/lungo/lungo.css">
+        <link rel="stylesheet" href="static/lungo/components/lungo/theme.lungo.css"> 
+        <link rel="stylesheet" href="static/lungo/components/lungo/lungo.icon.css">
+        <link rel="stylesheet" href="static/lungo/components/lungo/lungo.icon.brand.css">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+        <link rel="stylesheet" href="static/lungo/css/index.css">
+        <link rel="stylesheet" href="static/css/iconos.css" media="screen" title="no title" charset="utf-8">
+    </head>
 
 
-<body class="app">
-    <aside id="features">
-    <header data-title="Opciones"></header>
-        <article class="active list indented">
-            <ul id='listmenu'>
-              <li data-view-article="Perfil" data-icon="user" class="active" >
+    <body class="app">
+        <aside id="features">
+        <header data-title="Opciones"></header>
+            <article class="active list indented">
+                <ul id='listmenu'>
+                  <li data-view-article="Perfil" data-icon="user" class="active" >
 
-                <strong>Perfil</strong>
-              </li>
-              <li data-view-article="map" data-icon="globe" class="active" id='limap'>
+                    <strong>Perfil</strong>
+                  </li>
+                  <li data-view-article="home" data-icon="globe" class="active" id='limap'>
 
-                <strong>Mapa</strong>
-              </li>
-              <li data-view-article="todasRutas" data-icon="search" class="active" >
-                <div class="tag on-right" id='numRutasEncontradas'>0</div>
-                <strong>Rutas encontradas</strong>
-              </li>
+                    <strong>Mapa</strong>
+                  </li>
+                  <li data-view-article="todasRutas" data-icon="search" class="active" >
+                    <div class="tag on-right" id='numRutasEncontradas'>0</div>
+                    <strong>Rutas encontradas</strong>
+                  </li>
 
-              <li data-view-article="todaslasRutas" data-icon="road" class="active" >
+                  <li data-view-article="todaslasRutas" data-icon="road" class="active" >
 
-                <strong>Todas las rutas</strong>
+                    <strong>Todas las rutas</strong>
 
-              </li>
+                  </li>
 
-            </ul>
-        </article>
-    </aside>
+                </ul>
+            </article>
+        </aside>
 
-    <section id="main" data-transition="slide">
-        <header  class="" >
-            <nav class="on-left">
-                <a href="#" data-view-aside="features" data-icon="menu" ></a>
-            </nav>
-            <nav id="LimpiarMap" class="on-right box">
-                <a href="#" data-router="section" data-icon="trash"></a>
-            </nav>
-            <nav id="PosicionActual" class="on-right box">
-                <a href="#" data-router="section" data-icon="screenshot"></a>
-            </nav>
-            <div class="centered title with-subtitle"  style="text-shadow: 1px 1px 2px black !important;">
+        <section id="main" data-transition="slide">
+            <header  class="" >
+                <nav class="on-left">
+                    <a href="#" data-view-aside="features" data-icon="menu" ></a>
+                </nav>
+                <nav id="LimpiarMap" class="on-right box">
+                    <a href="#" data-router="section" data-icon="trash"></a>
+                </nav>
+                <nav id="PosicionActual" class="on-right box">
+                    <a href="#" data-router="section" data-icon="screenshot"></a>
+                </nav>
+                <div class="centered title with-subtitle"  style="text-shadow: 1px 1px 2px black !important;">
 
-                Go Route
+                    Go Route
 
-                <button  id='btnBuscarRuta'>Buscar Ruta</button>
-                <div id ="Geocodificador" class="form" style='position:fixed; width:100%; left:0;'>
-                  <form id='divBuscar' action='#'>
-                    <fieldset class="radius-top" style='width:100% !important;' >
-                      <input type="text" placeholder="Buscar sitios, lugares, direcciones etc" id="txt-signup-name" value="" style='width:100% !important;' data-icon='search'>
-                  </fieldset>
-                  </form>
+                        <!-- <<small></small> class="subtitle">Que no te lo cuenten</small> -->
+                </div>
+             
+                
+                
+
+                
+            </header>
+
+            <article  class="active" id='home'>
+                <div id="map" style='width:100%; height:100%; position:absolute;'></div>
+                <div id ="Geocodificador" class="form" style='position:absolute; width:100%; left:0 !important; top:45px; z-index:99999999 !important; height:45px;'>
+                    <form id='divBuscar' action='#'>
+                     <div class="form">
+                          <fieldset data-icon="search"></span>
+                              <input type="text" placeholder="Buscar sitios, lugares, direcciones etc" id="txt-signup-name">
+                          </fieldset>
+                        </div>
+                    </form>
                 </div>
 
-                <!-- <<small></small> class="subtitle">Que no te lo cuenten</small> -->
+                 <button  id='btnBuscarRuta' class='anchor' data-icon='search'></button>
+            </article>
+            
+
+            <article id='todasRutas' class='list scroll indented'>
+              <div id="ups_x_rutas_encontrada" class="empty">
+                <span class="icon remove"></span>
+                <strong>Ups !</strong>
+                <small>Escoje un punto de partida y destino</small>
             </div>
-        </header>
+              <ul id='listarutasEncontradas'>
 
-        <article id="map" class="active idented ">
+              </ul>
+            </article>
+             <article id='todaslasRutas' class='list scroll indented'>
+              <!-- <div class="form"  style="margin-bottom:20px; height:20px !important">
+                <fieldset data-icon="search"><span class="icon search"></span>
+                    <input type="search" placeholder="Search..." style="height:20px;">
+                </fieldset>
+              </div> -->
+              <ul id='listatodaslasrutas'>
 
+              </ul>
+            </article>
+            <article id='Perfil'>
+              <div class="empty">
+                  <img style='width:100px; height:100px; border-radius:50%; margin:10px auto;' id='imgUsuario'>
+                  <strong id='NomUsuario'>Profile Empty</strong>
 
-        </article>
+                  <button class="anchor" id='cerrarSesion'><abbr>Cerrar sesion</abbr></button>
+              </div>
+            </article>
+        </section>
 
+        <section id='rutaEscogida' data-transition="cover">
+            <header data-back='arrow-left'>
 
-
-        <article id='todasRutas' class='list scroll indented'>
-          <div id="ups_x_rutas_encontrada" class="empty">
-            <span class="icon remove"></span>
-            <strong>Ups !</strong>
-            <small>Escoje un punto de partida y destino</small>
-        </div>
-          <ul id='listarutasEncontradas'>
-
-          </ul>
-        </article>
-         <article id='todaslasRutas' class='list scroll indented'>
-          <ul id='listatodaslasrutas'>
-
-          </ul>
-        </article>
-        <article id='Perfil'>
-          <div class="empty">
-              <img style='width:100px; height:100px; border-radius:50%; margin:10px auto;' id='imgUsuario'>
-              <strong id='NomUsuario'>Profile Empty</strong>
-
-              <button class="anchor" id='cerrarSesion'><abbr>Cerrar sesion</abbr></button>
-          </div>
-        </article>
-    </section>
-
-    <section id='rutaEscogida' data-transition="cover">
-        <header data-back='arrow-left'>
-
-            <div class="centered title with-subtitle"  style="text-shadow: 1px 1px 2px black !important; overflow:hidden;">
+                <div class="centered title with-subtitle"  style="text-shadow: 1px 1px 2px black !important; overflow:hidden;">
 
 
+                </div>
+            </header>
+
+
+
+
+            <article class='active list scroll' id='infoRuta'>
+              <div class="empty">
+              </div>
+
+            </article>
+
+
+
+        </section>
+        <div id="articlePopup">
+          <div>
+            
+            <div>
+              <strong id='strongCiudad' style='font-size:1.1rem;'></strong>
+              <p id='parrafoDir'></p>
             </div>
-        </header>
-
-
-
-
-        <article class='active list scroll' id='infoRuta'>
-          <div class="empty">
           </div>
-
-        </article>
-
-
-
-    </section>
-    <div id="articlePopup">
-      <div>
-        <div>
-          <span class="icon icon-heart rutaFavorita"></span>
+          <div>
+            <ul>
+              <li id='btnCerrarPopup'>
+                <span data-icon="remove"></span>
+                Cerrar
+              </li>
+              <li id="btnPartida">
+                <span data-icon="map-marker"></span>
+                 Partida
+              </li>
+              <li id='btnDestino'>
+                <span data-icon="map-marker"></span>
+                Destino
+              </li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <strong id='strongCiudad' style='font-size:1.1rem;'></strong>
-          <p id='parrafoDir'></p>
+        <div class="loading-bro dots">
+
+          <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
+            <circle id="loading-inner" cx="75" cy="75" r="60"/>
+         </svg>
         </div>
-      </div>
-      <div>
-        <ul>
-          <li id='btnCerrarPopup'>
-            <span class="remove"></span>
-            Cerrar
-          </li>
-          <li id="btnPartida">
-            <span data-icon="map-marker"></span>
-             Partida
-          </li>
-          <li id='btnDestino'>
-            <span data-icon="map-marker"></span>
-            Destino
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="loading-bro dots">
+         <script src="static/js/jquery.min.js" type="text/javascript"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
 
-      <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
-        <circle id="loading-inner" cx="75" cy="75" r="60"/>
-     </svg>
-    </div>
-     <script src="static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
-
-     <script src='static/js/leaflet.polylineDecorator.js'></script>
-    <script src="static/lungo/components/quojs/quo.js"></script>
-    <script src="static/lungo/components/lungo/lungo.js"></script>
-    <script src='static/js/fingerprint.js'></script>
-    <script src="static/js/socket.io.js"></script>
-    <script src='static/lungo/js/funciones.js'></script>
-</body>
-</html>
+         <script src='static/js/leaflet.polylineDecorator.js'></script>
+        <script src="static/lungo/components/quojs/quo.js"></script>
+        <script src="static/lungo/components/lungo/lungo.js"></script>
+        <script src='static/js/fingerprint.js'></script>
+        <script src="static/js/socket.io.js"></script>
+        <script src='static/lungo/js/funciones.js'></script>
+    </body>
+    </html>

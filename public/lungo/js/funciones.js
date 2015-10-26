@@ -17,32 +17,32 @@ socket.on('rutaEncontrada', rutaEncontrada)
 
 socket.on('todaslasrutas',todaslasrutas)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
-// socket.on('userProfile',function(data){
-// //  console.log("Entrando :::"+JSON.stringify(data))
-// try{
+socket.on('userProfile',function(data){
+//  console.log("Entrando :::"+JSON.stringify(data))
+try{
 
-//   if(!data ) {
+  if(!data ) {
 
-//     if(localStorage.getItem('profile')!=null){
-//        $('#NomUsuario').html(localStorage.getItem('usuario'))
-//         $('#imgUsuario').attr("src",localStorage.getItem('foto'));
-//     }else{
-//       window.location='http://104.131.226.138:8080'
-//     }
-//   }else{
-//     localStorage.setItem("profile", data._id);
-//     localStorage.setItem("usuario", data.name);
-//     localStorage.setItem("foto", data.photo);
-//     $('#NomUsuario').html(data.name)
-//     $('#imgUsuario').attr("src",data.photo);
-//   }
+    if(localStorage.getItem('profile')!=null){
+       $('#NomUsuario').html(localStorage.getItem('usuario'))
+        $('#imgUsuario').attr("src",localStorage.getItem('foto'));
+    }else{
+      window.location='http://104.131.226.138:8080'
+    }
+  }else{
+    localStorage.setItem("profile", data._id);
+    localStorage.setItem("usuario", data.name);
+    localStorage.setItem("foto", data.photo);
+    $('#NomUsuario').html(data.name)
+    $('#imgUsuario').attr("src",data.photo);
+  }
 
-// }catch(err){
-//   console.log(err)
+}catch(err){
+  console.log(err)
 
-//    window.location ='http://104.131.226.138:8080';
-// }
-// })
+   window.location ='http://104.131.226.138:8080';
+}
+})
 
 socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
@@ -127,7 +127,7 @@ $(document).ready(function(){
   socket.emit('buscarTodaslasRutas',{})
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:0, timeout:5000, enableHighAccuracy: false});
   //setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
-  navigator.geolocation.watchPosition(showPosition, errorPosition, options);
+  navigator.geolocation.watchPosition(showPositionMove, errorPosition, options);
 })
 
 function showPosition(position) {

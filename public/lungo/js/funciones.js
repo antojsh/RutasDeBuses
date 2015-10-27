@@ -127,7 +127,7 @@ $(document).ready(function(){
   socket.emit('buscarTodaslasRutas',{})
   navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:0, timeout:5000, enableHighAccuracy: false});
   //setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
-  navigator.geolocation.watchPosition(showPositionMove, errorPosition, options);
+  //navigator.geolocation.watchPosition(showPositionMove, errorPosition, options);
 })
 
 function showPosition(position) {

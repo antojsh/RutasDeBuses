@@ -274,7 +274,15 @@
       background: linear-gradient(#058fce, #25B7FA);
       border-bottom-width: 0 !important;
       line-height: 4em !important; }
-     
+     #listDirecciones{
+      display: none;
+     }
+     #dirDestino span{
+      color: red;
+     }
+     #dirPartida span{
+      color: green;
+     }
 
   @-webkit-keyframes loading {
     0% {

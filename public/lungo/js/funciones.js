@@ -53,6 +53,7 @@ var markerTemporal = new L.LayerGroup();
 var flechas= new L.LayerGroup();
 var coorPartida = new Array();
 var coorDestino = new Array();
+var dirPartida, dirDestino, tempDir;
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud;
 var ubicacion={
   latitud:"",
@@ -109,6 +110,7 @@ map.on('click', function (e) {
             $('#strongCiudad').html(response.address.country+', '+response.address.state+', '+response.address.city);
             $('.dots').fadeOut('fast');
             $('#parrafoDir').html(msj.replace(response.address.postcode+',',"") )
+            tempDir=msj.replace(response.address.postcode+',',"") 
             $('#articlePopup').css('bottom','0')
 
         }
@@ -160,10 +162,10 @@ function errorPosition(){
   //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 
-$('#todasRutas ul li').click(function(){
-
-  Lungo.Router.section('rutaEscogida');
-});
+// $('#todasRutas ul >li').click(function(){
+//   alert("kjfgndlfhkhnñ")
+//   Lungo.Router.section('rutaEscogida');
+// });
 
 $('#btnPartida').click(function() {
   //alert($(this).hasClass('btnParodesSelec'));z
@@ -171,11 +173,13 @@ $('#btnPartida').click(function() {
 
     $(this).removeClass('btnParodesSelec');
     $('#btnPartida span').css('color','white');
+    dirPartida="";
     B_markerpartida();
   }else{
     B_markertemporal();
     $(this).addClass('btnParodesSelec');
     $('#btnPartida span').css('color','green');
+      $('#dirPartida').html('<span class="icon pushpin"></span> '+'<small>'+tempDir+'</small>');
       L.marker([globalLatiud, globalLongitud], {icon: greenIcon}).addTo(markerPartida).bindPopup("<b>Partida</b>");
       markerPartida.addTo(map);
 
@@ -194,12 +198,14 @@ $('#btnDestino').click(function() {
 
     $(this).removeClass('btnParodesSelec');
     $('#btnDestino span').css('color','white');
+    tempDir="";
     B_markerdestino();
 
   }else{
     B_markertemporal();
     $(this).addClass('btnParodesSelec');
     $('#btnDestino span').css('color','red');
+    $('#dirDestino').html('<span class="icon pushpin"></span> '+'<small>'+tempDir+'</small>');
     coordenadas[0].partida[0]=globalLatiud;
     L.marker([globalLatiud, globalLongitud], {icon: yellowIcon}).addTo(markerDestino).bindPopup("<b>Destino</b>");
     markerDestino.addTo(map);
@@ -301,6 +307,8 @@ $('#listarutasEncontradas').html('');
   Lungo.Router.article("main", "todasRutas");
   $("#ups_x_rutas_encontrada").fadeOut("fast");
   $("#divBuscar").fadeOut("fast");
+  $('#listDirecciones').css('display','block')
+
 }else{
   Lungo.Notification.error(
     "Ups !",                      //Title
@@ -324,7 +332,7 @@ function error(titulo,msj){
       '</div>'+
   '</div>');
 }
-$('#listarutasEncontradas').on('click','li',function(){
+$('#listarutasEncontradas').on('click','>li',function(){
 
   $('.dots').fadeIn('fast');
   socket.emit('buscarRutaUnica',{opc:0,id:this.id})

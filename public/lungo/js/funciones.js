@@ -8,6 +8,7 @@ var markerPartida=new L.LayerGroup(),
     markerDestino=new L.LayerGroup();
 var posicionactual = new Array();
 var swmarkertemp = false;
+var ggl = new L.Google('ROADMAP');
 socket.on('connect',function(data){
   var fingerprint = new Fingerprint().get();
 
@@ -136,9 +137,7 @@ function showPosition(position) {
     ubicacion.latitud=position.coords.latitude;
     ubicacion.longitud=position.coords.longitude;
     map.setView([position.coords.latitude, position.coords.longitude], 16);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">Go Route</a> Engeenier '
-    }).addTo(map);
+    map.addLayer(ggl);
 
     posicionactual.pop();
     posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});

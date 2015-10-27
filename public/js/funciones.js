@@ -1,4 +1,4 @@
-var socket = io.connect('http://104.131.226.138:8080');
+var socket = io.connect('http://localhost:8080');
 //var socket = io.connect('http://localhost:8080');
 var fingerprint = new Fingerprint().get();
 
@@ -6,13 +6,13 @@ socket.on('rutaEncontrada', rutaEncontrada)
 
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
 
-socket.on('userProfile',function(data){
-//  console.log("Entrando :::"+JSON.stringify(data))
- if(data._id ===undefined) window.location ='http://104.131.226.138:8080';
-  localStorage.setItem("profile", data._id);
-  $('#nomUsuario').html(data.name)
-  $('#imgUsuario').attr("src",data.photo);
-})
+// socket.on('userProfile',function(data){
+// //  console.log("Entrando :::"+JSON.stringify(data))
+//  if(data._id ===undefined) window.location ='http://104.131.226.138:8080';
+//   localStorage.setItem("profile", data._id);
+//   $('#nomUsuario').html(data.name)
+//   $('#imgUsuario').attr("src",data.photo);
+// })
 
 
 socket.io.on('connect_error', function(err) {
@@ -32,6 +32,7 @@ var coorDestino= new Array();
 var map= L.map('map',{closePopupOnClick: false}),marker,globalLatiud,globalLongitud,markerTemporal;
 var markerPartida,markerDestino,person;
 var anim;
+var ggl = new L.Google();
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon = L.icon({
     iconUrl: 'static/img/marker_start.png',
@@ -81,11 +82,10 @@ window.addEventListener("load",function(){ //document ready
 });
 
 function showPosition(position) {
+  alert('dfljili')
     map.setView([position.coords.latitude, position.coords.longitude], 16);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
+   
+    map.addLayer(ggl);
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
     person.bindPopup("<b>Destino</b>").openPopup();
     map.addLayer(person);
@@ -97,6 +97,7 @@ function showPositionMove(position) {
     map.addLayer(person);
 }
 function errorPosition(){
+  alert('errro')
   map.setView([11.004692, -74.808877], 16);
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

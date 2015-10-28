@@ -18,32 +18,32 @@ socket.on('rutaEncontrada', rutaEncontrada)
 
 socket.on('todaslasrutas',todaslasrutas)
 socket.on('rutaUnicaEncontrada',rutaUnicaEncontrada)
-socket.on('userProfile',function(data){
-//  console.log("Entrando :::"+JSON.stringify(data))
-try{
+// socket.on('userProfile',function(data){
+// //  console.log("Entrando :::"+JSON.stringify(data))
+// try{
 
-  if(!data ) {
+//   if(!data ) {
 
-    if(localStorage.getItem('profile')!=null){
-       $('#NomUsuario').html(localStorage.getItem('usuario'))
-        $('#imgUsuario').attr("src",localStorage.getItem('foto'));
-    }else{
-      window.location='http://104.131.226.138:8080'
-    }
-  }else{
-    localStorage.setItem("profile", data._id);
-    localStorage.setItem("usuario", data.name);
-    localStorage.setItem("foto", data.photo);
-    $('#NomUsuario').html(data.name)
-    $('#imgUsuario').attr("src",data.photo);
-  }
+//     if(localStorage.getItem('profile')!=null){
+//        $('#NomUsuario').html(localStorage.getItem('usuario'))
+//         $('#imgUsuario').attr("src",localStorage.getItem('foto'));
+//     }else{
+//       window.location='http://104.131.226.138:8080'
+//     }
+//   }else{
+//     localStorage.setItem("profile", data._id);
+//     localStorage.setItem("usuario", data.name);
+//     localStorage.setItem("foto", data.photo);
+//     $('#NomUsuario').html(data.name)
+//     $('#imgUsuario').attr("src",data.photo);
+//   }
 
-}catch(err){
-  console.log(err)
+// }catch(err){
+//   console.log(err)
 
-   window.location ='http://104.131.226.138:8080';
-}
-})
+//    window.location ='http://104.131.226.138:8080';
+// }
+// })
 
 socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
@@ -136,17 +136,14 @@ $(document).ready(function(){
 function showPosition(position) {
     ubicacion.latitud=position.coords.latitude;
     ubicacion.longitud=position.coords.longitude;
-    map.setView([position.coords.latitude, position.coords.longitude], 16);
+    
       
-   L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-  attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-  subdomains: '1234',
-  mapID: 'newest',
-  app_id: 'VzYRvg0G6IEhLGkzYOaG',
-  app_code: 'GgLGRHGmv8labI4hVNLcpA',
-  base: 'base',
-  maxZoom: 20
-}).addTo(map);
+    var points = data; // data loaded from data.js
+        var leafletMap = map.setView([position.coords.latitude, position.coords.longitude], 16);
+        L.tileLayer("http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png")
+            .addTo(leafletMap);
+   L.canvasOverlay()
+            .addTo(leafletMap);
 
     posicionactual.pop();
     posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});
@@ -155,6 +152,21 @@ function showPosition(position) {
     map.addLayer(person);
 
 }
+ function drawingOnCanvas(canvasOverlay, params) {
+            var ctx = params.canvas.getContext('2d');
+            ctx.clearRect(0, 0, params.canvas.width, params.canvas.height);
+            ctx.fillStyle = "rgba(255,116,0, 0.2)";
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                if (params.bounds.contains([d[0], d[1]])) {
+                    dot = canvasOverlay._map.latLngToContainerPoint([d[0], d[1]]);
+                    ctx.beginPath();
+                    ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+        };
 function showPositionMove(position) {
    ubicacion.latitud=position.coords.latitude;
     ubicacion.longitud=position.coords.longitude;

@@ -136,14 +136,17 @@ $(document).ready(function(){
 function showPosition(position) {
     ubicacion.latitud=position.coords.latitude;
     ubicacion.longitud=position.coords.longitude;
-    
+    map.setView([position.coords.latitude, position.coords.longitude], 16);
       
-    var points = data; // data loaded from data.js
-        var leafletMap = map.setView([position.coords.latitude, position.coords.longitude], 16);
-        L.tileLayer("http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png")
-            .addTo(leafletMap);
-   L.canvasOverlay()
-            .addTo(leafletMap);
+   L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+  attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+  subdomains: '1234',
+  mapID: 'newest',
+  app_id: 'VzYRvg0G6IEhLGkzYOaG',
+  app_code: 'GgLGRHGmv8labI4hVNLcpA',
+  base: 'base',
+  maxZoom: 20
+}).addTo(map);
 
     posicionactual.pop();
     posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});
@@ -152,21 +155,6 @@ function showPosition(position) {
     map.addLayer(person);
 
 }
- function drawingOnCanvas(canvasOverlay, params) {
-            var ctx = params.canvas.getContext('2d');
-            ctx.clearRect(0, 0, params.canvas.width, params.canvas.height);
-            ctx.fillStyle = "rgba(255,116,0, 0.2)";
-            for (var i = 0; i < data.length; i++) {
-                var d = data[i];
-                if (params.bounds.contains([d[0], d[1]])) {
-                    dot = canvasOverlay._map.latLngToContainerPoint([d[0], d[1]]);
-                    ctx.beginPath();
-                    ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.closePath();
-                }
-            }
-        };
 function showPositionMove(position) {
    ubicacion.latitud=position.coords.latitude;
     ubicacion.longitud=position.coords.longitude;

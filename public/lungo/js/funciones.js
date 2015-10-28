@@ -424,7 +424,7 @@ else{
    if (anim !=undefined) map.removeLayer(anim);
       anim = window.setInterval(function() {
       arrowHead.setPatterns([
-          {offset: arrowOffset+'%', repeat: 80, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
+          {offset: arrowOffset+'%', repeat: 150, symbol: L.Symbol.arrowHead({pixelSize: 7, polygon: false, pathOptions: {color: '#DF0101',stroke: true}})}
       ])
       if(++arrowOffset > 20)
           arrowOffset = 0;

@@ -138,15 +138,15 @@ function showPosition(position) {
     ubicacion.longitud=position.coords.longitude;
     map.setView([position.coords.latitude, position.coords.longitude], 16);
       
-   L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-  attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-  subdomains: '1234',
-  mapID: 'newest',
-  app_id: 'VzYRvg0G6IEhLGkzYOaG',
-  app_code: 'GgLGRHGmv8labI4hVNLcpA',
-  base: 'base',
-  maxZoom: 20
-}).addTo(map);
+    L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.transit.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+      attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+      subdomains: '1234',
+      mapID: 'newest',
+      app_id: 'VzYRvg0G6IEhLGkzYOaG',
+      app_code: 'GgLGRHGmv8labI4hVNLcpA',
+      base: 'base',
+      maxZoom: 20
+    }).addTo(map);
 
     posicionactual.pop();
     posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});

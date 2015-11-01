@@ -4,6 +4,8 @@
   padding: 0;
   box-sizing: border-box;
   }
+  .fa{
+    font-family: FontAwesome !important; }
   section header{
       background: black !important;
       box-shadow: 1px 1px 1px #00afe3 !important;

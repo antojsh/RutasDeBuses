@@ -63,38 +63,10 @@ var ubicacion={
 }
 var anim;
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
-var greenIcon = L.icon({
-    iconUrl: 'static/img/marker_start.png',
-    iconSize:     [50, 50], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
-});
-var yellowIcon = L.icon({
-    iconUrl: 'static/img/marker_stop.png',
-    iconSize:     [50, 50], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
-});
-var markerTemp = L.icon({
-    iconUrl: 'static/img/marker_temporal.png',
-    iconSize:     [50, 50], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62]  // the same for the shadow
-  //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
-var markerPerson = L.icon({
-    iconUrl: 'static/img/persona.png',
-    iconSize:     [50, 50], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [30, 50], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62]  // the same for the shadow
-  //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
+var greenIcon =  L.AwesomeMarkers.icon({icon: 'map-marker', markerColor: 'green', prefix: 'fa'}) 
+var yellowIcon =L.AwesomeMarkers.icon({icon: 'map-marker', markerColor: 'red', prefix: 'fa'}) 
+var markerTemp = L.AwesomeMarkers.icon({icon: 'thumb-tack', markerColor: 'purple', prefix: 'fa'}) 
+var markerPerson =  L.AwesomeMarkers.icon({icon: 'male', markerColor: 'blue', prefix: 'fa'}) 
 map.on('click', function (e) {
 
     $('.dots').fadeIn('fast');

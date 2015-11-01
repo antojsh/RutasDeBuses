@@ -62,6 +62,7 @@ var ubicacion={
   longitud:""
 }
 var anim;
+//jbj
 var coordenadas =[  {  "partida": []  },  {"destino": []  }]
 var greenIcon =  L.AwesomeMarkers.icon({icon: 'map-marker', markerColor: 'green', prefix: 'fa'}) 
 var yellowIcon =L.AwesomeMarkers.icon({icon: 'map-marker', markerColor: 'red', prefix: 'fa'}) 

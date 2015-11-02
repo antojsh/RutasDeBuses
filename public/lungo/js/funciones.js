@@ -144,14 +144,9 @@ function showPosition(position) {
     ubicacion.longitud=position.coords.longitude;
     map.setView([position.coords.latitude, position.coords.longitude], 16);
       
-    L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.transit.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-      attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-      subdomains: '1234',
-      mapID: 'newest',
-      app_id: 'VzYRvg0G6IEhLGkzYOaG',
-      app_code: 'GgLGRHGmv8labI4hVNLcpA',
-      base: 'base',
-      maxZoom: 20
+    L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     posicionactual.pop();
@@ -170,9 +165,10 @@ function showPositionMove(position) {
 }
 function errorPosition(){
   map.setView([11.004692, -74.808877], 16);
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+  L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
   //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 

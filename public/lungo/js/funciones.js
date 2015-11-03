@@ -50,7 +50,7 @@ socket.io.on('connect_error', function(err) {
   $('.noConnection').css('max-height','60px');
   $('.Connection').css('max-height','0px');
 });
-var tiempo;
+
 var markerTemporal = new L.LayerGroup();
 var flechas= new L.LayerGroup();
 var coorPartida = new Array();
@@ -128,14 +128,6 @@ $('#btnCerrarPopup').click(function(e){
 });
 
 $(document).ready(function(){
-  var hora = (new Date).getHours()
-  if(hora> 18 && hora < 6 ){
-    tiempo='dia';
-
-  }else{
-    tiempo='noche'
-  }
-  alert(hora)
   var options = {
   enableHighAccuracy: false,
   timeout: 5000,
@@ -148,22 +140,14 @@ $(document).ready(function(){
 })
 
 function showPosition(position) {
-  alert(tiempo)
     ubicacion.latitud=position.coords.latitude;
     ubicacion.longitud=position.coords.longitude;
     map.setView([position.coords.latitude, position.coords.longitude], 16);
-    if(tiempo=='dia'){
-      L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map);
-    }else{
-      L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19
-      }).addTo(map);
-    }
-    
+      
+    L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
     posicionactual.pop();
     posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});
@@ -181,17 +165,10 @@ function showPositionMove(position) {
 }
 function errorPosition(){
   map.setView([11.004692, -74.808877], 16);
- if(tiempo=='dia'){
-      L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map);
-    }else{
-      L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19
-      }).addTo(map);
-    }
+  L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
   //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }
 
@@ -238,7 +215,7 @@ $('#btnDestino').click(function() {
     B_markertemporal();
     $(this).addClass('btnParodesSelec');
     $('#btnDestino span').css('color','red');
-    
+    alert(tempDir)
      $('#dirDestino').html('<span class="icon pushpin"></span> '+'<small>'+tempDir+'</small>');
     coordenadas[0].partida[0]=globalLatiud;
     L.marker([globalLatiud, globalLongitud], {icon: yellowIcon}).addTo(markerDestino).bindPopup("<b>Destino</b>");

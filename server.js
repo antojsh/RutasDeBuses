@@ -47,7 +47,7 @@ app.get('/lungo', function (req, res) {
 });
 app.use('/static', express.static('public'));
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/camera/index.html');
+  res.sendFile(__dirname + '/public/login.html');
 });
 app.get('/app', function (req, res) {
   res.sendFile(__dirname + '/public/lungo/index.html');

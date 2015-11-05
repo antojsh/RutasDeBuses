@@ -81,7 +81,7 @@ app.get('/auth/twitter', function(req, res, next) {
 //app.get('/auth/facebook', passport.authenticate('facebook'));
 // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
 // En caso de fallo redirige a otra vista '/login'
-app.get('/auth/twitter/callback', passport.authenticate('twitter',
+app.get('/auth/twitter/callback', passport.authorize('twitter',
   { successRedirect: '/app', failureRedirect: '/' }
 ),  function(req, res) {
 	inforPerfil=req.account;
@@ -90,7 +90,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter',
 });
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
 // En caso de fallo redirige a otra vista '/login'
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
+app.get('/auth/facebook/callback', passport.authorize('facebook',
   { successRedirect: '/app', failureRedirect: '/' }
 ),  function(req, res) {
 	inforPerfil=req.account;

@@ -63,9 +63,7 @@ module.exports = function(passport) {
 		clientSecret	: config.facebook.secret,
 		callbackURL	 : '/auth/facebook/callback',
 		profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
-	}, function(accessToken, refreshToken, profile, done) {
-		console.log(JSON.stringify(profile))
-
+	}, function(req,accessToken, refreshToken, profile, done) {
 		// El campo 'profileFields' nos permite que los campos que almacenamos
 		// se llamen igual tanto para si el usuario se autentica por Twitter o
 		// por Facebook, ya que cada proveedor entrega los datos en el JSON con
@@ -79,9 +77,9 @@ module.exports = function(passport) {
 			// y si no, lo crea y salva en la base de datos
 			var user = new User({
 				provider_id	: profile.id,
-				provider		 : profile.provider,
-				name				 : profile.displayName,
-				photo				: profile.photos[0].value
+				provider	: profile.provider,
+				name		: profile.displayName,
+				photo		: profile.photos[0].value
 			});
 			user.save(function(err) {
 				if(err) throw err;

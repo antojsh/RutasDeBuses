@@ -67,7 +67,10 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 	//inforPerfil=null;
 });
-app.get("/auth/facebook", passport.authenticate('facebook'))
+app.get("/auth/facebook", function(req, res, next) {
+  console.log(req.query.llave)
+  next();
+},passport.authenticate('facebook'))
 
 // Ruta para autenticarse con Twitter (enlace de login)
 app.get('/auth/twitter', function(req, res, next) {

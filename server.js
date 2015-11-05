@@ -20,7 +20,8 @@ var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
 var iduser;
 var usuariosActivos={};
 var Rutas = require('./models/rutasbuses')
-var User = mongoose.model('Usuarios');
+require('./models/usuarios')
+
 server.listen(port,ip_addr);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
@@ -35,6 +36,7 @@ cloudinary.config({
 mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo de Digital');
+	
 });
 app.get('/create', function (req, res) {
   res.sendFile(__dirname + '/google.html');

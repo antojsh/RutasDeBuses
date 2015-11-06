@@ -215,7 +215,7 @@ $('#btnDestino').click(function() {
     B_markertemporal();
     $(this).addClass('btnParodesSelec');
     $('#btnDestino span').css('color','red');
-    alert(tempDir)
+   
      $('#dirDestino').html('<span class="icon pushpin"></span> '+'<small>'+tempDir+'</small>');
     coordenadas[0].partida[0]=globalLatiud;
     L.marker([globalLatiud, globalLongitud], {icon: yellowIcon}).addTo(markerDestino).bindPopup("<b>Destino</b>");

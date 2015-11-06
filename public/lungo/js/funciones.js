@@ -144,11 +144,9 @@ function showPosition(position) {
     ubicacion.longitud=position.coords.longitude;
     map.setView([position.coords.latitude, position.coords.longitude], 16);
       
-    L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    L.tileLayer('https://a.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYW50b2pzaCIsImEiOiJjaWducjNjcnEwMGJ3YXNseHJxbmI0M2IyIn0.eWqjuTfzY0yNEmVhpt3I7w', {
+        attribution: '<a href="http://osm.org/copyright">Terms & Feedback</a>'
     }).addTo(map);
-
     posicionactual.pop();
     posicionactual.push({lat:position.coords.latitude, long:position.coords.longitude});
     person= L.marker([position.coords.latitude, position.coords.longitude], {icon: markerPerson});
@@ -165,9 +163,8 @@ function showPositionMove(position) {
 }
 function errorPosition(){
   map.setView([11.004692, -74.808877], 16);
-  L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  L.tileLayer('https://a.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYW50b2pzaCIsImEiOiJjaWducjNjcnEwMGJ3YXNseHJxbmI0M2IyIn0.eWqjuTfzY0yNEmVhpt3I7w', {
+        attribution: '<a href="http://osm.org/copyright">Terms & Feedback</a>'
     }).addTo(map);
   //error('No pudimos localizarte','Por favor activa la localziacion para ubicarte')
 }

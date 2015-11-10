@@ -14,11 +14,12 @@ section article >span{
   font-size: 1.5rem;
   color: #1A1A1A;
   margin-bottom: 10px;
+  text-shadow: 1px 1px 2px red;
 }
 section article >small{
   color: #C2C2C2;
-  text-shadow: 1px 1px 2px #dadada;
-  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px black;
+  font-size: 1.3rem;
 }
 section article .contentSocial{
   width: 70%;

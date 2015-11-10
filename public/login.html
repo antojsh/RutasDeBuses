@@ -17,8 +17,11 @@
         margin: 20px !important;
         font-size: 3rem;
       }
-      body{
-        background-color: red !important;
+      section > article.splash, section > [data-control="pull"].splash {
+        background: url(static/img/fondo.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
       }
     </style>
   </head>
@@ -28,8 +31,8 @@
         <img src="static/img/logo.png" class="logo" >
 
         <div class="form">
-        <strong>Go Route</strong><br>
-        <small>Buscamos la ruta de tu destino</small>
+        <strong style='text-shadow:1px 1px 5px black;'>Go Route</strong><br>
+        <small style='text-shadow:1px 1px 5px black; font-size:1.3rem;' >Buscamos la ruta de tu destino</small>
            <!--  <fieldset class="radius-top" data-icon="user"><span class="icon user"></span>
                 <input type="text" placeholder="Usuario" id="txt-signup-name" value="">
             </fieldset>
@@ -53,9 +56,9 @@
         Lungo.init({
            name: 'prueba'
         });
-        Lungo.ready(function(){
-          if(localStorage.getItem('profile')!=null) window.location='http://104.131.226.138:8080/app'
-        })
+        // Lungo.ready(function(){
+        //   if(localStorage.getItem('profile')!=null) window.location='http://104.131.226.138:8080/app'
+        // })
         document.getElementById('facebook').addEventListener('click',function(){
           window.location='http://104.131.226.138:8080/auth/facebook'
         })

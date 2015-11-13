@@ -144,6 +144,7 @@ $('#listatodaslasrutas').on('click','li',function(){
 })
 // functions
 function showPosition(position){
+
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
   var accuracy = position.coords.accuracy;
@@ -168,9 +169,8 @@ var marker = new google.maps.Marker({
 //     strokeOpacity: 0.3
 // });
 
-var bounds = new google.maps.LatLngBounds();
-bounds.extend(centerPosition);
-map.fitBounds(bounds);
+map.setCenter(centerPosition);
+map.setZoom(14)
 }
 function errorPosition(){
 
@@ -240,6 +240,7 @@ else{
   flightPath.setMap(map);
  
   animateCircle(flightPath);
+   map.setZoom(13)
 }
 Lungo.Router.article("main", "home");
    $('.dots').fadeOut('fast');
@@ -254,7 +255,7 @@ function animateCircle(line) {
       var icons = line.get('icons');
       icons[0].offset = (count / 2) + '%';
       line.set('icons', icons);
-  }, 800);
+  }, 200);
 }
 function rutaEncontrada(data){
 $('#listarutasEncontradas').html('');

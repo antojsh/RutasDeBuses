@@ -33,7 +33,7 @@ module.exports = function(passport) {
 		consumerKey		 : config.twitter.key,
 		consumerSecret	: config.twitter.secret,
 		callbackURL		 : '/auth/twitter/callback',
-			//profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
+		profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
 	}, function(req,accessToken, refreshToken, profile, done) {
 		
 		User.findOne({provider_id: profile.id}, function(err, user) {
@@ -62,7 +62,7 @@ module.exports = function(passport) {
 		clientID			: config.facebook.key,
 		clientSecret	: config.facebook.secret,
 		callbackURL	 : '/auth/facebook/callback',
-		//profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
+		profileFields: ['id', 'email', 'gender', 'link', 'locale', 'displayName', 'timezone', 'updated_time', 'verified','photos']
 	}, function(req,accessToken, refreshToken, profile, done) {
 		// El campo 'profileFields' nos permite que los campos que almacenamos
 		// se llamen igual tanto para si el usuario se autentica por Twitter o

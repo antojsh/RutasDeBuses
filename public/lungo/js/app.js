@@ -6,8 +6,10 @@ var fingerprint = new Fingerprint().get();
 var coorPartida= new Array();
 var coorDestino= new Array();
 var tempDir;
- var flightPath;
+var flightPath;
 var markers = [];
+var markerPerson;
+var centerPosition ;
 var latlng, markerPartida, markerDestino, markerTemporal;
  var lineSymbol = {
     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
@@ -103,28 +105,15 @@ try{
 
     map.fitBounds(bounds);
   });
-  // [END region_getplaces]
-
-  // Bias the SearchBox results towards places that are within the bounds of the
-  // current map's viewport.
-
-
-
-
-
-
-
-
-
-
-
-
-
- 	socket.emit('buscarTodaslasRutas',{})
+  socket.emit('buscarTodaslasRutas',{})
    map = new google.maps.Map(document.getElementById("map"),mapOptions);
+    var options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0
+    };
     navigator.geolocation.getCurrentPosition(showPosition,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
-  // setInterval(function(){ navigator.geolocation.getCurrentPosition(showPositionMove,errorPosition,{maximumAge:600000, timeout:5000, enableHighAccuracy: true}); }, 2000);
-
+    navigator.geolocation.watchPosition(showPositionMove, errorPosition, options);
    google.maps.event.addListener(map, "click", function(e) {
   	$('.dots').fadeIn('fast');
     latlng = e.latLng;
@@ -245,9 +234,9 @@ function showPosition(position){
   var longitude = position.coords.longitude;
   var accuracy = position.coords.accuracy;
 
-var centerPosition = new google.maps.LatLng(latitude, longitude);
+  centerPosition = new google.maps.LatLng(latitude, longitude);
 
-var marker = new google.maps.Marker({
+markerPerson = new google.maps.Marker({
    position: centerPosition,
    map: map,
    icon:'static/img/persona2.png',
@@ -255,18 +244,11 @@ var marker = new google.maps.Marker({
 
 });
 
-// var circle = new google.maps.Circle({
-//     center: centerPosition,
-//     radius: accuracy,
-//     map: map,
-//     fillColor: '#0000FF',
-//     fillOpacity: 0.3,
-//     strokeColor:"#0A0A2A",
-//     strokeOpacity: 0.3
-// });
-
 map.setCenter(centerPosition);
 map.setZoom(14)
+}
+function showPositionMove(position){
+  markerPerson.setPosition(new google.maps.LatLng(position.coords.latitude,position.coords.longitude));
 }
 function errorPosition(){
 
@@ -403,6 +385,9 @@ function ocultarFooter(){
 }
 $('#LimpiarMap').click(function(){
   LimpiarMapa();
+})
+$('#PosicionActual').click(function(){
+  map.setCenter(centerPosition);
 })
 function LimpiarMapa(){
  

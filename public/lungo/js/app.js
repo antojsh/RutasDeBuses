@@ -6,6 +6,7 @@ var fingerprint = new Fingerprint().get();
 var coorPartida= new Array();
 var coorDestino= new Array();
 var tempDir;
+ var flightPath;
 var markers = [];
 var latlng, markerPartida, markerDestino, markerTemporal;
  var lineSymbol = {
@@ -315,12 +316,17 @@ if(data.opc==0){
   Lungo.Router.section("rutaEscogida");
 }
 else{
+  try{
+    flightPath.setMap(null);
+  }catch(err){
+
+  }
 	var flightPlanCoordinates = [];
 	for (var i = data.ruta.loc.length - 1; i >= 0; i--) {
 		flightPlanCoordinates.push({lat:data.ruta.loc[i][0], lng:data.ruta.loc[i][1]})
 	};
    
-  var flightPath = new google.maps.Polyline({
+   flightPath = new google.maps.Polyline({
     path: flightPlanCoordinates,
     geodesic: true,
     strokeColor: '#FF0000',
@@ -350,7 +356,7 @@ function animateCircle(line) {
       var icons = line.get('icons');
       icons[0].offset = (count / 2) + '%';
       line.set('icons', icons);
-  }, 200);
+  }, 150);
 }
 function rutaEncontrada(data){
 $('#listarutasEncontradas').html('');
@@ -394,4 +400,33 @@ $('#listarutasEncontradas').html('');
 }
 function ocultarFooter(){
   $('#articlePopup').css('bottom','-150px');
+}
+$('#LimpiarMap').click(function(){
+  LimpiarMapa();
+})
+function LimpiarMapa(){
+ 
+  try {
+     flightPath.setMap(null);
+    markerPartida.setMap(null);
+    markerDestino.setMap(null);
+  }
+  catch(err) {
+      flightPath.setMap(null);
+      markerDestino.setMap(null);
+     markerPartida.setMap(null);
+  } 
+  finally {
+     $('#btnDestino').removeClass('btnParodesSelec');
+  $('#btnPartida').removeClass('btnParodesSelec');
+  $('#btnDestino span').css('color','white');
+  $('#btnPartida span').css('color','white');
+
+   coorPartida = new Array();
+   coorDestino = new Array();
+      flightPath.setMap(null);
+    markerPartida.setMap(null);
+    markerDestino.setMap(null);
+  }
+  
 }

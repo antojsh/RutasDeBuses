@@ -121,7 +121,7 @@ app.post('/saveRuta',function(req,res){
 })
 
 io.sockets.on('connection', function (socket) {
-
+	console.log(socket.id)	
 	socket.emit('userProfile',inforPerfil)
 	inforPerfil=null;
 	 socket.on('app_user',nuevoUsuario)

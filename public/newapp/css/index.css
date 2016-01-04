@@ -1,0 +1,176 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Candal', sans-serif;
+}
+
+section {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  overflow: auto;
+}
+
+section:target {
+  z-index: 10;
+}
+
+section article.categoria:first-child {
+  margin-top: 3em;
+}
+
+section .titulo-categoria {
+  display: block;
+  line-height: 1em;
+  width: 100%;
+  height: 1.5em;
+}
+
+section .container-item {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+section strong, section small, section span {
+  text-shadow: 1px 1px 1 px #000;
+}
+
+.container-inner {
+  width: 100%;
+  height: 12em;
+}
+
+.item {
+  background-image: url(http://www.canalnoticiasandalucia.com/wp-content/uploads/2012/07/Bus-urbano-Madrid-City-Class-e1343408719535.jpg);
+  background-size: cover;
+  background-position: center;
+  background-origin: inherit;
+  width: 100%;
+  height: 100%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  -webkit-filter: contrast(150%);
+  box-shadow: inset 0px -10px 25px rgba(0, 0, 0, 0.5);
+}
+
+header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  height: 3em;
+  background: #1b1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 0.5em;
+}
+
+header .open-menu {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .open-menu label {
+  font-family: 'Candal', sans-serif;
+  font-size: 1.7rem;
+  margin-top: -10px;
+  margin-left: 5px;
+}
+
+header .open-menu label:first-child {
+  color: #E06B38;
+}
+
+header .open-menu span {
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+aside {
+  width: 100%;
+  background: #1b1a1a;
+  height: 100%;
+  position: fixed;
+  z-index: 40;
+  left: -100%;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside ul li {
+  width: 100%;
+  height: 50px;
+}
+
+aside ul li span, aside ul li label, aside ul li a {
+  color: #9f9f9f;
+}
+
+aside ul li a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 1em 2em;
+}
+
+aside ul li:nth-child(2) {
+  margin-top: 20px;
+  box-shadow: 5px 0px 0px 0px red inset;
+}
+
+aside ul li:first-child {
+  height: auto;
+  width: 100%;
+  box-shadow: 0px 1px 5px #000;
+}
+
+aside ul li:first-child .profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+aside ul li:first-child .profile-info label {
+  margin-left: 20px;
+}
+
+aside ul li:first-child a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+}
+
+aside ul li:first-child a img {
+  width: 70px;
+}
+
+aside ul li:first-child a span {
+  font-size: 1.2rem;
+}
+
+.mostrarMenu {
+  left: 0;
+}

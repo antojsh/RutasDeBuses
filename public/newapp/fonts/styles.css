@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "chat-app";
+  src:url("fonts/chat-app.eot");
+  src:url("fonts/chat-app.eot?#iefix") format("embedded-opentype"),
+    url("fonts/chat-app.woff") format("woff"),
+    url("fonts/chat-app.ttf") format("truetype"),
+    url("fonts/chat-app.svg#chat-app") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "chat-app" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "chat-app" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+  content: "\61";
+}
+.icon-mas:before {
+  content: "\62";
+}
+.icon-user:before {
+  content: "\63";
+}
+.icon-chatsuser-account:before {
+  content: "\64";
+}
+.icon-user-account:before {
+  content: "\65";
+}
+.icon-home:before {
+  content: "\66";
+}
+.icon-code:before {
+  content: "\67";
+}
+.icon-logout:before {
+  content: "\68";
+}
+.icon-sign-in:before {
+  content: "\69";
+}
+.icon-file:before {
+  content: "\6a";
+}
+.icon-menu2:before {
+  content: "\6b";
+}
+.icon-pencil:before {
+  content: "\6c";
+}
+.icon-delete:before {
+  content: "\6d";
+}
+.icon-cutlery:before {
+  content: "\6e";
+}
+.icon-search-find:before {
+  content: "\6f";
+}
+.icon-arrow-left:before {
+  content: "\70";
+}

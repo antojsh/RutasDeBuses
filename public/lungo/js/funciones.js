@@ -3,7 +3,7 @@ Lungo.init({
 });
 L_PREFER_CANVAS = true;
 //var socket = io.connect('http://104.131.226.138:8080');
-var socket = io.connect('http://104.131.226.138:8080');
+var socket = io.connect('http://208.68.38.12:3000');
 var markerPartida=new L.LayerGroup(),
     person =new L.LayerGroup(),
     markerDestino=new L.LayerGroup();

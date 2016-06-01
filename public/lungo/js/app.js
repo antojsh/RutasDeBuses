@@ -1,7 +1,7 @@
 Lungo.init({
     name: 'prueba'
 });
-var socket = io.connect('http://104.131.226.138:8080',{'forceNew':true });
+var socket = io.connect('http://208.68.38.12:3000',{'forceNew':true });
 var fingerprint = new Fingerprint().get();
 var coorPartida= new Array();
 var coorDestino= new Array();

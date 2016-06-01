@@ -16,8 +16,8 @@ require('./passport')(passport);
 var session = require('express-session')
 var inforPerfil;
 //var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '104.131.226.138';
-var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '192.168.1.3';
-var port    = process.env.OPENSHIFT_NODEJS_PORT || '8080';
+var ip_addr = process.env.OPENSHIFT_NODEJS_IP   || '208.68.38.12';
+var port    = process.env.OPENSHIFT_NODEJS_PORT || '3000';
 var iduser;
 var usuariosActivos={};
 var Rutas = require('./models/rutasbuses')
@@ -33,8 +33,8 @@ cloudinary.config({
 	api_secret:"vsGFakqDWdHBQSAhs7axRC-iIOg"
 
 })
-mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
-//mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
+//mongoose.connect('mongodb://antojsh:antonio199308JSH@ds041663.mongolab.com:41663/busroute',function(err,res){
+mongoose.connect('mongodb://127.0.0.1:27017/DbRutasBuses',function(err,res){
 	if (err) console.log('Error: '+err)
 	else console.log('Conectado Mongo de Digital');
 	

@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('http://208.68.38.12:3000');
 //var socket = io.connect('http://localhost:8080');
 var fingerprint = new Fingerprint().get();
 
